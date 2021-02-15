@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/projects/Blackwood.System.Text.Json/Documentation",
+  "source_base_path": "G:/projects/github/Blackwood.System.Text.Json/Documentation",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "KtZoR44eUicvV0IUG+/3lg=="
+          "hash": "0PLZ2a0/mKohJwQCGIXQ/w=="
         }
       },
       "is_incremental": false,
@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "i/WMxFmU1F44Oq73D/APRw=="
+          "hash": "zkD6fyKGPAIw0UP5I2wAFQ=="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "CAHCG8tDDZSeZDvz6qY6Bw=="
+          "hash": "4P02kea3U2Mas5GQtLYAFQ=="
         }
       },
       "is_incremental": false,
@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "dcB3UmtM9MiSoBFKhbzVwg=="
+          "hash": "/onMeGxLqJk7f9GeshRWLw=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Blackwood.JSONDeserializer.html",
-          "hash": "d322OtfFMtFPdYJR5RKSTw=="
+          "hash": "1BJaIKXB/2dqg5EvYSEn0Q=="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Blackwood.html",
-          "hash": "tQcNs3vtryHJgxrkAHIMMA=="
+          "hash": "KBFsiddk13enYYzIiRVixg=="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "Qdj8Fb7JDg6BYYx6A7Q8Ow=="
+          "hash": "/WY4V9kuOp5DpO55pT6hNw=="
         }
       },
       "is_incremental": false,
@@ -105,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "juSVKDi3O54PYQBo5RO4+Q=="
+          "hash": "A8gD2RLuNQqcPnbSO7db3A=="
         }
       },
       "is_incremental": false,
@@ -115,23 +115,25 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
         "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 3,
-          "skipped_file_count": 1
+          "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 2,
-          "skipped_file_count": 1
+          "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
           "can_incremental": false,
