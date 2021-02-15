@@ -1,4 +1,4 @@
-# Blackwood.IO Assembly
+# Blackwood.System.Text.Json Assembly
 
 This assembly is collection of utilitites commonly needed across many projects.
 They have been gathered into one place.  This is not intended to have Windows
@@ -17,12 +17,12 @@ To get started on Mac and Linux, you can download .NET Core 3.0.
 
 
 ### Download
-* [Github](https://github.com/randym32/Blackwood.IO)
-* [Nuget](https://www.nuget.org/packages/Blackwood.IO/)
+* [Github](https://github.com/randym32/Blackwood.System.Text.Json)
+* [Nuget](https://www.nuget.org/packages/Blackwood.System.Text.Json/)
 
 
 ## Documentation
-The documentation can be found at [https://randym32.github.io/Blackwood.IO](https://randym32.github.io/Blackwood.IO)
+The documentation can be found at [https://randym32.github.io/Blackwood.System.Text.Json](https://randym32.github.io/Blackwood.System.Text.Json)
 
 ### Browser configuration notes
 The documentation, when browsed from a local filesystem, may require tweaking
@@ -38,6 +38,6 @@ You can not use Chrome with a local file system.  You can, however, use an exten
 like "Web Server for Chrome"
 
 ## Contributing
-View the [Blackwood.IO GitHub Project](https://github.com/randym32/Blackwood.IO)
+View the [Blackwood.System.Text.Json GitHub Project](https://github.com/randym32/Blackwood.System.Text.Json)
 for information on contributing.
 
