@@ -13,7 +13,7 @@ namespace Blackwood
 /// This is used to work with the JSON deserializer to better represent them as
 /// .NET objects.
 /// </summary>
-public class JSONDeserializer : JsonConverter<object>
+public partial class JSONDeserializer : JsonConverter<object>
 {
     /// <summary>
     /// This is used to deserialize more common JSON encodings
