@@ -38,6 +38,19 @@ references:
   fullName.vb: Blackwood.JSONDeserializer.Deserialize(Of T)(System.String)
   nameWithType: JSONDeserializer.Deserialize<T>(String)
   nameWithType.vb: JSONDeserializer.Deserialize(Of T)(String)
+- uid: Blackwood.JSONDeserializer.JsonToNormal(System.Text.Json.JsonElement)
+  name: JsonToNormal(JsonElement)
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_JsonToNormal_System_Text_Json_JsonElement_
+  commentId: M:Blackwood.JSONDeserializer.JsonToNormal(System.Text.Json.JsonElement)
+  fullName: Blackwood.JSONDeserializer.JsonToNormal(System.Text.Json.JsonElement)
+  nameWithType: JSONDeserializer.JsonToNormal(JsonElement)
+- uid: Blackwood.JSONDeserializer.JsonToNormal*
+  name: JsonToNormal
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_JsonToNormal_
+  commentId: Overload:Blackwood.JSONDeserializer.JsonToNormal
+  isSpec: "True"
+  fullName: Blackwood.JSONDeserializer.JsonToNormal
+  nameWithType: JSONDeserializer.JsonToNormal
 - uid: Blackwood.JSONDeserializer.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
   name: Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
   href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_Read_System_Text_Json_Utf8JsonReader__System_Type_System_Text_Json_JsonSerializerOptions_
@@ -54,6 +67,28 @@ references:
   isSpec: "True"
   fullName: Blackwood.JSONDeserializer.Read
   nameWithType: JSONDeserializer.Read
+- uid: Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary{System.String,System.Object})
+  name: ToDict(Dictionary<String, Object>)
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_ToDict_System_Collections_Generic_Dictionary_System_String_System_Object__
+  commentId: M:Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary{System.String,System.Object})
+  name.vb: ToDict(Dictionary(Of String, Object))
+  fullName: Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary<System.String, System.Object>)
+  fullName.vb: Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary(Of System.String, System.Object))
+  nameWithType: JSONDeserializer.ToDict(Dictionary<String, Object>)
+  nameWithType.vb: JSONDeserializer.ToDict(Dictionary(Of String, Object))
+- uid: Blackwood.JSONDeserializer.ToDict(System.Text.Json.JsonElement)
+  name: ToDict(JsonElement)
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_ToDict_System_Text_Json_JsonElement_
+  commentId: M:Blackwood.JSONDeserializer.ToDict(System.Text.Json.JsonElement)
+  fullName: Blackwood.JSONDeserializer.ToDict(System.Text.Json.JsonElement)
+  nameWithType: JSONDeserializer.ToDict(JsonElement)
+- uid: Blackwood.JSONDeserializer.ToDict*
+  name: ToDict
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_ToDict_
+  commentId: Overload:Blackwood.JSONDeserializer.ToDict
+  isSpec: "True"
+  fullName: Blackwood.JSONDeserializer.ToDict
+  nameWithType: JSONDeserializer.ToDict
 - uid: Blackwood.JSONDeserializer.Write(System.Text.Json.Utf8JsonWriter,System.Object,System.Text.Json.JsonSerializerOptions)
   name: Write(Utf8JsonWriter, Object, JsonSerializerOptions)
   href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_Write_System_Text_Json_Utf8JsonWriter_System_Object_System_Text_Json_JsonSerializerOptions_
