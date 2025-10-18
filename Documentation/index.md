@@ -1,43 +1,92 @@
-# Blackwood.System.Text.Json Assembly
+# Blackwood.System.Text.Json
 
-This assembly is collection of utilitites specific to the System.Text.Json
-serializer/deserializer.  For projects that use the NewtonSoft JSON.NET tools,
-a different framework can be used.
+This assembly is collection of utilitites for the
+[`System.Text.Json`](https://learn.microsoft.com/en-us/dotnet/api/system.text.json)
+to make JSON serialization and deserialization more flexible.
+
+## Overview
+
+**Utility Classes**:
+- [`JSONDeserializer`](xref:Blackwood.JSONDeserializer) – Enhanced deserialization with flexible type handling.
+- [`JSONConvert`](xref:Blackwood.JSONConvert) – Customer conversion utilities.
+
+View the [API Documentation](./api/index.md) for detailed information about available namespaces, classes, and methods.
 
 
 ## Getting Started
 
-### Download Microsoft development tools
+### Prerequisites
 
-If you working on Windows, download Visual Studio 2019 Community Edition to get started.  This version is free for personal use.
-* [Download Visual Studio 2019 Community Edition](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community)
+- .NET 8.0 or later
+- Visual Studio 2022 or later (Windows), or VS Code with C# extension (cross-platform)
 
-To get started on Mac and Linux, you can download .NET Core 3.0.  
-* [Download .NET Core 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0)
+### Installation
+
+Install the package via NuGet:
+
+```bash
+dotnet add package Blackwood.System.Text.Json
+```
+
+Or using Package Manager Console:
+
+```powershell
+Install-Package Blackwood.System.Text.Json
+```
+
+### Quick Start
+
+```csharp
+using Blackwood;
+
+// Example JSON structure
+var json = """
+{
+    "name": "John Doe",
+    "age": 30,
+    "isActive": "True"
+}
+""";
+
+// Deserialize the JSON to a Person object.
+var result = JSONDeserializer.Deserialize<Person>(json);
+```
 
 
-### Download
-* [Github](https://github.com/randym32/Blackwood.System.Text.Json)
-* [Nuget](https://www.nuget.org/packages/Blackwood.System.Text.Json/)
+### Resources
+
+- **Source Code**: [GitHub Repository](https://github.com/randym32/Blackwood.System.Text.Json)
+- **NuGet Package**: [Blackwood.System.Text.Json](https://www.nuget.org/packages/Blackwood.System.Text.Json/)
+- **Documentation**: [API Reference](./api/index.md)
+
 
 
 ## Documentation
-The documentation can be found at [https://randym32.github.io/Blackwood.System.Text.Json](https://randym32.github.io/Blackwood.System.Text.Json)
 
-### Browser configuration notes
-The documentation, when browsed from a local filesystem, may require tweaking
-the browser.
+The API documentation is available at [https://randym32.github.io/Blackwood.System.Text.Json](https://randym32.github.io/Blackwood.System.Text.Json).
 
-#### Firefox
-Go to about:config and make change to the following:
-* security.fileuri.strict_origin_policy set to false
-* privacy.file_unique_origin  set to false
 
-#### Chrome
-You can not use Chrome with a local file system.  You can, however, use an extension
-like "Web Server for Chrome"
+For instructions on how to build or modify the documentation, see
+_[How to Build the Documentation](building-docs.md)_.
+
+### Articles
+
+For guides and examples, check out our articles:
+
+- **[Introduction](./articles/intro.md)** - Overview of the library's features and capabilities
+- **[Getting Started](./articles/getting-started.md)** - Installation, configuration, and basic usage
+- **[Examples](./articles/examples.md)** - Common scenarios, flexible deserialization with type coercion, error handling.
+
 
 ## Contributing
-View the [Blackwood.System.Text.Json GitHub Project](https://github.com/randym32/Blackwood.System.Text.Json)
-for information on contributing.
+
+We welcome contributions! Please see our [Contributing Guidelines](contributing/CONTRIBUTING.md) for information on how to contribute to this project.
+
+- **Issues**: Report bugs or request features on [GitHub Issues](https://github.com/randym32/Blackwood.System.Text.Json/issues)
+- **Pull Requests**: Submit improvements via [GitHub Pull Requests](https://github.com/randym32/Blackwood.System.Text.Json/pulls)
+- **Code of Conduct**: Please read our [Code of Conduct](contributing/code_of_conduct.md)
+
+## License
+
+This project is licensed under the BSD 2-Clause License – see the [LICENSE](../LICENSE) file for details.
 

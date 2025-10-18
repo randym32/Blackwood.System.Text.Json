@@ -1,22 +1,50 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-	<LangVersion>9.0</LangVersion>
-	<PackageProjectUrl>https://github.com/randym32/Blackwood.System.Text.Json</PackageProjectUrl>
-	<RepositoryUrl>https://github.com/randym32/Blackwood.System.Text.Json</RepositoryUrl>
-	<Description>This assembly is collection of utilitites specific to the System.Text.Json serializer/deserializer. For projects that use the NewtonSoft JSON.NET tools, a different framework can be used.</Description>
-	<Copyright>2021 Randall Maas</Copyright>
-	<PackageLicenseFile>LICENSE</PackageLicenseFile>
-	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <WarningsNotAsErrors>NU1701</WarningsNotAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>Blackwood.System.Text.Json.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Blackwood.System.Text.Json</PackageId>
+    <Version>2.0.0</Version>
+    <Authors>Randall Maas</Authors>
+    <Company>Blackwood Designs, LLC</Company>
+    <Product>Blackwood.System.Text.Json</Product>
+    <Description>This assembly is a collection of utilities specific to the System.Text.Json serializer/deserializer. For projects that use the NewtonSoft JSON.NET tools, a different framework can be used.</Description>
+    <Copyright>Copyright © 2021-2025 Randall Maas</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/randym32/Blackwood.System.Text.Json</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/randym32/Blackwood.System.Text.Json</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>json;serialization;system.text.json;utilities</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageOutputPath>..\packages\</PackageOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\Blackwood.System.Text.Json.xml</DocumentationFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="5.0.1" />
+    <PackageReference Include="System.Text.Json" Version="9.0.10" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +52,13 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Blackwood.System.Text.Json.tests" />
   </ItemGroup>
 
 </Project>

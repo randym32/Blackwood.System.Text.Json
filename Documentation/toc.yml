@@ -1,7 +1,24 @@
-- name: Blackwood System.Text.Json Assembly
-  href: ./index.html
-  homepage: index.md
-- name: API Documentation
-  href: api/index.html
-  homepage: api/index.md
-  
+- name: Documentation
+  href: index.md
+- name: Articles
+  href: articles/intro.md
+  items:
+  - name: Getting Started
+    href: articles/getting-started.md
+  - name: Examples
+    href: articles/examples.md
+  - name: Building the Documentation
+    href: building-docs.md
+- name: API Reference
+  href: api/index.md
+- name: Contribution Guidelines
+  href: contributing/CONTRIBUTING.md
+  items:
+  - name: Code of Conduct
+    href: contributing/code_of_conduct.md
+  - name: How to File an Issue
+    href: contributing/how-to-file-an-issue.md
+  - name: Pull Requests
+    href: contributing/pull-requests.md
+  - name: Style Guide
+    href: contributing/style-guide.md

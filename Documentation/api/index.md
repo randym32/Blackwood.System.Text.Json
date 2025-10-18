@@ -1,15 +1,16 @@
 # API Documentation
 
-This file summarizes the namespaces and classes in this assembly.
+This section contains the API reference documentation for the Blackwood.System.Text.Json library.
 
+## Namespaces
 
+- [Blackwood](xref:Blackwood) - Main namespace containing utility classes
 
-### Blackwood Namespace
+## Classes
 
-The [Blackwood namespace](xref:Blackwood) is used to contain extra helper procedures and classes.
+- [JSONConvert](xref:Blackwood.JSONConvert) - Customer conversion utilities
+- [JSONDeserializer](xref:Blackwood.JSONDeserializer) - Enhanced deserialization with flexible type handling
 
-| Component                                                    | Description                                    |
-|--------------------------------------------------------------|------------------------------------------------|
-| [JSONDeserializer](xref:Blackwood.JSONDeserializer)          | A class to support JSON deserialization.       |
+## Getting Started
 
-
+For detailed information about each class and its methods, click on the links above or use the navigation menu.
