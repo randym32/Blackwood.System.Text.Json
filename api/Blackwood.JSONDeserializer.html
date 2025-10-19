@@ -1,535 +1,738 @@
-﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
+<!DOCTYPE html>
 <html>
-  
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class JSONDeserializer
-   | Blackwood.IO </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class JSONDeserializer
-   | Blackwood.IO ">
-    <meta name="generator" content="docfx 2.56.7.0">
-    
-    <link rel="shortcut icon" href="../favicon.ico">
-    <link rel="stylesheet" href="../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Class JSONDeserializer | Blackwood.System.Text.Json </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class JSONDeserializer | Blackwood.System.Text.Json ">
+      
+      <meta name="description" content="A custom JSON deserializer extending the standard System.Text.Json functionality to better handle common JSON patterns and provide more flexible type conversion.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/randym32/Blackwood.System.Text.Json/new/master/apiSpec/new?filename=Blackwood_JSONDeserializer.md&amp;value=---%0Auid%3A%20Blackwood.JSONDeserializer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
-        
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              
-              <a class="navbar-brand" href="../index.html">
-                  <img id="logo" class="png" src="../logo-small.png" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar"></div>
-          </div>
-        </nav>
-        
-    <div class="topcorner">
-      <form class="navbar-form navbar-right" role="search" id="search">
-        <div class="form-group">
-          <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-        </div>
-      </form>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+    </header>
+      <div class="affix" style="position: fixed; top: 1px; right: 20px; width: 230px; z-index: 1050; height: 48px;">
+              <form class="search" role="search" id="search">
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search" style="height:32px; padding-top:2px; padding-bottom:2px;">
+              </form>
       </div>
-      </header>
-      <div class="container-fluid body-content">
-        
-        <div id="search-results">
-          <div class="search-list"></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination"></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container-fluid body-content hide-when-search">
-        
-        <div class="sidenav hide-when-search" style="margin-left: -15px">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-             <div id="sidetoc"></div>
-          </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Blackwood.JSONDeserializer">
-  
-  
-  <h1 id="Blackwood_JSONDeserializer" data-uid="Blackwood.JSONDeserializer" class="text-break">Class JSONDeserializer
+
+        <article data-uid="Blackwood.JSONDeserializer">
+
+
+
+  <h1 id="Blackwood_JSONDeserializer" data-uid="Blackwood.JSONDeserializer" class="text-break">
+Class JSONDeserializer  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONSerializer.cs/#L8"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"><p>This is used to work with the JSON deserializer to better represent them as
-.NET objects.</p>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Blackwood.html">Blackwood</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Blackwood.System.Text.Json.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>A custom JSON deserializer extending the standard System.Text.Json
+functionality to better handle common JSON patterns and provide more
+flexible type conversion.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter">JsonConverter</a></div>
-    <div class="level2"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1">JsonConverter</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</div>
-    <div class="level3"><span class="xref">JSONDeserializer</span></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.canconvert#System_Text_Json_Serialization_JsonConverter_1_CanConvert_System_Type_">JsonConverter&lt;Object&gt;.CanConvert(Type)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.handlenull#System_Text_Json_Serialization_JsonConverter_1_HandleNull">JsonConverter&lt;Object&gt;.HandleNull</a>
-    </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Blackwood.html">Blackwood</a></h6>
-  <h6><strong>Assembly</strong>: Blackwood.System.Text.Json.dll</h6>
-  <h5 id="Blackwood_JSONDeserializer_syntax">Syntax</h5>
+  <div class="markdown conceptual"></div>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class JSONDeserializer : JsonConverter&lt;object&gt;</code></pre>
   </div>
-  <h3 id="methods">Methods
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter">JsonConverter</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1">JsonConverter</a>&lt;<span class="xref">object</span>&gt;</div>
+      <div><span class="xref">JSONDeserializer</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.canconvert">JsonConverter&lt;object&gt;.CanConvert(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.readaspropertyname">JsonConverter&lt;object&gt;.ReadAsPropertyName(ref Utf8JsonReader, Type, JsonSerializerOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.writeaspropertyname">JsonConverter&lt;object&gt;.WriteAsPropertyName(Utf8JsonWriter, object, JsonSerializerOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.handlenull">JsonConverter&lt;object&gt;.HandleNull</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverter-1.type">JsonConverter&lt;object&gt;.Type</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Blackwood_JSONDeserializer_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>This JSON converter supports</p>
+<ul>
+<li>Case-insensitive property name matching</li>
+<li>Support for JSON comments and trailing commas</li>
+<li>Automatic type inference for numbers (int, long, double)</li>
+<li>Special handling for boolean strings (&ldquo;True&rdquo;/&ldquo;False&rdquo;)</li>
+<li>Flexible object conversion from JsonElement to native .NET types</li>
+</ul>
+</div>
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Blackwood_JSONDeserializer_JSONOptions" data-uid="Blackwood.JSONDeserializer.JSONOptions">
+  JSONOptions
+  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONDeserializer.cs/#L35"><i class="bi bi-code-slash"></i></a>
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/new/master/apiSpec/new?filename=Blackwood_JSONDeserializer_Deserialize__1_System_IO_Stream_.md&amp;value=---%0Auid%3A%20Blackwood.JSONDeserializer.Deserialize%60%601(System.IO.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSON.cs/#L51">View Source</a>
-  </span>
-  <a id="Blackwood_JSONDeserializer_Deserialize_" data-uid="Blackwood.JSONDeserializer.Deserialize*"></a>
-  <h4 id="Blackwood_JSONDeserializer_Deserialize__1_System_IO_Stream_" data-uid="Blackwood.JSONDeserializer.Deserialize``1(System.IO.Stream)">Deserialize&lt;T&gt;(Stream)</h4>
-  <div class="markdown level1 summary"><p>This is used to deserialize more common JSON encodings</p>
+
+  <div class="markdown level1 summary"><p>Pre-configured JSON serializer options optimized for flexible JSON parsing.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
+
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ValueTask&lt;T&gt; Deserialize&lt;T&gt;(Stream stream)</code></pre>
+    <pre><code class="lang-csharp hljs">public static readonly JsonSerializerOptions JSONOptions</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.io.stream">Stream</a></td>
-        <td><span class="parametername">stream</span></td>
-        <td><p>The stream to read the JSON from.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1">ValueTask</a>&lt;T&gt;</td>
-        <td><p>A task to decode the value</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/new/master/apiSpec/new?filename=Blackwood_JSONDeserializer_Deserialize__1_System_String_.md&amp;value=---%0Auid%3A%20Blackwood.JSONDeserializer.Deserialize%60%601(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSON.cs/#L23">View Source</a>
-  </span>
-  <a id="Blackwood_JSONDeserializer_Deserialize_" data-uid="Blackwood.JSONDeserializer.Deserialize*"></a>
-  <h4 id="Blackwood_JSONDeserializer_Deserialize__1_System_String_" data-uid="Blackwood.JSONDeserializer.Deserialize``1(System.String)">Deserialize&lt;T&gt;(String)</h4>
-  <div class="markdown level1 summary"><p>This is used to deserialize more common JSON encodings</p>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+  <h4 class="section" id="Blackwood_JSONDeserializer_JSONOptions_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>These options support</p>
+<ul>
+<li>Skips JSON comments during parsing</li>
+<li>Allows trailing commas in JSON objects and arrays</li>
+<li>Case-insensitive property name matching</li>
+<li>Pretty-prints output with indentation</li>
+<li>Ignores default values when writing JSON</li>
+<li>Uses the custom JSONDeserializer for improved type conversion</li>
+</ul>
+</div>
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Blackwood_JSONDeserializer_ConvertValueToSerializableForm_" data-uid="Blackwood.JSONDeserializer.ConvertValueToSerializableForm*"></a>
+
+  <h3 id="Blackwood_JSONDeserializer_ConvertValueToSerializableForm_System_Object_" data-uid="Blackwood.JSONDeserializer.ConvertValueToSerializableForm(System.Object)">
+  ConvertValueToSerializableForm(object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONSerializer.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Serializes a property value to a JSON-compatible format.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
+
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static T Deserialize&lt;T&gt;(string jsonString)</code></pre>
+    <pre><code class="lang-csharp hljs">public static object? ConvertValueToSerializableForm(object? value)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">jsonString</span></td>
-        <td><p>The str to decode the JSON from.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">T</span></td>
-        <td><p>A task to decode the value</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/new/master/apiSpec/new?filename=Blackwood_JSONDeserializer_JsonToNormal_System_Text_Json_JsonElement_.md&amp;value=---%0Auid%3A%20Blackwood.JSONDeserializer.JsonToNormal(System.Text.Json.JsonElement)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSON2.cs/#L15">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">object</span></dt>
+    <dd><p>The property value to serialize</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">object</span></dt>
+    <dd><p>A JSON-compatible representation of the value</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Blackwood_JSONDeserializer_DeserializeProperties_" data-uid="Blackwood.JSONDeserializer.DeserializeProperties*"></a>
+
+  <h3 id="Blackwood_JSONDeserializer_DeserializeProperties_System_Object_System_Collections_Generic_Dictionary_System_String_System_Object__System_Type_" data-uid="Blackwood.JSONDeserializer.DeserializeProperties(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object},System.Type)">
+  DeserializeProperties(object, Dictionary&lt;string, object&gt;, Type)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONDeserializer2.cs/#L169"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Deserializes properties from a JSON element to an object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DeserializeProperties(object obj, Dictionary&lt;string, object&gt; properties, Type attributeType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <span class="xref">object</span></dt>
+    <dd><p>The object to deserialize properties to</p>
+</dd>
+    <dt><code>properties</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <span class="xref">object</span>&gt;</dt>
+    <dd><p>The properties to deserialize</p>
+</dd>
+    <dt><code>attributeType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>The attribute type to use for deserialization</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Blackwood_JSONDeserializer_Deserialize_" data-uid="Blackwood.JSONDeserializer.Deserialize*"></a>
+
+  <h3 id="Blackwood_JSONDeserializer_Deserialize__1_System_IO_Stream_" data-uid="Blackwood.JSONDeserializer.Deserialize``1(System.IO.Stream)">
+  Deserialize&lt;T&gt;(Stream)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONDeserializer.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously deserializes JSON from a stream into a strongly-typed object.
+This method is optimized for reading large JSON documents from streams
+without loading the entire content into memory at once.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ValueTask&lt;T?&gt; Deserialize&lt;T&gt;(Stream stream)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream containing JSON data to deserialize</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1">ValueTask</a>&lt;T&gt;</dt>
+    <dd><p>A ValueTask containing the deserialized object of type T</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The target type to deserialize to</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonexception">JsonException</a></dt>
+    <dd><p>Thrown when the JSON stream is malformed</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p>Thrown when the stream is null</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Blackwood_JSONDeserializer_Deserialize_" data-uid="Blackwood.JSONDeserializer.Deserialize*"></a>
+
+  <h3 id="Blackwood_JSONDeserializer_Deserialize__1_System_String_" data-uid="Blackwood.JSONDeserializer.Deserialize``1(System.String)">
+  Deserialize&lt;T&gt;(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONDeserializer.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Deserializes a JSON string into a strongly-typed object.
+This method provides JSON parsing with support for comments,
+trailing commas, and case-insensitive property matching.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T? Deserialize&lt;T&gt;(string jsonString)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>jsonString</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The JSON string to deserialize</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The deserialized object of type T, or default(T) if the input is null/empty</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The target type to deserialize to</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonexception">JsonException</a></dt>
+    <dd><p>Thrown when the JSON string is malformed</p>
+</dd>
+  </dl>
+
+
+
   <a id="Blackwood_JSONDeserializer_JsonToNormal_" data-uid="Blackwood.JSONDeserializer.JsonToNormal*"></a>
-  <h4 id="Blackwood_JSONDeserializer_JsonToNormal_System_Text_Json_JsonElement_" data-uid="Blackwood.JSONDeserializer.JsonToNormal(System.Text.Json.JsonElement)">JsonToNormal(JsonElement)</h4>
-  <div class="markdown level1 summary"><p>Converts the JSON element to a C# object</p>
+
+  <h3 id="Blackwood_JSONDeserializer_JsonToNormal_System_Text_Json_JsonElement_" data-uid="Blackwood.JSONDeserializer.JsonToNormal(System.Text.Json.JsonElement)">
+  JsonToNormal(JsonElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONDeserializer2.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a JsonElement to its most appropriate .NET object representation.
+This method provides intelligent type conversion based on the JSON value kind,
+including special handling for boolean strings and automatic type inference.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
+
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static object JsonToNormal(JsonElement item)</code></pre>
+    <pre><code class="lang-csharp hljs">public static object? JsonToNormal(JsonElement item)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a></td>
-        <td><span class="parametername">item</span></td>
-        <td><p>The JSON element</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td><p>The new thing</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/new/master/apiSpec/new?filename=Blackwood_JSONDeserializer_Read_System_Text_Json_Utf8JsonReader__System_Type_System_Text_Json_JsonSerializerOptions_.md&amp;value=---%0Auid%3A%20Blackwood.JSONDeserializer.Read(System.Text.Json.Utf8JsonReader%40%2CSystem.Type%2CSystem.Text.Json.JsonSerializerOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSON.cs/#L77">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>item</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a></dt>
+    <dd><p>The JsonElement to convert</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">object</span></dt>
+    <dd><p>The converted .NET object with the most appropriate type, or null for unsupported types</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="Blackwood_JSONDeserializer_JsonToNormal_System_Text_Json_JsonElement__examples">Examples</h4>
+  <pre><code class="lang-csharp">var json = "\"true\"";
+var element = JsonDocument.Parse(json).RootElement;
+var result = JSONDeserializer.JsonToNormal(element); // Returns bool true</code></pre>
+
+
+  <h4 class="section" id="Blackwood_JSONDeserializer_JsonToNormal_System_Text_Json_JsonElement__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Supported conversions:</p>
+<ul>
+<li>JsonValueKind.String: Converts to string, with special handling for &ldquo;true&rdquo;/&ldquo;false&rdquo; strings</li>
+<li>JsonValueKind.Number: Converts to double</li>
+<li>JsonValueKind.True/False: Converts to boolean</li>
+<li>JsonValueKind.Array: Converts to object[] using ToArray method</li>
+<li>JsonValueKind.Object: Converts to Dictionary&lt;string, object&gt; using ToDict method</li>
+<li>JsonValueKind.Null: Returns null</li>
+<li>Unsupported types: Returns null</li>
+</ul>
+</div>
+
+
+
+
   <a id="Blackwood_JSONDeserializer_Read_" data-uid="Blackwood.JSONDeserializer.Read*"></a>
-  <h4 id="Blackwood_JSONDeserializer_Read_System_Text_Json_Utf8JsonReader__System_Type_System_Text_Json_JsonSerializerOptions_" data-uid="Blackwood.JSONDeserializer.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">Read(ref Utf8JsonReader, Type, JsonSerializerOptions)</h4>
-  <div class="markdown level1 summary"><p>Reads C# objects from the stream for the JSON deserializer</p>
+
+  <h3 id="Blackwood_JSONDeserializer_Read_System_Text_Json_Utf8JsonReader__System_Type_System_Text_Json_JsonSerializerOptions_" data-uid="Blackwood.JSONDeserializer.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+  Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONDeserializer.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Custom JSON converter that reads JSON tokens and converts them to appropriate .NET types.
+This method extends type inference and conversion capabilities beyond
+the standard System.Text.Json behavior.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
+
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)</code></pre>
+    <pre><code class="lang-csharp hljs">public override object? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.text.json.utf8jsonreader">Utf8JsonReader</a></td>
-        <td><span class="parametername">reader</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
-        <td><span class="parametername">typeToConvert</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></td>
-        <td><span class="parametername">options</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">System.Text.Json.Serialization.JsonConverter&lt;System.Object&gt;.Read(System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)</span></div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/new/master/apiSpec/new?filename=Blackwood_JSONDeserializer_ToDict_System_Collections_Generic_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSON2.cs/#L38">View Source</a>
-  </span>
-  <a id="Blackwood_JSONDeserializer_ToDict_" data-uid="Blackwood.JSONDeserializer.ToDict*"></a>
-  <h4 id="Blackwood_JSONDeserializer_ToDict_System_Collections_Generic_Dictionary_System_String_System_Object__" data-uid="Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary{System.String,System.Object})">ToDict(Dictionary&lt;String, Object&gt;)</h4>
-  <div class="markdown level1 summary"><p>Convert the JSON to a dictionary to an array of strings</p>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>reader</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonreader">Utf8JsonReader</a></dt>
+    <dd><p>The JSON reader positioned at the token to convert</p>
+</dd>
+    <dt><code>typeToConvert</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>The target type for conversion (typically object)</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd><p>The JSON serializer options</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">object</span></dt>
+    <dd><p>The converted .NET object with the most appropriate type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Blackwood_JSONDeserializer_SerializeProperties_" data-uid="Blackwood.JSONDeserializer.SerializeProperties*"></a>
+
+  <h3 id="Blackwood_JSONDeserializer_SerializeProperties_System_Object_System_Type_" data-uid="Blackwood.JSONDeserializer.SerializeProperties(System.Object,System.Type)">
+  SerializeProperties(object, Type)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONSerializer.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Serializes custom properties marked with give attribute.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, object&gt; SerializeProperties(object from, Type AttributeType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>from</code> <span class="xref">object</span></dt>
+    <dd></dd>
+    <dt><code>AttributeType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <span class="xref">object</span>&gt;</dt>
+    <dd><p>A dictionary of serialized property values</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Blackwood_JSONDeserializer_ToArray_" data-uid="Blackwood.JSONDeserializer.ToArray*"></a>
+
+  <h3 id="Blackwood_JSONDeserializer_ToArray_System_Text_Json_JsonElement_" data-uid="Blackwood.JSONDeserializer.ToArray(System.Text.Json.JsonElement)">
+  ToArray(JsonElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONDeserializer2.cs/#L148"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a JsonElement representing a JSON array to an object array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static object[] ToArray(JsonElement v)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>v</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a></dt>
+    <dd><p>The JsonElement representing a JSON array to convert</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">object</span>[]</dt>
+    <dd><p>An object array containing all converted elements</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="Blackwood_JSONDeserializer_ToArray_System_Text_Json_JsonElement__examples">Examples</h4>
+  <pre><code class="lang-csharp">var json = "[1, \"hello\", true, [2, 3]]";
+var element = JsonDocument.Parse(json).RootElement;
+var result = JSONDeserializer.ToArray(element);
+// result[0] is double 1.0, result[1] is string "hello", result[2] is bool true, result[3] is object[] [2.0, 3.0]</code></pre>
+
+
+  <h4 class="section" id="Blackwood_JSONDeserializer_ToArray_System_Text_Json_JsonElement__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This method processes all elements in the JSON array and converts each
+element to its appropriate .NET type.</p>
+</div>
+
+
+
+
+  <a id="Blackwood_JSONDeserializer_ToDict_" data-uid="Blackwood.JSONDeserializer.ToDict*"></a>
+
+  <h3 id="Blackwood_JSONDeserializer_ToDict_System_Collections_Generic_Dictionary_System_String_System_Object__" data-uid="Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary{System.String,System.Object})">
+  ToDict(Dictionary&lt;string, object&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONDeserializer2.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a dictionary containing JsonElement values to a dictionary with native .NET objects.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, object&gt; ToDict(Dictionary&lt;string, object&gt; jsonDictionary)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</td>
-        <td><span class="parametername">jsonDictionary</span></td>
-        <td><p>The dictionary of JSON elements</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</td>
-        <td><p>The dictionary</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/new/master/apiSpec/new?filename=Blackwood_JSONDeserializer_ToDict_System_Text_Json_JsonElement_.md&amp;value=---%0Auid%3A%20Blackwood.JSONDeserializer.ToDict(System.Text.Json.JsonElement)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSON2.cs/#L56">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>jsonDictionary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <span class="xref">object</span>&gt;</dt>
+    <dd><p>The dictionary containing JsonElement values to convert</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <span class="xref">object</span>&gt;</dt>
+    <dd><p>A new dictionary with all values converted to native .NET objects</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="Blackwood_JSONDeserializer_ToDict_System_Collections_Generic_Dictionary_System_String_System_Object___examples">Examples</h4>
+  <pre><code class="lang-csharp">var dict = new Dictionary&lt;string, object&gt;();
+dict["name"] = JsonDocument.Parse("\"John\"").RootElement;
+dict["age"] = JsonDocument.Parse("30").RootElement;
+var result = JSONDeserializer.ToDict(dict);
+// result["name"] is string "John", result["age"] is double 30.0</code></pre>
+
+
+  <h4 class="section" id="Blackwood_JSONDeserializer_ToDict_System_Collections_Generic_Dictionary_System_String_System_Object___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This method recursively processes all values in the dictionary, converting JsonElements
+to their appropriate .NET types.</p>
+</div>
+
+
+
+
   <a id="Blackwood_JSONDeserializer_ToDict_" data-uid="Blackwood.JSONDeserializer.ToDict*"></a>
-  <h4 id="Blackwood_JSONDeserializer_ToDict_System_Text_Json_JsonElement_" data-uid="Blackwood.JSONDeserializer.ToDict(System.Text.Json.JsonElement)">ToDict(JsonElement)</h4>
-  <div class="markdown level1 summary"><p>Convert the JSON element to an a dictionary</p>
+
+  <h3 id="Blackwood_JSONDeserializer_ToDict_System_Text_Json_JsonElement_" data-uid="Blackwood.JSONDeserializer.ToDict(System.Text.Json.JsonElement)">
+  ToDict(JsonElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONDeserializer2.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a JsonElement representing a JSON object to a Dictionary&lt;string, object&gt;.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, object&gt; ToDict(JsonElement jsonDictionary)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a></td>
-        <td><span class="parametername">jsonDictionary</span></td>
-        <td><p>The JSON element</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</td>
-        <td><p>The dictionary</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/new/master/apiSpec/new?filename=Blackwood_JSONDeserializer_Write_System_Text_Json_Utf8JsonWriter_System_Object_System_Text_Json_JsonSerializerOptions_.md&amp;value=---%0Auid%3A%20Blackwood.JSONDeserializer.Write(System.Text.Json.Utf8JsonWriter%2CSystem.Object%2CSystem.Text.Json.JsonSerializerOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSON.cs/#L120">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>jsonDictionary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a></dt>
+    <dd><p>The JsonElement representing a JSON object to convert</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <span class="xref">object</span>&gt;</dt>
+    <dd><p>A dictionary containing all properties with converted .NET object values</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="Blackwood_JSONDeserializer_ToDict_System_Text_Json_JsonElement__examples">Examples</h4>
+  <pre><code class="lang-csharp">var json = "{\"name\": \"John\", \"age\": 30, \"active\": true}";
+var element = JsonDocument.Parse(json).RootElement;
+var result = JSONDeserializer.ToDict(element);
+// result["name"] is string "John", result["age"] is double 30.0, result["active"] is bool true</code></pre>
+
+
+  <h4 class="section" id="Blackwood_JSONDeserializer_ToDict_System_Text_Json_JsonElement__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This method processes all properties in the JSON object and converts their values
+to appropriate .NET types.</p>
+</div>
+
+
+
+
   <a id="Blackwood_JSONDeserializer_Write_" data-uid="Blackwood.JSONDeserializer.Write*"></a>
-  <h4 id="Blackwood_JSONDeserializer_Write_System_Text_Json_Utf8JsonWriter_System_Object_System_Text_Json_JsonSerializerOptions_" data-uid="Blackwood.JSONDeserializer.Write(System.Text.Json.Utf8JsonWriter,System.Object,System.Text.Json.JsonSerializerOptions)">Write(Utf8JsonWriter, Object, JsonSerializerOptions)</h4>
-  <div class="markdown level1 summary"><p>Disabled since we aren't write</p>
+
+  <h3 id="Blackwood_JSONDeserializer_Write_System_Text_Json_Utf8JsonWriter_System_Object_System_Text_Json_JsonSerializerOptions_" data-uid="Blackwood.JSONDeserializer.Write(System.Text.Json.Utf8JsonWriter,System.Object,System.Text.Json.JsonSerializerOptions)">
+  Write(Utf8JsonWriter, object, JsonSerializerOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSONSerializer.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes a .NET object to JSON format.
+This method is primarily used for serialization scenarios, though the main
+focus of this class is on deserialization with improved parsing capabilities.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></td>
-        <td><span class="parametername">writer</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td><span class="parametername">value</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></td>
-        <td><span class="parametername">options</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">System.Text.Json.Serialization.JsonConverter&lt;System.Object&gt;.Write(System.Text.Json.Utf8JsonWriter, System.Object, System.Text.Json.JsonSerializerOptions)</span></div>
-  
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd><p>The JSON writer to write the serialized data to</p>
+</dd>
+    <dt><code>value</code> <span class="xref">object</span></dt>
+    <dd><p>The .NET object to serialize to JSON</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd><p>The JSON serializer options to use</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </article>
-          </div>
-          
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <div class="contribution">
-                <ul class="nav">
-                  <li>
-                    <a href="https://github.com/randym32/Blackwood.System.Text.Json/new/master/apiSpec/new?filename=Blackwood_JSONDeserializer.md&amp;value=---%0Auid%3A%20Blackwood.JSONDeserializer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/src/JSON2.cs/#L8" class="contribution-link">View Source</a>
-                  </li>
-                </ul>
-              </div>
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
-              </nav>
-            </div>
-          </div>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright 2021-2025 Randall Maas
         </div>
       </div>
-      
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container-fluid">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-            
-            <span>Copyright (c) 2020-2021 by Randall Maas</span>
-          </div>
-        </div>
-      </footer>
-    </div>
-    
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>
+    </footer>
   </body>
 </html>

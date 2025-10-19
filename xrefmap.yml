@@ -7,12 +7,130 @@ references:
   commentId: N:Blackwood
   fullName: Blackwood
   nameWithType: Blackwood
+- uid: Blackwood.JSONConvert
+  name: JSONConvert
+  href: api/Blackwood.JSONConvert.html
+  commentId: T:Blackwood.JSONConvert
+  fullName: Blackwood.JSONConvert
+  nameWithType: JSONConvert
+- uid: Blackwood.JSONConvert.ConvertToType(System.Object,System.Type)
+  name: ConvertToType(object?, Type)
+  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_ConvertToType_System_Object_System_Type_
+  commentId: M:Blackwood.JSONConvert.ConvertToType(System.Object,System.Type)
+  name.vb: ConvertToType(Object, Type)
+  fullName: Blackwood.JSONConvert.ConvertToType(object?, System.Type)
+  fullName.vb: Blackwood.JSONConvert.ConvertToType(Object, System.Type)
+  nameWithType: JSONConvert.ConvertToType(object?, Type)
+  nameWithType.vb: JSONConvert.ConvertToType(Object, Type)
+- uid: Blackwood.JSONConvert.ConvertToType*
+  name: ConvertToType
+  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_ConvertToType_
+  commentId: Overload:Blackwood.JSONConvert.ConvertToType
+  isSpec: "True"
+  fullName: Blackwood.JSONConvert.ConvertToType
+  nameWithType: JSONConvert.ConvertToType
+- uid: Blackwood.JSONConvert.LowerCaseKeys(System.Collections.Generic.Dictionary{System.String,System.Object})
+  name: LowerCaseKeys(Dictionary<string, object>)
+  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_LowerCaseKeys_System_Collections_Generic_Dictionary_System_String_System_Object__
+  commentId: M:Blackwood.JSONConvert.LowerCaseKeys(System.Collections.Generic.Dictionary{System.String,System.Object})
+  name.vb: LowerCaseKeys(Dictionary(Of String, Object))
+  fullName: Blackwood.JSONConvert.LowerCaseKeys(System.Collections.Generic.Dictionary<string, object>)
+  fullName.vb: Blackwood.JSONConvert.LowerCaseKeys(System.Collections.Generic.Dictionary(Of String, Object))
+  nameWithType: JSONConvert.LowerCaseKeys(Dictionary<string, object>)
+  nameWithType.vb: JSONConvert.LowerCaseKeys(Dictionary(Of String, Object))
+- uid: Blackwood.JSONConvert.LowerCaseKeys*
+  name: LowerCaseKeys
+  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_LowerCaseKeys_
+  commentId: Overload:Blackwood.JSONConvert.LowerCaseKeys
+  isSpec: "True"
+  fullName: Blackwood.JSONConvert.LowerCaseKeys
+  nameWithType: JSONConvert.LowerCaseKeys
+- uid: Blackwood.JSONConvert.ToBool(System.Object)
+  name: ToBool(object)
+  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_ToBool_System_Object_
+  commentId: M:Blackwood.JSONConvert.ToBool(System.Object)
+  name.vb: ToBool(Object)
+  fullName: Blackwood.JSONConvert.ToBool(object)
+  fullName.vb: Blackwood.JSONConvert.ToBool(Object)
+  nameWithType: JSONConvert.ToBool(object)
+  nameWithType.vb: JSONConvert.ToBool(Object)
+- uid: Blackwood.JSONConvert.ToBool*
+  name: ToBool
+  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_ToBool_
+  commentId: Overload:Blackwood.JSONConvert.ToBool
+  isSpec: "True"
+  fullName: Blackwood.JSONConvert.ToBool
+  nameWithType: JSONConvert.ToBool
+- uid: Blackwood.JSONConvert.ToFloat(System.Object)
+  name: ToFloat(object)
+  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_ToFloat_System_Object_
+  commentId: M:Blackwood.JSONConvert.ToFloat(System.Object)
+  name.vb: ToFloat(Object)
+  fullName: Blackwood.JSONConvert.ToFloat(object)
+  fullName.vb: Blackwood.JSONConvert.ToFloat(Object)
+  nameWithType: JSONConvert.ToFloat(object)
+  nameWithType.vb: JSONConvert.ToFloat(Object)
+- uid: Blackwood.JSONConvert.ToFloat*
+  name: ToFloat
+  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_ToFloat_
+  commentId: Overload:Blackwood.JSONConvert.ToFloat
+  isSpec: "True"
+  fullName: Blackwood.JSONConvert.ToFloat
+  nameWithType: JSONConvert.ToFloat
+- uid: Blackwood.JSONConvert.ToInt(System.Object)
+  name: ToInt(object)
+  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_ToInt_System_Object_
+  commentId: M:Blackwood.JSONConvert.ToInt(System.Object)
+  name.vb: ToInt(Object)
+  fullName: Blackwood.JSONConvert.ToInt(object)
+  fullName.vb: Blackwood.JSONConvert.ToInt(Object)
+  nameWithType: JSONConvert.ToInt(object)
+  nameWithType.vb: JSONConvert.ToInt(Object)
+- uid: Blackwood.JSONConvert.ToInt*
+  name: ToInt
+  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_ToInt_
+  commentId: Overload:Blackwood.JSONConvert.ToInt
+  isSpec: "True"
+  fullName: Blackwood.JSONConvert.ToInt
+  nameWithType: JSONConvert.ToInt
+- uid: Blackwood.JSONConvert.TryParseColor(System.String)
+  name: TryParseColor(string)
+  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_TryParseColor_System_String_
+  commentId: M:Blackwood.JSONConvert.TryParseColor(System.String)
+  name.vb: TryParseColor(String)
+  fullName: Blackwood.JSONConvert.TryParseColor(string)
+  fullName.vb: Blackwood.JSONConvert.TryParseColor(String)
+  nameWithType: JSONConvert.TryParseColor(string)
+  nameWithType.vb: JSONConvert.TryParseColor(String)
+- uid: Blackwood.JSONConvert.TryParseColor*
+  name: TryParseColor
+  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_TryParseColor_
+  commentId: Overload:Blackwood.JSONConvert.TryParseColor
+  isSpec: "True"
+  fullName: Blackwood.JSONConvert.TryParseColor
+  nameWithType: JSONConvert.TryParseColor
 - uid: Blackwood.JSONDeserializer
   name: JSONDeserializer
   href: api/Blackwood.JSONDeserializer.html
   commentId: T:Blackwood.JSONDeserializer
   fullName: Blackwood.JSONDeserializer
   nameWithType: JSONDeserializer
+- uid: Blackwood.JSONDeserializer.ConvertValueToSerializableForm(System.Object)
+  name: ConvertValueToSerializableForm(object?)
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_ConvertValueToSerializableForm_System_Object_
+  commentId: M:Blackwood.JSONDeserializer.ConvertValueToSerializableForm(System.Object)
+  name.vb: ConvertValueToSerializableForm(Object)
+  fullName: Blackwood.JSONDeserializer.ConvertValueToSerializableForm(object?)
+  fullName.vb: Blackwood.JSONDeserializer.ConvertValueToSerializableForm(Object)
+  nameWithType: JSONDeserializer.ConvertValueToSerializableForm(object?)
+  nameWithType.vb: JSONDeserializer.ConvertValueToSerializableForm(Object)
+- uid: Blackwood.JSONDeserializer.ConvertValueToSerializableForm*
+  name: ConvertValueToSerializableForm
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_ConvertValueToSerializableForm_
+  commentId: Overload:Blackwood.JSONDeserializer.ConvertValueToSerializableForm
+  isSpec: "True"
+  fullName: Blackwood.JSONDeserializer.ConvertValueToSerializableForm
+  nameWithType: JSONDeserializer.ConvertValueToSerializableForm
 - uid: Blackwood.JSONDeserializer.Deserialize*
   name: Deserialize
   href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_Deserialize_
@@ -20,6 +138,22 @@ references:
   isSpec: "True"
   fullName: Blackwood.JSONDeserializer.Deserialize
   nameWithType: JSONDeserializer.Deserialize
+- uid: Blackwood.JSONDeserializer.DeserializeProperties(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object},System.Type)
+  name: DeserializeProperties(object, Dictionary<string, object>, Type)
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_DeserializeProperties_System_Object_System_Collections_Generic_Dictionary_System_String_System_Object__System_Type_
+  commentId: M:Blackwood.JSONDeserializer.DeserializeProperties(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object},System.Type)
+  name.vb: DeserializeProperties(Object, Dictionary(Of String, Object), Type)
+  fullName: Blackwood.JSONDeserializer.DeserializeProperties(object, System.Collections.Generic.Dictionary<string, object>, System.Type)
+  fullName.vb: Blackwood.JSONDeserializer.DeserializeProperties(Object, System.Collections.Generic.Dictionary(Of String, Object), System.Type)
+  nameWithType: JSONDeserializer.DeserializeProperties(object, Dictionary<string, object>, Type)
+  nameWithType.vb: JSONDeserializer.DeserializeProperties(Object, Dictionary(Of String, Object), Type)
+- uid: Blackwood.JSONDeserializer.DeserializeProperties*
+  name: DeserializeProperties
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_DeserializeProperties_
+  commentId: Overload:Blackwood.JSONDeserializer.DeserializeProperties
+  isSpec: "True"
+  fullName: Blackwood.JSONDeserializer.DeserializeProperties
+  nameWithType: JSONDeserializer.DeserializeProperties
 - uid: Blackwood.JSONDeserializer.Deserialize``1(System.IO.Stream)
   name: Deserialize<T>(Stream)
   href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_Deserialize__1_System_IO_Stream_
@@ -30,14 +164,20 @@ references:
   nameWithType: JSONDeserializer.Deserialize<T>(Stream)
   nameWithType.vb: JSONDeserializer.Deserialize(Of T)(Stream)
 - uid: Blackwood.JSONDeserializer.Deserialize``1(System.String)
-  name: Deserialize<T>(String)
+  name: Deserialize<T>(string)
   href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_Deserialize__1_System_String_
   commentId: M:Blackwood.JSONDeserializer.Deserialize``1(System.String)
   name.vb: Deserialize(Of T)(String)
-  fullName: Blackwood.JSONDeserializer.Deserialize<T>(System.String)
-  fullName.vb: Blackwood.JSONDeserializer.Deserialize(Of T)(System.String)
-  nameWithType: JSONDeserializer.Deserialize<T>(String)
+  fullName: Blackwood.JSONDeserializer.Deserialize<T>(string)
+  fullName.vb: Blackwood.JSONDeserializer.Deserialize(Of T)(String)
+  nameWithType: JSONDeserializer.Deserialize<T>(string)
   nameWithType.vb: JSONDeserializer.Deserialize(Of T)(String)
+- uid: Blackwood.JSONDeserializer.JSONOptions
+  name: JSONOptions
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_JSONOptions
+  commentId: F:Blackwood.JSONDeserializer.JSONOptions
+  fullName: Blackwood.JSONDeserializer.JSONOptions
+  nameWithType: JSONDeserializer.JSONOptions
 - uid: Blackwood.JSONDeserializer.JsonToNormal(System.Text.Json.JsonElement)
   name: JsonToNormal(JsonElement)
   href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_JsonToNormal_System_Text_Json_JsonElement_
@@ -55,11 +195,11 @@ references:
   name: Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
   href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_Read_System_Text_Json_Utf8JsonReader__System_Type_System_Text_Json_JsonSerializerOptions_
   commentId: M:Blackwood.JSONDeserializer.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
-  name.vb: Read(ByRef Utf8JsonReader, Type, JsonSerializerOptions)
+  name.vb: Read(Utf8JsonReader, Type, JsonSerializerOptions)
   fullName: Blackwood.JSONDeserializer.Read(ref System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
-  fullName.vb: Blackwood.JSONDeserializer.Read(ByRef System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
+  fullName.vb: Blackwood.JSONDeserializer.Read(System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
   nameWithType: JSONDeserializer.Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
-  nameWithType.vb: JSONDeserializer.Read(ByRef Utf8JsonReader, Type, JsonSerializerOptions)
+  nameWithType.vb: JSONDeserializer.Read(Utf8JsonReader, Type, JsonSerializerOptions)
 - uid: Blackwood.JSONDeserializer.Read*
   name: Read
   href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_Read_
@@ -67,14 +207,43 @@ references:
   isSpec: "True"
   fullName: Blackwood.JSONDeserializer.Read
   nameWithType: JSONDeserializer.Read
+- uid: Blackwood.JSONDeserializer.SerializeProperties(System.Object,System.Type)
+  name: SerializeProperties(object, Type)
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_SerializeProperties_System_Object_System_Type_
+  commentId: M:Blackwood.JSONDeserializer.SerializeProperties(System.Object,System.Type)
+  name.vb: SerializeProperties(Object, Type)
+  fullName: Blackwood.JSONDeserializer.SerializeProperties(object, System.Type)
+  fullName.vb: Blackwood.JSONDeserializer.SerializeProperties(Object, System.Type)
+  nameWithType: JSONDeserializer.SerializeProperties(object, Type)
+  nameWithType.vb: JSONDeserializer.SerializeProperties(Object, Type)
+- uid: Blackwood.JSONDeserializer.SerializeProperties*
+  name: SerializeProperties
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_SerializeProperties_
+  commentId: Overload:Blackwood.JSONDeserializer.SerializeProperties
+  isSpec: "True"
+  fullName: Blackwood.JSONDeserializer.SerializeProperties
+  nameWithType: JSONDeserializer.SerializeProperties
+- uid: Blackwood.JSONDeserializer.ToArray(System.Text.Json.JsonElement)
+  name: ToArray(JsonElement)
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_ToArray_System_Text_Json_JsonElement_
+  commentId: M:Blackwood.JSONDeserializer.ToArray(System.Text.Json.JsonElement)
+  fullName: Blackwood.JSONDeserializer.ToArray(System.Text.Json.JsonElement)
+  nameWithType: JSONDeserializer.ToArray(JsonElement)
+- uid: Blackwood.JSONDeserializer.ToArray*
+  name: ToArray
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_ToArray_
+  commentId: Overload:Blackwood.JSONDeserializer.ToArray
+  isSpec: "True"
+  fullName: Blackwood.JSONDeserializer.ToArray
+  nameWithType: JSONDeserializer.ToArray
 - uid: Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary{System.String,System.Object})
-  name: ToDict(Dictionary<String, Object>)
+  name: ToDict(Dictionary<string, object>)
   href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_ToDict_System_Collections_Generic_Dictionary_System_String_System_Object__
   commentId: M:Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary{System.String,System.Object})
   name.vb: ToDict(Dictionary(Of String, Object))
-  fullName: Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary<System.String, System.Object>)
-  fullName.vb: Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary(Of System.String, System.Object))
-  nameWithType: JSONDeserializer.ToDict(Dictionary<String, Object>)
+  fullName: Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary<string, object>)
+  fullName.vb: Blackwood.JSONDeserializer.ToDict(System.Collections.Generic.Dictionary(Of String, Object))
+  nameWithType: JSONDeserializer.ToDict(Dictionary<string, object>)
   nameWithType.vb: JSONDeserializer.ToDict(Dictionary(Of String, Object))
 - uid: Blackwood.JSONDeserializer.ToDict(System.Text.Json.JsonElement)
   name: ToDict(JsonElement)
@@ -90,11 +259,14 @@ references:
   fullName: Blackwood.JSONDeserializer.ToDict
   nameWithType: JSONDeserializer.ToDict
 - uid: Blackwood.JSONDeserializer.Write(System.Text.Json.Utf8JsonWriter,System.Object,System.Text.Json.JsonSerializerOptions)
-  name: Write(Utf8JsonWriter, Object, JsonSerializerOptions)
+  name: Write(Utf8JsonWriter, object, JsonSerializerOptions)
   href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_Write_System_Text_Json_Utf8JsonWriter_System_Object_System_Text_Json_JsonSerializerOptions_
   commentId: M:Blackwood.JSONDeserializer.Write(System.Text.Json.Utf8JsonWriter,System.Object,System.Text.Json.JsonSerializerOptions)
-  fullName: Blackwood.JSONDeserializer.Write(System.Text.Json.Utf8JsonWriter, System.Object, System.Text.Json.JsonSerializerOptions)
-  nameWithType: JSONDeserializer.Write(Utf8JsonWriter, Object, JsonSerializerOptions)
+  name.vb: Write(Utf8JsonWriter, Object, JsonSerializerOptions)
+  fullName: Blackwood.JSONDeserializer.Write(System.Text.Json.Utf8JsonWriter, object, System.Text.Json.JsonSerializerOptions)
+  fullName.vb: Blackwood.JSONDeserializer.Write(System.Text.Json.Utf8JsonWriter, Object, System.Text.Json.JsonSerializerOptions)
+  nameWithType: JSONDeserializer.Write(Utf8JsonWriter, object, JsonSerializerOptions)
+  nameWithType.vb: JSONDeserializer.Write(Utf8JsonWriter, Object, JsonSerializerOptions)
 - uid: Blackwood.JSONDeserializer.Write*
   name: Write
   href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_Write_

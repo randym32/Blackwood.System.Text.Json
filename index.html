@@ -1,142 +1,162 @@
-﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
+<!DOCTYPE html>
 <html>
-  
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Blackwood.System.Text.Json Assembly | Blackwood.IO </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Blackwood.System.Text.Json Assembly | Blackwood.IO ">
-    <meta name="generator" content="docfx 2.56.7.0">
-    
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="styles/docfx.vendor.css">
-    <link rel="stylesheet" href="styles/docfx.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <meta property="docfx:navrel" content="toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="">
-    
-  </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
-        
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              
-              <a class="navbar-brand" href="index.html">
-                  <img id="logo" class="png" src="logo-small.png" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar"></div>
-          </div>
-        </nav>
-        
-    <div class="topcorner">
-      <form class="navbar-form navbar-right" role="search" id="search">
-        <div class="form-group">
-          <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-        </div>
-      </form>
-      </div>
-      </header>
-      <div class="container-fluid body-content">
-        
-        <div id="search-results">
-          <div class="search-list"></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
-          </div>
-          <ul id="pagination"></ul>
-        </div>
-      </div>
-      <div role="main" class="container-fluid body-content hide-when-search">
-        <div class="article row grid">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="">
-<h1 id="blackwoodsystemtextjson-assembly">Blackwood.System.Text.Json Assembly</h1>
+      <title>Blackwood.System.Text.Json | Blackwood.System.Text.Json </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Blackwood.System.Text.Json | Blackwood.System.Text.Json ">
+      
+      
+      <link rel="icon" href="favicon.ico">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/Documentation/index.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-<p>This assembly is collection of utilitites specific to the System.Text.Json
-serializer/deserializer.  For projects that use the NewtonSoft JSON.NET tools,
-a different framework can be used.</p>
+      <script type="module" src="./public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+    </header>
+      <div class="affix" style="position: fixed; top: 1px; right: 20px; width: 230px; z-index: 1050; height: 48px;">
+              <form class="search" role="search" id="search">
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search" style="height:32px; padding-top:2px; padding-bottom:2px;">
+              </form>
+      </div>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="">
+<h1 id="blackwoodsystemtextjson">Blackwood.System.Text.Json</h1>
+
+<p>This assembly is collection of utilitites for the
+<a href="https://learn.microsoft.com/en-us/dotnet/api/system.text.json"><code>System.Text.Json</code></a>
+to make JSON serialization and deserialization more flexible.</p>
+<h2 id="overview">Overview</h2>
+<p><strong>Utility Classes</strong>:</p>
+<ul>
+<li><a class="xref" href="api/Blackwood.JSONDeserializer.html"><code>JSONDeserializer</code></a> – Enhanced deserialization with flexible type handling.</li>
+<li><a class="xref" href="api/Blackwood.JSONConvert.html"><code>JSONConvert</code></a> – Customer conversion utilities.</li>
+</ul>
+<p>View the <a href="api/index.html">API Documentation</a> for detailed information about available namespaces, classes, and methods.</p>
 <h2 id="getting-started">Getting Started</h2>
-<h3 id="download-microsoft-development-tools">Download Microsoft development tools</h3>
-<p>If you working on Windows, download Visual Studio 2019 Community Edition to get started.  This version is free for personal use.</p>
+<h3 id="prerequisites">Prerequisites</h3>
 <ul>
-<li><a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community">Download Visual Studio 2019 Community Edition</a></li>
+<li>.NET 8.0 or later</li>
+<li>Visual Studio 2022 or later (Windows), or VS Code with C# extension (cross-platform)</li>
 </ul>
-<p>To get started on Mac and Linux, you can download .NET Core 3.0.</p>
+<h3 id="installation">Installation</h3>
+<p>Install the package via NuGet:</p>
+<pre><code class="lang-bash">dotnet add package Blackwood.System.Text.Json
+</code></pre>
+<p>Or using Package Manager Console:</p>
+<pre><code class="lang-powershell">Install-Package Blackwood.System.Text.Json
+</code></pre>
+<h3 id="quick-start">Quick Start</h3>
+<pre><code class="lang-csharp">using Blackwood;
+
+// Example JSON structure
+var json = &quot;&quot;&quot;
+{
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;age&quot;: 30,
+    &quot;isActive&quot;: &quot;True&quot;
+}
+&quot;&quot;&quot;;
+
+// Deserialize the JSON to a Person object.
+var result = JSONDeserializer.Deserialize&lt;Person&gt;(json);
+</code></pre>
+<h3 id="resources">Resources</h3>
 <ul>
-<li><a href="https://dotnet.microsoft.com/download/dotnet-core/3.0">Download .NET Core 3.0</a></li>
-</ul>
-<h3 id="download">Download</h3>
-<ul>
-<li><a href="https://github.com/randym32/Blackwood.System.Text.Json">Github</a></li>
-<li><a href="https://www.nuget.org/packages/Blackwood.System.Text.Json/">Nuget</a></li>
+<li><strong>Source Code</strong>: <a href="https://github.com/randym32/Blackwood.System.Text.Json">GitHub Repository</a></li>
+<li><strong>NuGet Package</strong>: <a href="https://www.nuget.org/packages/Blackwood.System.Text.Json/">Blackwood.System.Text.Json</a></li>
+<li><strong>Documentation</strong>: <a href="api/index.html">API Reference</a></li>
 </ul>
 <h2 id="documentation">Documentation</h2>
-<p>The documentation can be found at <a href="https://randym32.github.io/Blackwood.System.Text.Json">https://randym32.github.io/Blackwood.System.Text.Json</a></p>
-<h3 id="browser-configuration-notes">Browser configuration notes</h3>
-<p>The documentation, when browsed from a local filesystem, may require tweaking
-the browser.</p>
-<h4 id="firefox">Firefox</h4>
-<p>Go to about:config and make change to the following:</p>
+<p>The API documentation is available at <a href="https://randym32.github.io/Blackwood.System.Text.Json">https://randym32.github.io/Blackwood.System.Text.Json</a>.</p>
+<p>For instructions on how to build or modify the documentation, see
+<em><a href="building-docs.html">How to Build the Documentation</a></em>.</p>
+<h3 id="articles">Articles</h3>
+<p>For guides and examples, check out our articles:</p>
 <ul>
-<li>security.fileuri.strict_origin_policy set to false</li>
-<li>privacy.file_unique_origin  set to false</li>
+<li><strong><a href="articles/intro.html">Introduction</a></strong> - Overview of the library's features and capabilities</li>
+<li><strong><a href="articles/getting-started.html">Getting Started</a></strong> - Installation, configuration, and basic usage</li>
+<li><strong><a href="articles/examples.html">Examples</a></strong> - Common scenarios, flexible deserialization with type coercion, error handling.</li>
 </ul>
-<h4 id="chrome">Chrome</h4>
-<p>You can not use Chrome with a local file system.  You can, however, use an extension
-like &quot;Web Server for Chrome&quot;</p>
 <h2 id="contributing">Contributing</h2>
-<p>View the <a href="https://github.com/randym32/Blackwood.System.Text.Json">Blackwood.System.Text.Json GitHub Project</a>
-for information on contributing.</p>
+<p>We welcome contributions! Please see our <a href="contributing/CONTRIBUTING.html">Contributing Guidelines</a> for information on how to contribute to this project.</p>
+<ul>
+<li><strong>Issues</strong>: Report bugs or request features on <a href="https://github.com/randym32/Blackwood.System.Text.Json/issues">GitHub Issues</a></li>
+<li><strong>Pull Requests</strong>: Submit improvements via <a href="https://github.com/randym32/Blackwood.System.Text.Json/pulls">GitHub Pull Requests</a></li>
+<li><strong>Code of Conduct</strong>: Please read our <a href="contributing/code_of_conduct.html">Code of Conduct</a></li>
+</ul>
+<h2 id="license">License</h2>
+<p>This project is licensed under the BSD 2-Clause License – see the <a href="../LICENSE">LICENSE</a> file for details.</p>
+
 </article>
-          </div>
-          
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <div class="contribution">
-                <ul class="nav">
-                  <li>
-                    <a href="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/Documentation/index.md/#L1" class="contribution-link">Improve this Doc</a>
-                  </li>
-                </ul>
-              </div>
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
-              </nav>
-            </div>
-          </div>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright 2021-2025 Randall Maas
         </div>
       </div>
-      
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container-fluid">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-            
-            <span>Copyright (c) 2020-2021 by Randall Maas</span>
-          </div>
-        </div>
-      </footer>
-    </div>
-    
-    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
-    <script type="text/javascript" src="styles/docfx.js"></script>
-    <script type="text/javascript" src="styles/main.js"></script>
+    </footer>
   </body>
 </html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Examples and Recommendations | Blackwood.System.Text.Json </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Examples and Recommendations | Blackwood.System.Text.Json ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/randym32/Blackwood.System.Text.Json/blob/master/Documentation/articles/examples.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+    </header>
+      <div class="affix" style="position: fixed; top: 1px; right: 20px; width: 230px; z-index: 1050; height: 48px;">
+              <form class="search" role="search" id="search">
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search" style="height:32px; padding-top:2px; padding-bottom:2px;">
+              </form>
+      </div>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="">
+<h1 id="examples-and-recommendations">Examples and Recommendations</h1>
+
+<p>This article provides examples using Blackwood.System.Text.Json.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#basic-usage-patterns">Basic Usage Patterns</a></li>
+<li><a href="#working-with-complex-json">Working with Complex JSON</a></li>
+<li><a href="#type-conversion-examples">Type Conversion Examples</a></li>
+<li><a href="#recommendations">Recommendations</a></li>
+</ul>
+<h2 id="basic-usage-patterns">Basic Usage Patterns</h2>
+<h3 id="simple-object-deserialization">Simple Object Deserialization</h3>
+<p>Below is a simple example demonstrating deserialization with automatic type
+conversion to match the correct property types of your C# object.</p>
+<pre><code class="lang-csharp">using Blackwood;
+
+// Basic user data with mixed data types (strings and actual types)
+var userJson = &quot;&quot;&quot;
+{
+    &quot;id&quot;: &quot;12345&quot;,        // String that will be converted to int
+    &quot;name&quot;: &quot;John Doe&quot;,   // Regular string
+    &quot;email&quot;: &quot;john@example.com&quot;,
+    &quot;isActive&quot;: &quot;true&quot;,   // String that will be converted to bool
+    &quot;lastLogin&quot;: &quot;2024-01-15T10:30:00Z&quot;  // ISO 8601 date string
+}
+&quot;&quot;&quot;;
+
+// Model class with strongly-typed properties
+public class User
+{
+    public int Id { get; set; }           // Will receive converted int from &quot;12345&quot;
+    public string Name { get; set; }      // Direct string mapping
+    public string Email { get; set; }     // Direct string mapping
+    public bool IsActive { get; set; }    // Will receive converted bool from &quot;true&quot;
+    public DateTime LastLogin { get; set; } // Will parse ISO 8601 date string
+}
+
+// Deserialize with automatic type conversion
+var user = JSONDeserializer.Deserialize&lt;User&gt;(userJson);
+</code></pre>
+<h3 id="working-with-arrays">Working with Arrays</h3>
+<p>Here is an example showing how deserialization works with an array.</p>
+<pre><code class="lang-csharp">// JSON array with multiple objects containing string values that need conversion
+var productsJson = &quot;&quot;&quot;
+[
+    {
+        &quot;id&quot;: &quot;1&quot;,           // String to int conversion
+        &quot;name&quot;: &quot;Laptop&quot;,    // Direct string
+        &quot;price&quot;: &quot;999.99&quot;,   // String to decimal conversion
+        &quot;inStock&quot;: &quot;true&quot;    // String to bool conversion
+    },
+    {
+        &quot;id&quot;: &quot;2&quot;,           // String to int conversion
+        &quot;name&quot;: &quot;Mouse&quot;,     // Direct string
+        &quot;price&quot;: &quot;29.99&quot;,    // String to decimal conversion
+        &quot;inStock&quot;: &quot;false&quot;   // String to bool conversion
+    }
+]
+&quot;&quot;&quot;;
+
+// Product model class
+public class Product
+{
+    public int Id { get; set; }           // Will receive converted int values
+    public string Name { get; set; }      // Direct string mapping
+    public decimal Price { get; set; }    // Will receive converted decimal values
+    public bool InStock { get; set; }     // Will receive converted bool values
+}
+
+// Deserialize array of products with automatic type conversion
+var products = JSONDeserializer.Deserialize&lt;Product[]&gt;(productsJson);
+</code></pre>
+<h2 id="working-with-complex-json">Working with Complex JSON</h2>
+<p>Now lets look at more complex structures, such as deeply nested objects, arrays,
+and collections.</p>
+<h3 id="nested-objects-and-collections">Nested Objects and Collections</h3>
+<p>Below is an example featuring a deeply nested object structure that includes
+collections.</p>
+<pre><code class="lang-csharp">// Complex nested JSON with multiple levels and mixed data types
+var orderJson = &quot;&quot;&quot;
+{
+    &quot;orderId&quot;: &quot;ORD-001&quot;,     // Direct string
+    &quot;customer&quot;: {             // Nested object
+        &quot;id&quot;: &quot;123&quot;,          // String to int conversion
+        &quot;name&quot;: &quot;Alice Smith&quot;,
+        &quot;email&quot;: &quot;alice@example.com&quot;
+    },
+    &quot;items&quot;: [                // Array of nested objects
+        {
+            &quot;productId&quot;: &quot;P001&quot;,
+            &quot;quantity&quot;: &quot;2&quot;,      // String to int conversion
+            &quot;unitPrice&quot;: &quot;19.99&quot;  // String to decimal conversion
+        },
+        {
+            &quot;productId&quot;: &quot;P002&quot;,
+            &quot;quantity&quot;: &quot;1&quot;,      // String to int conversion
+            &quot;unitPrice&quot;: &quot;49.99&quot;  // String to decimal conversion
+        }
+    ],
+    &quot;shipping&quot;: {             // Another nested object
+        &quot;address&quot;: &quot;123 Main St&quot;,
+        &quot;city&quot;: &quot;New York&quot;,
+        &quot;zipCode&quot;: &quot;10001&quot;    // String (could be converted to int if needed)
+    },
+    &quot;total&quot;: &quot;89.97&quot;          // String to decimal conversion
+}
+&quot;&quot;&quot;;
+
+// Main order class with nested object properties
+public class Order
+{
+    public string OrderId { get; set; }        // Direct string mapping
+    public Customer Customer { get; set; }     // Nested object
+    public List&lt;OrderItem&gt; Items { get; set; } // Collection of nested objects
+    public ShippingInfo Shipping { get; set; } // Nested object
+    public decimal Total { get; set; }         // Will receive converted decimal
+}
+
+// Customer nested class
+public class Customer
+{
+    public int Id { get; set; }      // Will receive converted int
+    public string Name { get; set; } // Direct string mapping
+    public string Email { get; set; } // Direct string mapping
+}
+
+// Order item nested class
+public class OrderItem
+{
+    public string ProductId { get; set; }  // Direct string mapping
+    public int Quantity { get; set; }      // Will receive converted int
+    public decimal UnitPrice { get; set; } // Will receive converted decimal
+}
+
+// Shipping info nested class
+public class ShippingInfo
+{
+    public string Address { get; set; }  // Direct string mapping
+    public string City { get; set; }     // Direct string mapping
+    public string ZipCode { get; set; }  // Direct string mapping
+}
+
+// Deserialize complex nested structure with automatic type conversion
+var order = JSONDeserializer.Deserialize&lt;Order&gt;(orderJson);
+</code></pre>
+<h3 id="dynamic-json-with-unknown-structure">Dynamic JSON with Unknown Structure</h3>
+<p>When you are working with JSON data whose structure is not known &ndash; or fully
+known &ndash; at compile time you can deserialize them into an <code>object</code> type.  For
+instance processing configuration files or loosely-typed APIs.
+This will deserialize into a dynamic object:</p>
+<pre><code class="lang-csharp">// JSON with unknown structure - perfect for configuration files
+var dynamicJson = &quot;&quot;&quot;
+{
+    &quot;config&quot;: {
+        &quot;database&quot;: {
+            &quot;host&quot;: &quot;localhost&quot;,
+            &quot;port&quot;: &quot;5432&quot;,        // String that can be converted to int
+            &quot;name&quot;: &quot;myapp&quot;
+        },
+        &quot;features&quot;: {
+            &quot;enableLogging&quot;: &quot;true&quot;,    // String that can be converted to bool
+            &quot;maxConnections&quot;: &quot;100&quot;,    // String that can be converted to int
+            &quot;timeout&quot;: &quot;30&quot;            // String that can be converted to int
+        }
+    },
+    &quot;metadata&quot;: {
+        &quot;version&quot;: &quot;1.0.0&quot;,
+        &quot;environment&quot;: &quot;production&quot;
+    }
+}
+&quot;&quot;&quot;;
+
+// Deserialize to dynamic object when structure is unknown at compile time
+var config = JSONDeserializer.Deserialize&lt;object&gt;(dynamicJson);
+
+// Access nested properties with automatic type conversion
+var host = config.config.database.host; // &quot;localhost&quot; (string)
+var port = config.config.database.port; // 5432 (converted from &quot;5432&quot; string to int)
+var enableLogging = config.config.features.enableLogging; // true (converted from &quot;true&quot; string to bool)
+</code></pre>
+<h2 id="type-conversion-examples">Type Conversion Examples</h2>
+<p>The <code>JSONConvert</code> class provides tools to aid converting from JSON values (often
+strings) to the expected .NET types in your classes or variables.</p>
+<pre><code class="lang-csharp">// Convert various string types to their .NET equivalents
+var intValue = JSONConvert.ToInt(&quot;123&quot;);           // 123 (string to int)
+var floatValue = JSONConvert.ToFloat(&quot;45.67&quot;);     // 45.67f (string to float)
+var boolValue = JSONConvert.ToBool(&quot;true&quot;);        // true (string to bool)
+var boolValue2 = JSONConvert.ToBool(&quot;True&quot;);       // true (case insensitive conversion)
+
+// Parse colors from various string formats
+var color1 = JSONConvert.TryParseColor(&quot;#FF0000&quot;);     // Red (hex format)
+var color2 = JSONConvert.TryParseColor(&quot;blue&quot;);        // Blue (named color)
+var color3 = JSONConvert.TryParseColor(&quot;#00FF0080&quot;);   // Green with alpha (hex with alpha)
+
+// Convert dictionary keys to lowercase for consistent casing
+var dict = new Dictionary&lt;string, object&gt;
+{
+    [&quot;FirstName&quot;] = &quot;John&quot;,
+    [&quot;LastName&quot;] = &quot;Doe&quot;,
+    [&quot;Email&quot;] = &quot;john@example.com&quot;
+};
+
+// Convert all keys to lowercase
+var lowerCaseDict = JSONConvert.LowerCaseKeys(dict);
+// Result: { &quot;firstname&quot;: &quot;John&quot;, &quot;lastname&quot;: &quot;Doe&quot;, &quot;email&quot;: &quot;john@example.com&quot; }
+</code></pre>
+<h2 id="recommendations">Recommendations</h2>
+<ol>
+<li>Use strongly-typed models when possible</li>
+<li>Always handle potential null values</li>
+<li>Wrap deserialization in try-catch blocks</li>
+<li>The library converts types, but validate your assumptions</li>
+</ol>
+<h3 id="1-use-strongly-typed-models-when-possible">1. Use Strongly-Typed Models When Possible</h3>
+<p>With strongly-typeed models, the deserialization converter has better information
+how to deserialize the data.</p>
+<pre><code class="lang-csharp">// Good: Strongly-typed model provides compile-time safety and IntelliSense
+public class User
+{
+    public int Id { get; set; }      // Strongly-typed property
+    public string Name { get; set; } // Strongly-typed property
+    public string Email { get; set; } // Strongly-typed property
+}
+
+// Deserialize to strongly-typed object
+var user = JSONDeserializer.Deserialize&lt;User&gt;(json);
+
+// Avoid: Dynamic objects when structure is known (loses type safety)
+var user = JSONDeserializer.Deserialize&lt;object&gt;(json);
+</code></pre>
+<h3 id="2-use-appropriate-data-types">2. Use Appropriate Data Types</h3>
+<pre><code class="lang-csharp">// Good: Use appropriate types for the data to enable proper operations
+public class Product
+{
+    public int Id { get; set; }           // Integer for IDs (enables numeric operations)
+    public decimal Price { get; set; }    // Decimal for money (prevents floating-point errors)
+    public bool InStock { get; set; }     // Boolean for flags (enables logical operations)
+    public DateTime CreatedAt { get; set; } // DateTime for dates (enables date operations)
+}
+
+// Avoid: Using strings for everything (loses type safety and functionality)
+public class BadProduct
+{
+    public string Id { get; set; }        // Should be int (can't do math operations)
+    public string Price { get; set; }     // Should be decimal (can't do calculations)
+    public string InStock { get; set; }   // Should be bool (can't use in conditions)
+}
+</code></pre>
+<h3 id="3-handle-null-values-gracefully">3. Handle Null Values Gracefully</h3>
+<p>It's important to handle null values gracefully during deserialization.
+JSON data might have missing fields, or incoming data could be incomplete or malformed.
+If you don't check for nulls, you may run into <code>NullReferenceException</code>s or application errors.</p>
+<p>When handling null values in a class, use nullable types and provide sensible
+default property values to avoid runtime errors:</p>
+<pre><code class="lang-csharp">// User class with null-safe defaults to prevent null reference exceptions
+public class SafeUser
+{
+    public int Id { get; set; }                              // Required field
+    public string Name { get; set; } = string.Empty;         // Default to empty string
+    public string Email { get; set; } = string.Empty;        // Default to empty string
+    public DateTime? LastLogin { get; set; }                 // Nullable for optional field
+    public List&lt;string&gt; Tags { get; set; } = new List&lt;string&gt;(); // Initialize empty list
+}
+</code></pre>
+<p>The following section demonstrates how to safely invoke the deserializer and handle cases where the resulting object or its properties might be null, preventing runtime errors and enabling robust error handling in your application.</p>
+<pre><code class="lang-csharp">// Example: Graceful null handling after deserialization
+var user = JSONDeserializer.Deserialize&lt;User&gt;(json);
+
+if (user == null)
+{
+    // Handle null object appropriately
+    Console.WriteLine(&quot;Deserialization failed: user is null.&quot;);
+    return;
+}
+
+// Check for required properties that may be null or missing
+if (string.IsNullOrEmpty(user.Email))
+{
+    Console.WriteLine(&quot;No email address provided; using default.&quot;);
+    user.Email = &quot;unknown@example.com&quot;;
+}
+
+// Alternative: Use null-conditional and null-coalescing operators
+string displayName = user?.Name ?? &quot;Guest&quot;;
+DateTime lastLogin = user?.LastLogin ?? DateTime.MinValue;
+</code></pre>
+<h3 id="4-implement-proper-error-handling">4. Implement Proper Error Handling</h3>
+<pre><code class="lang-csharp">public class RobustJsonProcessor
+{
+    public async Task&lt;T&gt; ProcessJsonAsync&lt;T&gt;(string json, T defaultValue = default)
+    {
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            return defaultValue;
+        }
+
+        try
+        {
+            return JSONDeserializer.Deserialize&lt;T&gt;(json);
+        }
+        catch (JsonException ex)
+        {
+            // Log the error with context
+            Logger.LogError(ex, &quot;Failed to deserialize JSON: {Json}&quot;, json);
+            return defaultValue;
+        }
+    }
+}
+</code></pre>
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li><a href="../api/index.html">API Reference</a> - Explore the complete API</li>
+<li><a href="getting-started.html">Getting Started</a> - Review the basics if needed</li>
+</ul>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright 2021-2025 Randall Maas
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

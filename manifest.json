@@ -1,6 +1,5 @@
 {
-  "homepages": [],
-  "source_base_path": "G:/projects/github/Blackwood.System.Text.Json/Documentation",
+  "source_base_path": "C:/projects/2025-9-24/Blackwood.System.Text.Json/Documentation",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -9,19 +8,91 @@
         "resource": {
           "relative_path": "index.json"
         }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Blackwood.JSONConvert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Blackwood.JSONConvert.html"
+        }
       },
-      "is_incremental": false
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Blackwood.JSONConvert",
+      "Summary": "<p sourcefile=\"api/Blackwood.JSONConvert.yml\" sourcestartlinenumber=\"1\">These are helpers to convert to .Net types</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Blackwood.JSONDeserializer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Blackwood.JSONDeserializer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Blackwood.JSONDeserializer",
+      "Summary": "<p sourcefile=\"api/Blackwood.JSONDeserializer.yml\" sourcestartlinenumber=\"1\">A custom JSON deserializer extending the standard System.Text.Json\nfunctionality to better handle common JSON patterns and provide more\nflexible type conversion.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Blackwood.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Blackwood.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Blackwood",
+      "Summary": null
     },
     {
       "type": "Conceptual",
       "source_relative_path": "api/index.md",
       "output": {
         ".html": {
-          "relative_path": "api/index.html",
-          "hash": "4fxM28OC9cEkB0q+VTimbA=="
+          "relative_path": "api/index.html"
         }
       },
-      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/examples.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/examples.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/getting-started.html"
+        }
+      },
       "version": ""
     },
     {
@@ -29,23 +100,105 @@
       "source_relative_path": "articles/intro.md",
       "output": {
         ".html": {
-          "relative_path": "articles/intro.html",
-          "hash": "btWSD6quFMhn025BSFJvDQ=="
+          "relative_path": "articles/intro.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
       "type": "Toc",
-      "source_relative_path": "articles/toc.md",
+      "source_relative_path": "articles/toc.yml",
       "output": {
         ".html": {
-          "relative_path": "articles/toc.html",
-          "hash": "4P02kea3U2Mas5GQtLYAFQ=="
+          "relative_path": "articles/toc.html"
+        },
+        ".json": {
+          "relative_path": "articles/toc.json"
         }
       },
-      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "building-docs.md",
+      "output": {
+        ".html": {
+          "relative_path": "building-docs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "contributing/CONTRIBUTING.md",
+      "output": {
+        ".html": {
+          "relative_path": "contributing/CONTRIBUTING.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "contributing/code_of_conduct.md",
+      "output": {
+        ".html": {
+          "relative_path": "contributing/code_of_conduct.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "contributing/how-to-file-an-issue.md",
+      "output": {
+        ".html": {
+          "relative_path": "contributing/how-to-file-an-issue.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "contributing/pull-requests.md",
+      "output": {
+        ".html": {
+          "relative_path": "contributing/pull-requests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "contributing/style-guide.md",
+      "output": {
+        ".html": {
+          "relative_path": "contributing/style-guide.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "contributing/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "contributing/toc.html"
+        },
+        ".json": {
+          "relative_path": "contributing/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "favicon.ico"
+        }
+      },
       "version": ""
     },
     {
@@ -53,107 +206,45 @@
       "source_relative_path": "index.md",
       "output": {
         ".html": {
-          "relative_path": "index.html",
-          "hash": "uGYMWy//EWGy7Gv/4LkmJw=="
+          "relative_path": "index.html"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/Blackwood.JSONDeserializer.yml",
+      "type": "Resource",
+      "source_relative_path": "logo-small.png",
       "output": {
-        ".html": {
-          "relative_path": "api/Blackwood.JSONDeserializer.html",
-          "hash": "I084A/KM9elhuDYLXmel+w=="
+        "resource": {
+          "relative_path": "logo-small.png"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/Blackwood.yml",
+      "type": "Resource",
+      "source_relative_path": "public/main.css",
       "output": {
-        ".html": {
-          "relative_path": "api/Blackwood.html",
-          "hash": "6KTl3Pk59DlKetP9HGwrgw=="
+        "resource": {
+          "relative_path": "public/main.css"
         }
       },
-      "is_incremental": false,
       "version": ""
     },
     {
-      "type": "Toc",
-      "source_relative_path": "obj/api/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/toc.html",
-          "hash": "/WY4V9kuOp5DpO55pT6hNw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
         ".html": {
-          "relative_path": "toc.html",
-          "hash": "A8gD2RLuNQqcPnbSO7db3A=="
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
         }
       },
-      "is_incremental": false,
       "version": ""
     }
   ],
-  "incremental_info": [
-    {
-      "status": {
-        "can_incremental": true,
-        "incrementalPhase": "build",
-        "total_file_count": 0,
-        "skipped_file_count": 0
-      },
-      "processors": {
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 3,
-          "skipped_file_count": 3
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 2,
-          "skipped_file_count": 1
-        },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        }
-      }
-    },
-    {
-      "status": {
-        "can_incremental": false,
-        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
-        "incrementalPhase": "postProcessing",
-        "total_file_count": 0,
-        "skipped_file_count": 0
-      },
-      "processors": {}
-    }
-  ],
-  "version_info": {},
   "groups": [
     {
       "xrefmap": "xrefmap.yml"
