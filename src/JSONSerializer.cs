@@ -11,9 +11,9 @@ public partial class JSONDeserializer
     /// Serializes custom properties marked with give attribute.
     /// </summary>
     /// <returns>A dictionary of serialized property values</returns>
-    public static Dictionary<string, object> SerializeProperties(object from, Type AttributeType)
+    public static Dictionary<CasePreservingString, object> SerializeProperties(object from, Type AttributeType)
     {
-        var properties = new Dictionary<string, object>();
+        var properties = new Dictionary<CasePreservingString, object>();
         var type = from.GetType();
 
         // Get all properties marked with AttributeType
@@ -61,7 +61,7 @@ public partial class JSONDeserializer
     /// <param name="properties">The dictionary to store the serialized properties</param>
     /// <param name="info">The property or field to serialize</param>
     /// <param name="value">The property value to serialize</param>
-    static void SerializeProperty(Dictionary<string, object> properties, MemberInfo info, object? value)
+    static void SerializeProperty(Dictionary<CasePreservingString, object> properties, MemberInfo info, object? value)
     {
         // Skip nulls
         if (null == value) return;
@@ -102,6 +102,7 @@ public partial class JSONDeserializer
             Rectangle  rect  => new { x = rect.X, y = rect.Y, width = rect.Width, height = rect.Height },
             RectangleF rect  => new { x = rect.X, y = rect.Y, width = rect.Width, height = rect.Height },
             Array array => SerializeArray(array),
+            global::System.Net.IPAddress ipAddress => ipAddress.ToString(),
             _ => value // Fallback to standard representation
         };
     }

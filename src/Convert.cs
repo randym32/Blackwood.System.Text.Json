@@ -63,19 +63,6 @@ public static class JSONConvert
 
 
     /// <summary>
-    /// Converts the keys of a dictionary to lowercase.
-    /// </summary>
-    /// <param name="jsonDictionary">The dictionary to convert</param>
-    /// <returns>A new dictionary with the keys converted to lowercase</returns>
-    static public Dictionary<string, object> LowerCaseKeys(Dictionary<string, object> jsonDictionary)
-    {
-        var ret = new Dictionary<string, object>();
-        foreach (var item in jsonDictionary)
-            ret[item.Key.ToLower()] = item.Value;
-        return ret;
-    }
-
-    /// <summary>
     /// Converts a string to a Color.
     /// Supports named colors, hex codes (#RRGGBB or #AARRGGBB), or returns null for invalid strings.
     /// </summary>
@@ -93,43 +80,15 @@ public static class JSONConvert
         // If string is a hex color code
         if (s.StartsWith("#"))
         {
-            string hex = s.Substring(1);
-
-            // #AARRGGBB
-            if (hex.Length == 8)
+            try
             {
-                try
-                {
-                    byte a = Convert.ToByte(hex.Substring(0, 2), 16);
-                    byte r = Convert.ToByte(hex.Substring(2, 2), 16);
-                    byte g = Convert.ToByte(hex.Substring(4, 2), 16);
-                    byte b = Convert.ToByte(hex.Substring(6, 2), 16);
-                    return Color.FromArgb(a, r, g, b);
-                }
-                catch (FormatException)
-                {
-                    return null;
-                }
+                return ColorTranslator.FromHtml(s);
             }
-
-            // #RRGGBB
-            if (hex.Length == 6)
+            catch
             {
-                try
-                {
-                    byte r = Convert.ToByte(hex.Substring(0, 2), 16);
-                    byte g = Convert.ToByte(hex.Substring(2, 2), 16);
-                    byte b = Convert.ToByte(hex.Substring(4, 2), 16);
-                    return Color.FromArgb(r, g, b);
-                }
-                catch (FormatException)
-                {
-                    return null;
-                }
+                // If ColorTranslator.FromHtml throws an exception, return null
+                return null;
             }
-
-            // #RGB or #ARGB (shorthand) not directly supported
-            return null;
         }
 
         // If the string is a named color, return the color
@@ -144,7 +103,6 @@ public static class JSONConvert
         // If the string is not a valid color, return null
         return null;
     }
-
 
 
     /// <summary>
@@ -221,68 +179,91 @@ public static class JSONConvert
             return IPAddress.Parse(value.ToString()!);
 
         // Handle Point type (with integer x and y properties)
-        if (targetType == typeof(Point) || targetType == typeof(Point?))
+        if (  (targetType == typeof(Point) || targetType == typeof(Point?))
+           && value is Dictionary<CasePreservingString, object> pdict)
         {
-            if (value is Dictionary<string, object> dict
-               && dict.TryGetValue("x", out var x)
-               && dict.TryGetValue("y", out var y)
-               )
-                return new Point(ToInt(x), ToInt(y));
+            if (   pdict.TryGetValue("x", out var x)
+                && pdict.TryGetValue("y", out var y)
+                )
+            return new Point(ToInt(x), ToInt(y));
+
+            // Handle default type
+            if (pdict.Count == 0)
+                return new Point(0, 0);
         }
 
         // Handle PointF type (with float x and y properties)
-        if (targetType == typeof(PointF) || targetType == typeof(PointF?))
+        if ( (targetType == typeof(PointF) || targetType == typeof(PointF?))
+           && value is Dictionary<CasePreservingString, object> pfdict)
         {
-            if (value is Dictionary<string, object> dict
-               && dict.TryGetValue("x", out var x)
-               && dict.TryGetValue("y", out var y)
+            if (  pfdict.TryGetValue("x", out var x)
+               && pfdict.TryGetValue("y", out var y)
                )
-                return new PointF(ToFloat(x), ToFloat(y));
+            return new PointF(ToFloat(x), ToFloat(y));
+
+            // Handle default type
+            if (pfdict.Count == 0)
+                return new PointF(0.0f, 0.0f);
         }
 
         // Handle Size type (with integer width and height properties)
-        if (targetType == typeof(Size) || targetType == typeof(Size?))
+        if (  (targetType == typeof(Size) || targetType == typeof(Size?))
+           && value is Dictionary<CasePreservingString, object> sdict)
         {
-            if (value is Dictionary<string, object> dict
-               && dict.TryGetValue("width", out var width)
-               && dict.TryGetValue("height", out var height)
+            if (   sdict.TryGetValue("width", out var width)
+               && sdict.TryGetValue("height", out var height)
                )
-                return new Size(ToInt(width), ToInt(height));
+            return new Size(ToInt(width), ToInt(height));
+
+            // Handle default type
+            if (sdict.Count == 0)
+                return new Size(0, 0);
         }
 
-
         // Handle SizeF type (with float width and height properties)
-        if (targetType == typeof(SizeF) || targetType == typeof(SizeF?))
+        if (  (targetType == typeof(SizeF) || targetType == typeof(SizeF?))
+           && value is Dictionary<CasePreservingString, object> sfdict)
         {
-            if (value is Dictionary<string, object> dict
-               && dict.TryGetValue("width", out var width)
-               && dict.TryGetValue("height", out var height)
+            if (  sfdict.TryGetValue("width", out var width)
+               && sfdict.TryGetValue("height", out var height)
                )
                 return new SizeF(ToFloat(width), ToFloat(height));
+
+            // Handle default type
+            if (sfdict.Count == 0)
+                return new SizeF(0.0f, 0.0f);
         }
 
         // Handle Rectangle type (with integer x, y, width, and height properties)
-        if (targetType == typeof(Rectangle) || targetType == typeof(Rectangle?))
+        if (  (targetType == typeof(Rectangle) || targetType == typeof(Rectangle?))
+           && value is Dictionary<CasePreservingString, object> rdict)
         {
-            if (value is Dictionary<string, object> dict
-               && dict.TryGetValue("x", out var x)
-               && dict.TryGetValue("y", out var y)
-               && dict.TryGetValue("width", out var width)
-               && dict.TryGetValue("height", out var height)
+            if (  rdict.TryGetValue("x", out var x)
+               && rdict.TryGetValue("y", out var y)
+               && rdict.TryGetValue("width", out var width)
+               && rdict.TryGetValue("height", out var height)
                )
                 return new Rectangle(ToInt(x), ToInt(y), ToInt(width), ToInt(height));
+
+            // Handle default type
+            if (rdict.Count == 0)
+                return new Rectangle(0, 0, 0, 0);
         }
 
         // Handle RectangleF type (with float x, y, width, and height properties)
-        if (targetType == typeof(RectangleF) || targetType == typeof(RectangleF?))
+        if (  (targetType == typeof(RectangleF) || targetType == typeof(RectangleF?))
+           && value is Dictionary<CasePreservingString, object> rfdict)
         {
-            if (value is Dictionary<string, object> dict
-               && dict.TryGetValue("x", out var x)
-               && dict.TryGetValue("y", out var y)
-               && dict.TryGetValue("width", out var width)
-               && dict.TryGetValue("height", out var height)
+            if (  rfdict.TryGetValue("x", out var x)
+               && rfdict.TryGetValue("y", out var y)
+               && rfdict.TryGetValue("width", out var width)
+               && rfdict.TryGetValue("height", out var height)
                )
                 return new RectangleF(ToFloat(x), ToFloat(y), ToFloat(width), ToFloat(height));
+
+            // Handle default type
+            if (rfdict.Count == 0)
+                return new RectangleF(0.0f, 0.0f, 0.0f, 0.0f);
         }
 
         if (targetType == typeof(Color) || targetType == typeof(Color?))

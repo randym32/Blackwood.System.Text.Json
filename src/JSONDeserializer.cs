@@ -1,5 +1,6 @@
 ﻿// Copyright © 2020-2025 Randall Maas. All rights reserved.
 // See LICENSE file in the project root for full license information.
+using System.Drawing;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -43,7 +44,15 @@ public partial class JSONDeserializer : JsonConverter<object>
         // Use a helper converter to better map to the native .NET types
         Converters =
             {
-                new JSONDeserializer()                        // Custom converter
+                new JSONDeserializer(),                       // Custom converter
+                new IPAddressConverter(),                      // IPAddress converter
+                new CasePreservingStringConverter(),           // CasePreservingString converter
+                new Converter2D<Point>(),                          // Point converter
+                new Converter2D<PointF>(),                          // Point converter
+                new Converter2D<Size>(),                          // Point converter
+                new Converter2D<SizeF>(),                         // Point converter
+                new Converter2D<Rectangle>(),                          // Point converter
+                new Converter2D<RectangleF>()                          // Point converter
             }
     };
 

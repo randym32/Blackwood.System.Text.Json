@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Net;
 using System.Text.Json;
 using Blackwood;
 
@@ -674,7 +675,7 @@ public class JSONRoundTripTests
         // Assert
         Assert.That(deserializedValue, Is.Not.Null);
         // Note: Anonymous objects become Dictionary after deserialization
-        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<string,object>>());
+        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<CasePreservingString,object>>());
     }
 
     /// <summary>
@@ -698,7 +699,7 @@ public class JSONRoundTripTests
 
         // Assert
         Assert.That(deserializedValue, Is.Not.Null);
-        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
     }
 
     #endregion
@@ -799,13 +800,13 @@ public class JSONRoundTripTests
 
         // Assert
         Assert.That(deserializedValue, Is.Not.Null);
-        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
 
         // Verify the JsonElement contains the expected data
-        var jsonElement = (Dictionary<string,object>)deserializedValue;
-        Assert.That(jsonElement.TryGetValue("name", out var nameElement), Is.True);
+        var jsonElement = (Dictionary<CasePreservingString,object>)deserializedValue;
+        Assert.That(jsonElement.TryGetValue(new CasePreservingString("name"), out var nameElement), Is.True);
         Assert.That(nameElement?.ToString(), Is.EqualTo("Test"));
-        Assert.That(jsonElement.TryGetValue("value", out var valueElement), Is.True);
+        Assert.That(jsonElement.TryGetValue(new CasePreservingString("value"), out var valueElement), Is.True);
         Assert.That(valueElement, Is.EqualTo(42));
     }
 
@@ -827,13 +828,13 @@ public class JSONRoundTripTests
 
         // Assert
         Assert.That(deserializedValue, Is.Not.Null);
-        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
 
         // Verify the JsonElement contains the expected data
-        var jsonElement = (Dictionary<string, object>)deserializedValue;
-        Assert.That(jsonElement.TryGetValue("name", out var nameElement), Is.True);
+        var jsonElement = (Dictionary<CasePreservingString, object>)deserializedValue;
+        Assert.That(jsonElement.TryGetValue(new CasePreservingString("name"), out var nameElement), Is.True);
         Assert.That(nameElement?.ToString(), Is.EqualTo("Test"));
-        Assert.That(jsonElement.TryGetValue("value", out var valueElement), Is.True);
+        Assert.That(jsonElement.TryGetValue(new CasePreservingString("value"), out var valueElement), Is.True);
         Assert.That(valueElement, Is.EqualTo(42));
     }
 
@@ -852,13 +853,13 @@ public class JSONRoundTripTests
 
         // Assert
         Assert.That(deserializedValue, Is.Not.Null);
-        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
 
         // Verify the JsonElement contains the expected data
-        var jsonElement = (Dictionary<string,object>)deserializedValue;
-        Assert.That(jsonElement.TryGetValue("NAME", out var nameElement), Is.True);
+        var jsonElement = (Dictionary<CasePreservingString,object>)deserializedValue;
+        Assert.That(jsonElement.TryGetValue(new CasePreservingString("NAME"), out var nameElement), Is.True);
         Assert.That(nameElement?.ToString(), Is.EqualTo("Test"));
-        Assert.That(jsonElement.TryGetValue("VALUE", out var valueElement), Is.True);
+        Assert.That(jsonElement.TryGetValue(new CasePreservingString("VALUE"), out var valueElement), Is.True);
         Assert.That(valueElement, Is.EqualTo(42));
     }
 
@@ -918,7 +919,321 @@ public class JSONRoundTripTests
 
         // Assert
         Assert.That(deserializedValue, Is.Not.Null);
-        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
+    }
+
+    #endregion
+
+    #region Additional Edge Case Tests
+
+    /// <summary>
+    /// Tests that very large integers survive round-trip serialization correctly.
+    /// Verifies that large integer data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_VeryLargeInteger_PreservesValue()
+    {
+        // Arrange
+        var originalValue = 9223372036854775807L; // Max long value
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<long>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.EqualTo(originalValue));
+    }
+
+    /// <summary>
+    /// Tests that very small numbers survive round-trip serialization correctly.
+    /// Verifies that small number data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_VerySmallNumber_PreservesValue()
+    {
+        // Arrange
+        var originalValue = 1.175494351E-38f; // Min positive float value
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<float>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.EqualTo(originalValue));
+    }
+
+    /// <summary>
+    /// Tests that decimal values with high precision survive round-trip serialization correctly.
+    /// Verifies that high precision decimal data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_HighPrecisionDecimal_PreservesValue()
+    {
+        // Arrange
+        var originalValue = 123.456789012345678901234567890m;
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<decimal>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.EqualTo(originalValue));
+    }
+
+    /// <summary>
+    /// Tests that DateTime with different formats survive round-trip serialization correctly.
+    /// Verifies that DateTime data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_DateTime_PreservesValue()
+    {
+        // Arrange
+        var originalValue = new DateTime(2023, 12, 25, 10, 30, 45, 123, DateTimeKind.Utc);
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<DateTime>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.EqualTo(originalValue));
+    }
+
+    /// <summary>
+    /// Tests that Guid values survive round-trip serialization correctly.
+    /// Verifies that Guid data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_Guid_PreservesValue()
+    {
+        // Arrange
+        var originalValue = Guid.NewGuid();
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<Guid>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.EqualTo(originalValue));
+    }
+
+    /// <summary>
+    /// Tests that TimeSpan values survive round-trip serialization correctly.
+    /// Verifies that TimeSpan data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_TimeSpan_PreservesValue()
+    {
+        // Arrange
+        var originalValue = new TimeSpan(1, 2, 3, 4, 5);
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<TimeSpan>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.EqualTo(originalValue));
+    }
+
+    /// <summary>
+    /// Tests that Version values survive round-trip serialization correctly.
+    /// Verifies that Version data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_Version_PreservesValue()
+    {
+        // Arrange
+        var originalValue = new Version(1, 2, 3, 4);
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<Version>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.EqualTo(originalValue));
+    }
+
+    /// <summary>
+    /// Tests that Uri values survive round-trip serialization correctly.
+    /// Verifies that Uri data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_Uri_PreservesValue()
+    {
+        // Arrange
+        var originalValue = new Uri("https://example.com/path?query=value");
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<Uri>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.EqualTo(originalValue));
+    }
+
+    /// <summary>
+    /// Tests that IPAddress values survive round-trip serialization correctly.
+    /// Verifies that IPAddress data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_IPAddress_PreservesValue()
+    {
+        // Arrange
+        var originalValue = global::System.Net.IPAddress.Parse("192.168.1.1");
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<global::System.Net.IPAddress>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.EqualTo(originalValue));
+    }
+
+    /// <summary>
+    /// Tests that enum values survive round-trip serialization correctly.
+    /// Verifies that enum data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_Enum_PreservesValue()
+    {
+        // Arrange
+        var originalValue = DayOfWeek.Monday;
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<DayOfWeek>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.EqualTo(originalValue));
+    }
+
+    /// <summary>
+    /// Tests that nullable types survive round-trip serialization correctly.
+    /// Verifies that nullable data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_NullableTypes_PreservesValue()
+    {
+        // Arrange
+        var originalValue = new
+        {
+            NullableInt = (int?)42,
+            NullableString = (string?)"Hello",
+            NullableBool = (bool?)true,
+            NullableDateTime = (DateTime?)new DateTime(2023, 12, 25)
+        };
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<object>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.Not.Null);
+        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
+    }
+
+    /// <summary>
+    /// Tests that complex nested structures with mixed types survive round-trip serialization correctly.
+    /// Verifies that complex nested data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_ComplexNestedStructure_PreservesValue()
+    {
+        // Arrange
+        var originalValue = new
+        {
+            Name = "Test",
+            Value = 42,
+            IsActive = true,
+            CreatedDate = new DateTime(2023, 12, 25),
+            Tags = new[] { "tag1", "tag2", "tag3" },
+            Metadata = new
+            {
+                Version = new Version(1, 2, 3),
+                Uri = new Uri("https://example.com"),
+                Point = new Point(10, 20),
+                Color = Color.Red
+            }
+        };
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<object>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.Not.Null);
+        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
+    }
+
+    /// <summary>
+    /// Tests that arrays with mixed types survive round-trip serialization correctly.
+    /// Verifies that mixed type array data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_MixedTypeArray_PreservesValue()
+    {
+        // Arrange
+        var originalValue = new object[] { 1, "hello", true, 3.14, Color.Red, new Point(10, 20) };
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<object[]>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.Not.Null);
+        Assert.That(deserializedValue.Length, Is.EqualTo(originalValue.Length));
+        for (int i = 0; i < originalValue.Length; i++)
+        {
+            Assert.That(deserializedValue[i], Is.Not.Null);
+        }
+    }
+
+    /// <summary>
+    /// Tests that very deep nesting survives round-trip serialization correctly.
+    /// Verifies that deeply nested data is preserved through serialize/deserialize cycle.
+    /// </summary>
+    [Test]
+    public void RoundTrip_VeryDeepNesting_PreservesValue()
+    {
+        // Arrange
+        var originalValue = new
+        {
+            Level1 = new
+            {
+                Level2 = new
+                {
+                    Level3 = new
+                    {
+                        Level4 = new
+                        {
+                            Level5 = new
+                            {
+                                Level6 = new
+                                {
+                                    Level7 = new
+                                    {
+                                        Level8 = new
+                                        {
+                                            Level9 = new
+                                            {
+                                                Level10 = "Deep Value"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        var jsonString = JsonSerializer.Serialize(originalValue, JSONDeserializer.JSONOptions);
+
+        // Act
+        var deserializedValue = JSONDeserializer.Deserialize<object>(jsonString);
+
+        // Assert
+        Assert.That(deserializedValue, Is.Not.Null);
+        Assert.That(deserializedValue, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
     }
 
     #endregion

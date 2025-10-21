@@ -79,18 +79,23 @@ public partial class JSONDeserializer
     /// // result["name"] is string "John", result["age"] is double 30.0
     /// </code>
     /// </example>
-    static public Dictionary<string, object> ToDict(Dictionary<string, object> jsonDictionary)
+    static public Dictionary<CasePreservingString, object> ToDict(Dictionary<string, object> jsonDictionary)
     {
-        var ret = new Dictionary<string, object>();
+        var ret = new Dictionary<CasePreservingString, object>();
         foreach (var item in jsonDictionary)
         {
             // Only process non-null values to avoid null reference exceptions
             if (null != item.Value)
             {
-                // Convert JsonElement to native .NET object using recursive conversion
-                var obj = JsonToNormal((JsonElement)item.Value);
-                if (null != obj)
-                    ret[item.Key] = obj;  // Add converted value to result dictionary
+                if (item.Value is JsonElement e)
+                {
+                    // Convert JsonElement to native .NET object using recursive conversion
+                    var obj = JsonToNormal(e);
+                    if (null != obj)
+                        ret[item.Key] = obj;  // Add converted value to result dictionary
+                }
+                else
+                    ret[item.Key] = item.Value;
             }
         }
         return ret;
@@ -113,10 +118,10 @@ public partial class JSONDeserializer
     /// // result["name"] is string "John", result["age"] is double 30.0, result["active"] is bool true
     /// </code>
     /// </example>
-    static public Dictionary<string, object> ToDict(JsonElement jsonDictionary)
+    static public Dictionary<CasePreservingString, object> ToDict(JsonElement jsonDictionary)
     {
         // Create a new dictionary to hold the converted properties
-        var ret = new Dictionary<string, object>();
+        var ret = new Dictionary<CasePreservingString, object>();
         foreach (var item in jsonDictionary.EnumerateObject())
         {
             // Convert each property value to a native .NET object using recursive conversion
@@ -166,7 +171,7 @@ public partial class JSONDeserializer
     /// <param name="obj">The object to deserialize properties to</param>
     /// <param name="properties">The properties to deserialize</param>
     /// <param name="attributeType">The attribute type to use for deserialization</param>
-    static public void DeserializeProperties(object obj, Dictionary<string, object> properties, Type attributeType)
+    static public void DeserializeProperties(object obj, Dictionary<CasePreservingString, object> properties, Type attributeType)
     {
         var type = obj.GetType();
 

@@ -240,8 +240,8 @@ public class JSONDeserializer2Tests
         var result = JSONDeserializer.JsonToNormal(element);
 
         // Assert
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
-        var dict = (Dictionary<string, object>)result!;
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
+        var dict = (Dictionary<CasePreservingString, object>)result!;
         Assert.That(dict.Count, Is.EqualTo(3));
         Assert.That(dict["name"], Is.EqualTo("John"));
         Assert.That(dict["age"], Is.EqualTo(30.0));
@@ -282,7 +282,7 @@ public class JSONDeserializer2Tests
 
         // Assert
         Assert.That(result, Is.Not.Null);
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
     }
 
     #endregion
@@ -304,11 +304,11 @@ public class JSONDeserializer2Tests
         var result = JSONDeserializer.ToDict(element);
 
         // Assert
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
         Assert.That(result.Count, Is.EqualTo(3));
-        Assert.That(result["name"], Is.EqualTo("John"));
-        Assert.That(result["age"], Is.EqualTo(30.0));
-        Assert.That(result["active"], Is.EqualTo(true));
+        Assert.That(result[new CasePreservingString("name")], Is.EqualTo("John"));
+        Assert.That(result[new CasePreservingString("age")], Is.EqualTo(30.0));
+        Assert.That(result[new CasePreservingString("active")], Is.EqualTo(true));
     }
 
     /// <summary>
@@ -327,10 +327,10 @@ public class JSONDeserializer2Tests
 
         // Assert
         Assert.That(result.Count, Is.EqualTo(1));
-        Assert.That(result["person"], Is.InstanceOf<Dictionary<string, object>>());
-        var nestedDict = (Dictionary<string, object>)result["person"];
-        Assert.That(nestedDict["name"], Is.EqualTo("John"));
-        Assert.That(nestedDict["age"], Is.EqualTo(30.0));
+        Assert.That(result[new CasePreservingString("person")], Is.InstanceOf<Dictionary<CasePreservingString, object>>());
+        var nestedDict = (Dictionary<CasePreservingString, object>)result[new CasePreservingString("person")];
+        Assert.That(nestedDict[new CasePreservingString("name")], Is.EqualTo("John"));
+        Assert.That(nestedDict[new CasePreservingString("age")], Is.EqualTo(30.0));
     }
 
     /// <summary>
@@ -349,11 +349,11 @@ public class JSONDeserializer2Tests
 
         // Assert
         Assert.That(result.Count, Is.EqualTo(2));
-        Assert.That(result["numbers"], Is.InstanceOf<object[]>());
-        Assert.That(result["names"], Is.InstanceOf<object[]>());
+        Assert.That(result[new CasePreservingString("numbers")], Is.InstanceOf<object[]>());
+        Assert.That(result[new CasePreservingString("names")], Is.InstanceOf<object[]>());
 
-        var numbers = (object[])result["numbers"];
-        var names = (object[])result["names"];
+        var numbers = (object[])result[new CasePreservingString("numbers")];
+        var names = (object[])result[new CasePreservingString("names")];
 
         Assert.That(numbers.Length, Is.EqualTo(3));
         Assert.That(numbers[0], Is.EqualTo(1.0));
@@ -380,7 +380,7 @@ public class JSONDeserializer2Tests
         var result = JSONDeserializer.ToDict(element);
 
         // Assert
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
         Assert.That(result.Count, Is.EqualTo(0));
     }
 
@@ -400,10 +400,10 @@ public class JSONDeserializer2Tests
 
         // Assert
         Assert.That(result.Count, Is.EqualTo(4));
-        Assert.That(result["flag1"], Is.EqualTo(true));
-        Assert.That(result["flag2"], Is.EqualTo(false));
-        Assert.That(result["flag3"], Is.EqualTo(true));
-        Assert.That(result["flag4"], Is.EqualTo(false));
+        Assert.That(result[new CasePreservingString("flag1")], Is.EqualTo(true));
+        Assert.That(result[new CasePreservingString("flag2")], Is.EqualTo(false));
+        Assert.That(result[new CasePreservingString("flag3")], Is.EqualTo(true));
+        Assert.That(result[new CasePreservingString("flag4")], Is.EqualTo(false));
     }
 
     #endregion
@@ -431,11 +431,11 @@ public class JSONDeserializer2Tests
         var result = JSONDeserializer.ToDict(inputDict);
 
         // Assert
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
         Assert.That(result.Count, Is.EqualTo(3));
-        Assert.That(result["name"], Is.EqualTo("John"));
-        Assert.That(result["age"], Is.EqualTo(30.0));
-        Assert.That(result["active"], Is.EqualTo(true));
+        Assert.That(result[new CasePreservingString("name")], Is.EqualTo("John"));
+        Assert.That(result[new CasePreservingString("age")], Is.EqualTo(30.0));
+        Assert.That(result[new CasePreservingString("active")], Is.EqualTo(true));
     }
 
     /// <summary>
@@ -449,15 +449,18 @@ public class JSONDeserializer2Tests
         var document = JsonDocument.Parse(json);
         var element = document.RootElement;
 
-        var inputDict = new Dictionary<string, object>();
-        foreach (var prop in element.EnumerateObject())
-        {
-            inputDict[prop.Name] = prop.Value;
-        }
-        inputDict["nullValue"] = null!; // Add a null value
+        // First convert JsonElement to Dictionary<CasePreservingString, object>
+        var casePreservingDict = JSONDeserializer.ToDict(element);
+        casePreservingDict[new CasePreservingString("nullValue")] = null!; // Add a null value
 
-        // Act
-        var result = JSONDeserializer.ToDict(inputDict);
+        // Act - convert to Dictionary<string, object> which should skip null values
+        // Note: ToDict expects Dictionary<string, object>, so we need to convert the CasePreservingString keys
+        var stringDict = new Dictionary<string, object>();
+        foreach (var kvp in casePreservingDict)
+        {
+            stringDict[kvp.Key.ToString()] = kvp.Value;
+        }
+        var result = JSONDeserializer.ToDict(stringDict);
 
         // Assert
         Assert.That(result.Count, Is.EqualTo(2));
@@ -479,7 +482,7 @@ public class JSONDeserializer2Tests
         var result = JSONDeserializer.ToDict(inputDict);
 
         // Assert
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
         Assert.That(result.Count, Is.EqualTo(0));
     }
 
@@ -502,25 +505,31 @@ public class JSONDeserializer2Tests
         var doc4 = JsonDocument.Parse(json4);
         var doc5 = JsonDocument.Parse(json5);
 
-        var inputDict = new Dictionary<string, object>
+        var casePreservingDict = new Dictionary<CasePreservingString, object>
         {
-            ["name"] = doc1.RootElement,
-            ["age"] = doc2.RootElement,
-            ["active"] = doc3.RootElement,
-            ["numbers"] = doc4.RootElement,
-            ["nested"] = doc5.RootElement
+            [new CasePreservingString("name")] = doc1.RootElement,
+            [new CasePreservingString("age")] = doc2.RootElement,
+            [new CasePreservingString("active")] = doc3.RootElement,
+            [new CasePreservingString("numbers")] = doc4.RootElement,
+            [new CasePreservingString("nested")] = doc5.RootElement
         };
 
-        // Act
-        var result = JSONDeserializer.ToDict(inputDict);
+        // Act - convert to Dictionary<string, object>
+        // Note: ToDict expects Dictionary<string, object>, so we need to convert the CasePreservingString keys
+        var stringDict = new Dictionary<string, object>();
+        foreach (var kvp in casePreservingDict)
+        {
+            stringDict[kvp.Key.ToString()] = kvp.Value;
+        }
+        var result = JSONDeserializer.ToDict(stringDict);
 
         // Assert
         Assert.That(result.Count, Is.EqualTo(5));
-        Assert.That(result["name"], Is.EqualTo("John"));
-        Assert.That(result["age"], Is.EqualTo(30.0));
-        Assert.That(result["active"], Is.EqualTo(true));
-        Assert.That(result["numbers"], Is.InstanceOf<object[]>());
-        Assert.That(result["nested"], Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result[new CasePreservingString("name")], Is.EqualTo("John"));
+        Assert.That(result[new CasePreservingString("age")], Is.EqualTo(30.0));
+        Assert.That(result[new CasePreservingString("active")], Is.EqualTo(true));
+        Assert.That(result[new CasePreservingString("numbers")], Is.InstanceOf<object[]>());
+        Assert.That(result[new CasePreservingString("nested")], Is.InstanceOf<Dictionary<CasePreservingString, object>>());
     }
 
     #endregion
@@ -603,14 +612,14 @@ public class JSONDeserializer2Tests
 
         // Assert
         Assert.That(result.Length, Is.EqualTo(2));
-        Assert.That(result[0], Is.InstanceOf<Dictionary<string, object>>());
-        Assert.That(result[1], Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result[0], Is.InstanceOf<Dictionary<CasePreservingString, object>>());
+        Assert.That(result[1], Is.InstanceOf<Dictionary<CasePreservingString, object>>());
 
-        var dict1 = (Dictionary<string, object>)result[0];
-        var dict2 = (Dictionary<string, object>)result[1];
+        var dict1 = (Dictionary<CasePreservingString, object>)result[0];
+        var dict2 = (Dictionary<CasePreservingString, object>)result[1];
 
-        Assert.That(dict1["name"], Is.EqualTo("John"));
-        Assert.That(dict2["age"], Is.EqualTo(30.0));
+        Assert.That(dict1[new CasePreservingString("name")], Is.EqualTo("John"));
+        Assert.That(dict2[new CasePreservingString("age")], Is.EqualTo(30.0));
     }
 
     /// <summary>
@@ -814,26 +823,26 @@ public class JSONDeserializer2Tests
 
         // Assert
         Assert.That(result.Count, Is.EqualTo(2));
-        Assert.That(result["users"], Is.InstanceOf<object[]>());
-        Assert.That(result["metadata"], Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result[new CasePreservingString("users")], Is.InstanceOf<object[]>());
+        Assert.That(result[new CasePreservingString("metadata")], Is.InstanceOf<Dictionary<CasePreservingString, object>>());
 
-        var users = (object[])result["users"];
-        var metadata = (Dictionary<string, object>)result["metadata"];
+        var users = (object[])result[new CasePreservingString("users")];
+        var metadata = (Dictionary<CasePreservingString, object>)result[new CasePreservingString("metadata")];
 
         Assert.That(users.Length, Is.EqualTo(2));
-        Assert.That(metadata["total"], Is.EqualTo(2.0));
-        Assert.That(metadata["lastUpdated"], Is.EqualTo("2023-01-01"));
+        Assert.That(metadata[new CasePreservingString("total")], Is.EqualTo(2.0));
+        Assert.That(metadata[new CasePreservingString("lastUpdated")], Is.EqualTo("2023-01-01"));
 
-        var user1 = (Dictionary<string, object>)users[0];
-        var user2 = (Dictionary<string, object>)users[1];
+        var user1 = (Dictionary<CasePreservingString, object>)users[0];
+        var user2 = (Dictionary<CasePreservingString, object>)users[1];
 
-        Assert.That(user1["name"], Is.EqualTo("John"));
-        Assert.That(user1["active"], Is.EqualTo(true));
-        Assert.That(user1["scores"], Is.InstanceOf<object[]>());
+        Assert.That(user1[new CasePreservingString("name")], Is.EqualTo("John"));
+        Assert.That(user1[new CasePreservingString("active")], Is.EqualTo(true));
+        Assert.That(user1[new CasePreservingString("scores")], Is.InstanceOf<object[]>());
 
-        Assert.That(user2["name"], Is.EqualTo("Jane"));
-        Assert.That(user2["active"], Is.EqualTo(false));
-        Assert.That(user2["scores"], Is.InstanceOf<object[]>());
+        Assert.That(user2[new CasePreservingString("name")], Is.EqualTo("Jane"));
+        Assert.That(user2[new CasePreservingString("active")], Is.EqualTo(false));
+        Assert.That(user2[new CasePreservingString("scores")], Is.InstanceOf<object[]>());
     }
 
     #endregion
@@ -844,6 +853,7 @@ public class JSONDeserializer2Tests
     /// </summary>
     public class TestDeserializeClass
     {
+#pragma warning disable CS0618 // Type or member is obsolete
         [global::System.Obsolete("Test property")]
         public string TestProperty { get; set; } = "";
 
@@ -852,6 +862,7 @@ public class JSONDeserializer2Tests
 
         [global::System.Obsolete("Test boolean")]
         public bool TestBool { get; set; } = false;
+#pragma warning restore CS0618 // Type or member is obsolete
 
         public string NonSerializedProperty { get; set; } = "";
     }
@@ -864,12 +875,12 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new TestDeserializeClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["TestProperty"] = "TestValue",
-            ["TestField"] = 42,
-            ["TestBool"] = true,
-            ["NonSerializedProperty"] = "ShouldNotBeSet"
+            [new CasePreservingString("TestProperty")] = "TestValue",
+            [new CasePreservingString("TestField")] = 42,
+            [new CasePreservingString("TestBool")] = true,
+            [new CasePreservingString("NonSerializedProperty")] = "ShouldNotBeSet"
         };
 
         // Act
@@ -890,9 +901,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new TestDeserializeClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["TestProperty"] = "TestValue"
+            [new CasePreservingString("TestProperty")] = "TestValue"
             // Missing TestField and TestBool
         };
 
@@ -913,10 +924,10 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new TestDeserializeClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["TestProperty"] = "TestValue",
-            ["TestField"] = "InvalidInt", // This should cause a conversion error
+            [new CasePreservingString("TestProperty")] = "TestValue",
+            [new CasePreservingString("TestField")] = "InvalidInt", // This should cause a conversion error
             ["TestBool"] = true
         };
 
@@ -937,7 +948,7 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new TestDeserializeClass();
-        var properties = new Dictionary<string, object>();
+        var properties = new Dictionary<CasePreservingString, object>();
 
         // Act & Assert
         Assert.DoesNotThrow(() =>
@@ -957,11 +968,11 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new TestDeserializeClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["TestProperty"] = "StringValue",
-            ["TestField"] = 123.45, // Double value
-            ["TestBool"] = "true" // String boolean
+            [new CasePreservingString("TestProperty")] = "StringValue",
+            [new CasePreservingString("TestField")] = 123.45, // Double value
+            [new CasePreservingString("TestBool")] = "true" // String boolean
         };
 
         // Act
@@ -981,11 +992,11 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new TestDeserializeClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["TestProperty"] = "TestValue",
-            ["TestField"] = null!,
-            ["TestBool"] = true
+            [new CasePreservingString("TestProperty")] = "TestValue",
+            [new CasePreservingString("TestField")] = null!,
+            [new CasePreservingString("TestBool")] = true
         };
 
         // Act & Assert
@@ -1002,6 +1013,7 @@ public class JSONDeserializer2Tests
     /// </summary>
     public class ComplexTypeTestClass
     {
+#pragma warning disable CS0618 // Type or member is obsolete
         [global::System.Obsolete("DateTime property")]
         public DateTime DateTimeProperty { get; set; } = DateTime.MinValue;
 
@@ -1025,6 +1037,7 @@ public class JSONDeserializer2Tests
 
         [global::System.Obsolete("IPAddress property")]
         public global::System.Net.IPAddress IPAddressProperty { get; set; } = global::System.Net.IPAddress.None;
+#pragma warning restore CS0618 // Type or member is obsolete
     }
 
     /// <summary>
@@ -1035,9 +1048,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new ComplexTypeTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["DateTimeProperty"] = "2023-12-25T10:30:00"
+            [new CasePreservingString("DateTimeProperty")] = "2023-12-25T10:30:00"
         };
 
         // Act
@@ -1058,9 +1071,9 @@ public class JSONDeserializer2Tests
         // Arrange
         var testObject = new ComplexTypeTestClass();
         var guidString = "12345678-1234-1234-1234-123456789012";
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["GuidProperty"] = guidString
+            [new CasePreservingString("GuidProperty")] = guidString
         };
 
         // Act
@@ -1078,9 +1091,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new ComplexTypeTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["ColorProperty"] = "Red"
+            [new CasePreservingString("ColorProperty")] = "Red"
         };
 
         // Act
@@ -1098,12 +1111,12 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new ComplexTypeTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["PointProperty"] = new Dictionary<string, object>
+            [new CasePreservingString("PointProperty")] = new Dictionary<CasePreservingString, object>
             {
-                ["x"] = 10,
-                ["y"] = 20
+                [new CasePreservingString("x")] = 10,
+                [new CasePreservingString("y")] = 20
             }
         };
 
@@ -1123,9 +1136,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new ComplexTypeTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["UriProperty"] = "https://example.com/test"
+            [new CasePreservingString("UriProperty")] = "https://example.com/test"
         };
 
         // Act
@@ -1143,9 +1156,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new ComplexTypeTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["VersionProperty"] = "2.1.3.4"
+            [new CasePreservingString("VersionProperty")] = "2.1.3.4"
         };
 
         // Act
@@ -1166,9 +1179,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new ComplexTypeTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["TimeSpanProperty"] = "01:30:45"
+            [new CasePreservingString("TimeSpanProperty")] = "01:30:45"
         };
 
         // Act
@@ -1188,9 +1201,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new ComplexTypeTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["IPAddressProperty"] = "192.168.1.1"
+            [new CasePreservingString("IPAddressProperty")] = "192.168.1.1"
         };
 
         // Act
@@ -1205,6 +1218,7 @@ public class JSONDeserializer2Tests
     /// </summary>
     public class NullableAndEnumTestClass
     {
+#pragma warning disable CS0618 // Type or member is obsolete
         [global::System.Obsolete("Nullable int property")]
         public int? NullableIntProperty { get; set; } = null;
 
@@ -1219,6 +1233,7 @@ public class JSONDeserializer2Tests
 
         [global::System.Obsolete("Nullable enum property")]
         public DayOfWeek? NullableEnumProperty { get; set; } = null;
+#pragma warning restore CS0618 // Type or member is obsolete
     }
 
     /// <summary>
@@ -1229,9 +1244,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new NullableAndEnumTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["NullableIntProperty"] = 42
+            [new CasePreservingString("NullableIntProperty")] = 42
         };
 
         // Act
@@ -1250,9 +1265,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new NullableAndEnumTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["NullableDateTimeProperty"] = "2023-12-25T10:30:00"
+            [new CasePreservingString("NullableDateTimeProperty")] = "2023-12-25T10:30:00"
         };
 
         // Act
@@ -1273,9 +1288,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new NullableAndEnumTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["NullableBoolProperty"] = "true"
+            [new CasePreservingString("NullableBoolProperty")] = "true"
         };
 
         // Act
@@ -1294,9 +1309,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new NullableAndEnumTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["EnumProperty"] = "Monday"
+            [new CasePreservingString("EnumProperty")] = "Monday"
         };
 
         // Act
@@ -1314,9 +1329,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new NullableAndEnumTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["NullableEnumProperty"] = "Wednesday"
+            [new CasePreservingString("NullableEnumProperty")] = "Wednesday"
         };
 
         // Act
@@ -1335,12 +1350,12 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         var testObject = new NullableAndEnumTestClass();
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["NullableIntProperty"] = null,
-            ["NullableDateTimeProperty"] = null,
-            ["NullableBoolProperty"] = null,
-            ["NullableEnumProperty"] = null
+            [new CasePreservingString("NullableIntProperty")] = null!,
+            [new CasePreservingString("NullableDateTimeProperty")] = null!,
+            [new CasePreservingString("NullableBoolProperty")] = null!,
+            [new CasePreservingString("NullableEnumProperty")] = null!
         };
 
         // Act
@@ -1454,8 +1469,8 @@ public class JSONDeserializer2Tests
 
         // Assert
         Assert.That(result.Count, Is.EqualTo(2));
-        Assert.That(result["name"], Is.EqualTo("John"));
-        Assert.That(result["active"], Is.EqualTo(true));
+        Assert.That(result[new CasePreservingString("name")], Is.EqualTo("John"));
+        Assert.That(result[new CasePreservingString("active")], Is.EqualTo(true));
         Assert.That(result.ContainsKey("age"), Is.False);
         Assert.That(result.ContainsKey("description"), Is.False);
     }
@@ -1487,21 +1502,21 @@ public class JSONDeserializer2Tests
         var result = JSONDeserializer.JsonToNormal(element);
 
         // Assert
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
-        var dict = (Dictionary<string, object>)result!;
-        Assert.That(dict["level1"], Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
+        var dict = (Dictionary<CasePreservingString, object>)result!;
+        Assert.That(dict[new CasePreservingString("level1")], Is.InstanceOf<Dictionary<CasePreservingString, object>>());
 
-        var level1 = (Dictionary<string, object>)dict["level1"];
-        Assert.That(level1["level2"], Is.InstanceOf<Dictionary<string, object>>());
+        var level1 = (Dictionary<CasePreservingString, object>)dict[new CasePreservingString("level1")];
+        Assert.That(level1[new CasePreservingString("level2")], Is.InstanceOf<Dictionary<CasePreservingString, object>>());
 
-        var level2 = (Dictionary<string, object>)level1["level2"];
-        Assert.That(level2["level3"], Is.InstanceOf<Dictionary<string, object>>());
+        var level2 = (Dictionary<CasePreservingString, object>)level1[new CasePreservingString("level2")];
+        Assert.That(level2[new CasePreservingString("level3")], Is.InstanceOf<Dictionary<CasePreservingString, object>>());
 
-        var level3 = (Dictionary<string, object>)level2["level3"];
-        Assert.That(level3["level4"], Is.InstanceOf<Dictionary<string, object>>());
+        var level3 = (Dictionary<CasePreservingString, object>)level2[new CasePreservingString("level3")];
+        Assert.That(level3[new CasePreservingString("level4")], Is.InstanceOf<Dictionary<CasePreservingString, object>>());
 
-        var level4 = (Dictionary<string, object>)level3["level4"];
-        Assert.That(level4["value"], Is.EqualTo("deep"));
+        var level4 = (Dictionary<CasePreservingString, object>)level3[new CasePreservingString("level4")];
+        Assert.That(level4[new CasePreservingString("value")], Is.EqualTo("deep"));
     }
 
     #endregion
@@ -1542,7 +1557,7 @@ public class JSONDeserializer2Tests
         var result = JSONDeserializer.ToDict(element);
 
         // Assert
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
         Assert.That(result.Count, Is.EqualTo(0));
     }
 
@@ -1554,9 +1569,9 @@ public class JSONDeserializer2Tests
     {
         // Arrange
         object? nullObject = null;
-        var properties = new Dictionary<string, object>
+        var properties = new Dictionary<CasePreservingString, object>
         {
-            ["TestProperty"] = "TestValue"
+            [new CasePreservingString("TestProperty")] = "TestValue"
         };
 
         // Act & Assert
@@ -1581,7 +1596,193 @@ public class JSONDeserializer2Tests
 
         // Assert
         Assert.That(result, Is.Not.Null);
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
+    }
+
+    #endregion
+
+    #region SerializeProperties Tests
+
+    /// <summary>
+    /// Test class for testing the SerializeProperties method.
+    /// </summary>
+    public class TestSerializeClass
+    {
+#pragma warning disable CS0618 // Type or member is obsolete
+        [global::System.Obsolete("Test property")]
+        public string TestProperty { get; set; } = "TestValue";
+
+        [global::System.Obsolete("Test field")]
+        public int TestField = 42;
+
+        [global::System.Obsolete("Test boolean")]
+        public bool TestBool { get; set; } = true;
+
+        [global::System.Obsolete("Test color")]
+        public global::System.Drawing.Color TestColor { get; set; } = global::System.Drawing.Color.Red;
+
+        [global::System.Obsolete("Test point")]
+        public global::System.Drawing.Point TestPoint { get; set; } = new global::System.Drawing.Point(10, 20);
+
+        [global::System.Obsolete("Test array")]
+        public int[] TestArray { get; set; } = new int[] { 1, 2, 3 };
+#pragma warning restore CS0618 // Type or member is obsolete
+
+        public string NonSerializedProperty { get; set; } = "ShouldNotAppear";
+    }
+
+    /// <summary>
+    /// Tests that SerializeProperties correctly serializes properties marked with attributes.
+    /// </summary>
+    [Test]
+    public void SerializeProperties_WithMarkedProperties_ShouldSerializeCorrectly()
+    {
+        // Arrange
+        var testObject = new TestSerializeClass();
+        var attributeType = typeof(global::System.ObsoleteAttribute);
+
+        // Act
+        var result = JSONDeserializer.SerializeProperties(testObject, attributeType);
+
+        // Assert
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.Count, Is.EqualTo(6)); // TestProperty, TestField, TestBool, TestColor, TestPoint, TestArray
+        Assert.That(result.ContainsKey("TestProperty"), Is.True);
+        Assert.That(result.ContainsKey("TestField"), Is.True);
+        Assert.That(result.ContainsKey("TestBool"), Is.True);
+        Assert.That(result.ContainsKey("TestColor"), Is.True);
+        Assert.That(result.ContainsKey("TestPoint"), Is.True);
+        Assert.That(result.ContainsKey("TestArray"), Is.True);
+        Assert.That(result[new CasePreservingString("TestProperty")], Is.EqualTo("TestValue"));
+        Assert.That(result[new CasePreservingString("TestField")], Is.EqualTo(42));
+        Assert.That(result[new CasePreservingString("TestBool")], Is.EqualTo(true));
+        Assert.That(result[new CasePreservingString("TestColor")], Is.EqualTo("Red"));
+        Assert.That(result[new CasePreservingString("TestArray")], Is.InstanceOf<object[]>());
+    }
+
+    /// <summary>
+    /// Tests that SerializeProperties handles null values correctly.
+    /// </summary>
+    [Test]
+    public void SerializeProperties_WithNullValues_ShouldSkipNullProperties()
+    {
+        // Arrange
+        var testObject = new TestSerializeClass
+        {
+            TestProperty = null! // Set to null
+        };
+        var attributeType = typeof(global::System.ObsoleteAttribute);
+
+        // Act
+        var result = JSONDeserializer.SerializeProperties(testObject, attributeType);
+
+        // Assert
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.ContainsKey("TestProperty"), Is.False); // Should be skipped
+        Assert.That(result.ContainsKey("TestField"), Is.True);
+        Assert.That(result.ContainsKey("TestBool"), Is.True);
+    }
+
+    /// <summary>
+    /// Tests that SerializeProperties handles exceptions gracefully.
+    /// </summary>
+    [Test]
+    public void SerializeProperties_WithException_HandlesGracefully()
+    {
+        // Arrange
+        var testObject = new TestSerializeClassWithException();
+        var attributeType = typeof(global::System.ObsoleteAttribute);
+
+        // Act
+        var result = JSONDeserializer.SerializeProperties(testObject, attributeType);
+
+        // Assert
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.ContainsKey("TestProperty"), Is.True);
+        Assert.That(result.ContainsKey("ExceptionProperty"), Is.True);
+        Assert.That(result[new CasePreservingString("ExceptionProperty")].ToString(), Does.Contain("Error serializing"));
+    }
+
+    /// <summary>
+    /// Test class with a property that throws an exception when accessed.
+    /// Used to test error handling in SerializeProperties method.
+    /// </summary>
+    public class TestSerializeClassWithException
+    {
+#pragma warning disable CS0618 // Type or member is obsolete
+        [global::System.Obsolete("Test property")]
+        public string TestProperty { get; set; } = "TestValue";
+
+        [global::System.Obsolete("Exception property")]
+        public string ExceptionProperty
+        {
+            get => throw new InvalidOperationException("Test exception");
+            set { }
+        }
+#pragma warning restore CS0618 // Type or member is obsolete
+    }
+
+    /// <summary>
+    /// Tests that SerializeProperties handles empty objects correctly.
+    /// </summary>
+    [Test]
+    public void SerializeProperties_WithEmptyObject_ShouldReturnEmptyDictionary()
+    {
+        // Arrange
+        var testObject = new EmptyTestClass();
+        var attributeType = typeof(global::System.ObsoleteAttribute);
+
+        // Act
+        var result = JSONDeserializer.SerializeProperties(testObject, attributeType);
+
+        // Assert
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.Count, Is.EqualTo(0));
+    }
+
+    /// <summary>
+    /// Test class with no properties marked with the specified attribute.
+    /// </summary>
+    public class EmptyTestClass
+    {
+        public string NonSerializedProperty { get; set; } = "ShouldNotAppear";
+    }
+
+    /// <summary>
+    /// Tests that SerializeProperties handles different data types correctly.
+    /// </summary>
+    [Test]
+    public void SerializeProperties_WithDifferentDataTypes_ShouldSerializeCorrectly()
+    {
+        // Arrange
+        var testObject = new TestSerializeClass();
+        var attributeType = typeof(global::System.ObsoleteAttribute);
+
+        // Act
+        var result = JSONDeserializer.SerializeProperties(testObject, attributeType);
+
+        // Assert
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result[new CasePreservingString("TestProperty")], Is.EqualTo("TestValue"));
+        Assert.That(result[new CasePreservingString("TestField")], Is.EqualTo(42));
+        Assert.That(result[new CasePreservingString("TestBool")], Is.EqualTo(true));
+        Assert.That(result[new CasePreservingString("TestColor")], Is.EqualTo("Red"));
+
+        // Verify Point is serialized as an object
+        var pointResult = result[new CasePreservingString("TestPoint")];
+        Assert.That(pointResult, Is.Not.Null);
+        var pointType = pointResult!.GetType();
+        Assert.That(pointType.GetProperty("x")!.GetValue(pointResult), Is.EqualTo(10));
+        Assert.That(pointType.GetProperty("y")!.GetValue(pointResult), Is.EqualTo(20));
+
+        // Verify Array is serialized correctly
+        var arrayResult = result[new CasePreservingString("TestArray")];
+        Assert.That(arrayResult, Is.InstanceOf<object[]>());
+        var array = (object[])arrayResult;
+        Assert.That(array.Length, Is.EqualTo(3));
+        Assert.That(array[0], Is.EqualTo(1));
+        Assert.That(array[1], Is.EqualTo(2));
+        Assert.That(array[2], Is.EqualTo(3));
     }
 
     #endregion

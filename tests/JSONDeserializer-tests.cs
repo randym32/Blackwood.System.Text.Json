@@ -99,7 +99,7 @@ public class JSONDeserializerTests
 
         // Assert
         Assert.That(result, Is.Not.Null);
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
     }
 
     /// <summary>
@@ -328,10 +328,10 @@ public class JSONDeserializerTests
         var result = JSONDeserializer.JsonToNormal(json);
 
         // Assert
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
-        var dict = (Dictionary<string, object>)result!;
-        Assert.That(dict["name"], Is.EqualTo("John"));
-        Assert.That(dict["age"], Is.EqualTo(30.0));
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
+        var dict = (Dictionary<CasePreservingString, object>)result!;
+        Assert.That(dict[new CasePreservingString("name")], Is.EqualTo("John"));
+        Assert.That(dict[new CasePreservingString("age")], Is.EqualTo(30.0));
     }
 
     /// <summary>
@@ -373,10 +373,10 @@ public class JSONDeserializerTests
         var result = JSONDeserializer.ToDict(json);
 
         // Assert
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
-        Assert.That(result["name"], Is.EqualTo("John"));
-        Assert.That(result["age"], Is.EqualTo(30.0));
-        Assert.That(result["isActive"], Is.True);
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
+        Assert.That(result[new CasePreservingString("name")], Is.EqualTo("John"));
+        Assert.That(result[new CasePreservingString("age")], Is.EqualTo(30.0));
+        Assert.That(result[new CasePreservingString("isActive")], Is.True);
     }
 
     /// <summary>
@@ -401,8 +401,8 @@ public class JSONDeserializerTests
         var result = JSONDeserializer.ToDict(dict);
 
         // Assert
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
-        Assert.That(result.ContainsKey("person"));
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
+        Assert.That(result.ContainsKey(new CasePreservingString("person")));
     }
 
     /// <summary>
@@ -418,7 +418,7 @@ public class JSONDeserializerTests
         var result = JSONDeserializer.ToDict(json);
 
         // Assert
-        Assert.That(result, Is.InstanceOf<Dictionary<string, object>>());
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
         Assert.That(result.Count, Is.EqualTo(0));
     }
 
@@ -595,7 +595,7 @@ public class JSONDeserializerTests
         Assert.That(options.PropertyNameCaseInsensitive, Is.True);
         Assert.That(options.WriteIndented, Is.True);
         Assert.That(options.DefaultIgnoreCondition, Is.EqualTo(JsonIgnoreCondition.WhenWritingDefault));
-        Assert.That(options.Converters.Count, Is.EqualTo(1));
+        Assert.That(options.Converters.Count, Is.EqualTo(9));
         Assert.That(options.Converters[0], Is.InstanceOf<JSONDeserializer>());
     }
 
