@@ -263,18 +263,6 @@ var boolValue2 = JSONConvert.ToBool(&quot;True&quot;);       // true (case insen
 var color1 = JSONConvert.TryParseColor(&quot;#FF0000&quot;);     // Red (hex format)
 var color2 = JSONConvert.TryParseColor(&quot;blue&quot;);        // Blue (named color)
 var color3 = JSONConvert.TryParseColor(&quot;#00FF0080&quot;);   // Green with alpha (hex with alpha)
-
-// Convert dictionary keys to lowercase for consistent casing
-var dict = new Dictionary&lt;string, object&gt;
-{
-    [&quot;FirstName&quot;] = &quot;John&quot;,
-    [&quot;LastName&quot;] = &quot;Doe&quot;,
-    [&quot;Email&quot;] = &quot;john@example.com&quot;
-};
-
-// Convert all keys to lowercase
-var lowerCaseDict = JSONConvert.LowerCaseKeys(dict);
-// Result: { &quot;firstname&quot;: &quot;John&quot;, &quot;lastname&quot;: &quot;Doe&quot;, &quot;email&quot;: &quot;john@example.com&quot; }
 </code></pre>
 <h2 id="recommendations">Recommendations</h2>
 <ol>
@@ -355,29 +343,6 @@ if (string.IsNullOrEmpty(user.Email))
 // Alternative: Use null-conditional and null-coalescing operators
 string displayName = user?.Name ?? &quot;Guest&quot;;
 DateTime lastLogin = user?.LastLogin ?? DateTime.MinValue;
-</code></pre>
-<h3 id="4-implement-proper-error-handling">4. Implement Proper Error Handling</h3>
-<pre><code class="lang-csharp">public class RobustJsonProcessor
-{
-    public async Task&lt;T&gt; ProcessJsonAsync&lt;T&gt;(string json, T defaultValue = default)
-    {
-        if (string.IsNullOrWhiteSpace(json))
-        {
-            return defaultValue;
-        }
-
-        try
-        {
-            return JSONDeserializer.Deserialize&lt;T&gt;(json);
-        }
-        catch (JsonException ex)
-        {
-            // Log the error with context
-            Logger.LogError(ex, &quot;Failed to deserialize JSON: {Json}&quot;, json);
-            return defaultValue;
-        }
-    }
-}
 </code></pre>
 <h2 id="next-steps">Next Steps</h2>
 <ul>

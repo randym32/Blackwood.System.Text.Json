@@ -12,6 +12,62 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Blackwood.CasePreservingString.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Blackwood.CasePreservingString.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Blackwood.CasePreservingString",
+      "Summary": "<p sourcefile=\"api/Blackwood.CasePreservingString.yml\" sourcestartlinenumber=\"1\">This represents a string that preserves its original case for display\npurposes but allows for case-insensitive comparisons. It provides methods\nto convert a string to this struct, compare two instances in a\ncase-insensitive manner, and generate a hash code based on the\nuppercase version of the string.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Blackwood.CasePreservingStringConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Blackwood.CasePreservingStringConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Blackwood.CasePreservingStringConverter",
+      "Summary": "<p sourcefile=\"api/Blackwood.CasePreservingStringConverter.yml\" sourcestartlinenumber=\"1\">Custom JSON converter for CasePreservingString serialization and deserialization.\nSupports both regular serialization and dictionary key serialization.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Blackwood.Converter2D-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Blackwood.Converter2D-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Blackwood.Converter2D<T>",
+      "Summary": "<p sourcefile=\"api/Blackwood.Converter2D-1.yml\" sourcestartlinenumber=\"1\">Custom JSON converter for Point serialization and deserialization.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Blackwood.IPAddressConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Blackwood.IPAddressConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Blackwood.IPAddressConverter",
+      "Summary": "<p sourcefile=\"api/Blackwood.IPAddressConverter.yml\" sourcestartlinenumber=\"1\">Custom JSON converter for IPAddress serialization and deserialization.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Blackwood.JSONConvert.yml",
       "output": {
         ".html": {
@@ -37,6 +93,20 @@
       "IsMRef": true,
       "Title": "Blackwood.JSONDeserializer",
       "Summary": "<p sourcefile=\"api/Blackwood.JSONDeserializer.yml\" sourcestartlinenumber=\"1\">A custom JSON deserializer extending the standard System.Text.Json\nfunctionality to better handle common JSON patterns and provide more\nflexible type conversion.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Blackwood.PointConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Blackwood.PointConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Blackwood.PointConverter",
+      "Summary": "<p sourcefile=\"api/Blackwood.PointConverter.yml\" sourcestartlinenumber=\"1\">Custom JSON converter for Point serialization and deserialization.</p>\n"
     },
     {
       "type": "ManagedReference",

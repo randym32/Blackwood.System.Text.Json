@@ -7,6 +7,256 @@ references:
   commentId: N:Blackwood
   fullName: Blackwood
   nameWithType: Blackwood
+- uid: Blackwood.CasePreservingString
+  name: CasePreservingString
+  href: api/Blackwood.CasePreservingString.html
+  commentId: T:Blackwood.CasePreservingString
+  fullName: Blackwood.CasePreservingString
+  nameWithType: CasePreservingString
+- uid: Blackwood.CasePreservingString.#ctor(System.String)
+  name: CasePreservingString(string)
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString__ctor_System_String_
+  commentId: M:Blackwood.CasePreservingString.#ctor(System.String)
+  name.vb: New(String)
+  fullName: Blackwood.CasePreservingString.CasePreservingString(string)
+  fullName.vb: Blackwood.CasePreservingString.New(String)
+  nameWithType: CasePreservingString.CasePreservingString(string)
+  nameWithType.vb: CasePreservingString.New(String)
+- uid: Blackwood.CasePreservingString.#ctor*
+  name: CasePreservingString
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString__ctor_
+  commentId: Overload:Blackwood.CasePreservingString.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Blackwood.CasePreservingString.CasePreservingString
+  fullName.vb: Blackwood.CasePreservingString.New
+  nameWithType: CasePreservingString.CasePreservingString
+  nameWithType.vb: CasePreservingString.New
+- uid: Blackwood.CasePreservingString.Equals(Blackwood.CasePreservingString)
+  name: Equals(CasePreservingString)
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString_Equals_Blackwood_CasePreservingString_
+  commentId: M:Blackwood.CasePreservingString.Equals(Blackwood.CasePreservingString)
+  fullName: Blackwood.CasePreservingString.Equals(Blackwood.CasePreservingString)
+  nameWithType: CasePreservingString.Equals(CasePreservingString)
+- uid: Blackwood.CasePreservingString.Equals(System.Object)
+  name: Equals(object?)
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString_Equals_System_Object_
+  commentId: M:Blackwood.CasePreservingString.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: Blackwood.CasePreservingString.Equals(object?)
+  fullName.vb: Blackwood.CasePreservingString.Equals(Object)
+  nameWithType: CasePreservingString.Equals(object?)
+  nameWithType.vb: CasePreservingString.Equals(Object)
+- uid: Blackwood.CasePreservingString.Equals*
+  name: Equals
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString_Equals_
+  commentId: Overload:Blackwood.CasePreservingString.Equals
+  isSpec: "True"
+  fullName: Blackwood.CasePreservingString.Equals
+  nameWithType: CasePreservingString.Equals
+- uid: Blackwood.CasePreservingString.GetHashCode
+  name: GetHashCode()
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString_GetHashCode
+  commentId: M:Blackwood.CasePreservingString.GetHashCode
+  fullName: Blackwood.CasePreservingString.GetHashCode()
+  nameWithType: CasePreservingString.GetHashCode()
+- uid: Blackwood.CasePreservingString.GetHashCode*
+  name: GetHashCode
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString_GetHashCode_
+  commentId: Overload:Blackwood.CasePreservingString.GetHashCode
+  isSpec: "True"
+  fullName: Blackwood.CasePreservingString.GetHashCode
+  nameWithType: CasePreservingString.GetHashCode
+- uid: Blackwood.CasePreservingString.ToString
+  name: ToString()
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString_ToString
+  commentId: M:Blackwood.CasePreservingString.ToString
+  fullName: Blackwood.CasePreservingString.ToString()
+  nameWithType: CasePreservingString.ToString()
+- uid: Blackwood.CasePreservingString.ToString*
+  name: ToString
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString_ToString_
+  commentId: Overload:Blackwood.CasePreservingString.ToString
+  isSpec: "True"
+  fullName: Blackwood.CasePreservingString.ToString
+  nameWithType: CasePreservingString.ToString
+- uid: Blackwood.CasePreservingString.op_Implicit(Blackwood.CasePreservingString)~System.String
+  name: implicit operator string(CasePreservingString)
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString_op_Implicit_Blackwood_CasePreservingString__System_String
+  commentId: M:Blackwood.CasePreservingString.op_Implicit(Blackwood.CasePreservingString)~System.String
+  name.vb: CType(CasePreservingString)
+  fullName: Blackwood.CasePreservingString.implicit operator string(Blackwood.CasePreservingString)
+  fullName.vb: Blackwood.CasePreservingString.CType(Blackwood.CasePreservingString)
+  nameWithType: CasePreservingString.implicit operator string(CasePreservingString)
+  nameWithType.vb: CasePreservingString.CType(CasePreservingString)
+- uid: Blackwood.CasePreservingString.op_Implicit(System.String)~Blackwood.CasePreservingString
+  name: implicit operator CasePreservingString(string)
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString_op_Implicit_System_String__Blackwood_CasePreservingString
+  commentId: M:Blackwood.CasePreservingString.op_Implicit(System.String)~Blackwood.CasePreservingString
+  name.vb: CType(String)
+  fullName: Blackwood.CasePreservingString.implicit operator Blackwood.CasePreservingString(string)
+  fullName.vb: Blackwood.CasePreservingString.CType(String)
+  nameWithType: CasePreservingString.implicit operator CasePreservingString(string)
+  nameWithType.vb: CasePreservingString.CType(String)
+- uid: Blackwood.CasePreservingString.op_Implicit*
+  name: implicit operator
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString_op_Implicit_
+  commentId: Overload:Blackwood.CasePreservingString.op_Implicit
+  isSpec: "True"
+  name.vb: CType
+  fullName: Blackwood.CasePreservingString.implicit operator
+  fullName.vb: Blackwood.CasePreservingString.CType
+  nameWithType: CasePreservingString.implicit operator
+  nameWithType.vb: CasePreservingString.CType
+- uid: Blackwood.CasePreservingString.text
+  name: text
+  href: api/Blackwood.CasePreservingString.html#Blackwood_CasePreservingString_text
+  commentId: F:Blackwood.CasePreservingString.text
+  fullName: Blackwood.CasePreservingString.text
+  nameWithType: CasePreservingString.text
+- uid: Blackwood.CasePreservingStringConverter
+  name: CasePreservingStringConverter
+  href: api/Blackwood.CasePreservingStringConverter.html
+  commentId: T:Blackwood.CasePreservingStringConverter
+  fullName: Blackwood.CasePreservingStringConverter
+  nameWithType: CasePreservingStringConverter
+- uid: Blackwood.CasePreservingStringConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
+  name: Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
+  href: api/Blackwood.CasePreservingStringConverter.html#Blackwood_CasePreservingStringConverter_Read_System_Text_Json_Utf8JsonReader__System_Type_System_Text_Json_JsonSerializerOptions_
+  commentId: M:Blackwood.CasePreservingStringConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
+  name.vb: Read(Utf8JsonReader, Type, JsonSerializerOptions)
+  fullName: Blackwood.CasePreservingStringConverter.Read(ref System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
+  fullName.vb: Blackwood.CasePreservingStringConverter.Read(System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
+  nameWithType: CasePreservingStringConverter.Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
+  nameWithType.vb: CasePreservingStringConverter.Read(Utf8JsonReader, Type, JsonSerializerOptions)
+- uid: Blackwood.CasePreservingStringConverter.Read*
+  name: Read
+  href: api/Blackwood.CasePreservingStringConverter.html#Blackwood_CasePreservingStringConverter_Read_
+  commentId: Overload:Blackwood.CasePreservingStringConverter.Read
+  isSpec: "True"
+  fullName: Blackwood.CasePreservingStringConverter.Read
+  nameWithType: CasePreservingStringConverter.Read
+- uid: Blackwood.CasePreservingStringConverter.ReadAsPropertyName(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
+  name: ReadAsPropertyName(ref Utf8JsonReader, Type, JsonSerializerOptions)
+  href: api/Blackwood.CasePreservingStringConverter.html#Blackwood_CasePreservingStringConverter_ReadAsPropertyName_System_Text_Json_Utf8JsonReader__System_Type_System_Text_Json_JsonSerializerOptions_
+  commentId: M:Blackwood.CasePreservingStringConverter.ReadAsPropertyName(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
+  name.vb: ReadAsPropertyName(Utf8JsonReader, Type, JsonSerializerOptions)
+  fullName: Blackwood.CasePreservingStringConverter.ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
+  fullName.vb: Blackwood.CasePreservingStringConverter.ReadAsPropertyName(System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
+  nameWithType: CasePreservingStringConverter.ReadAsPropertyName(ref Utf8JsonReader, Type, JsonSerializerOptions)
+  nameWithType.vb: CasePreservingStringConverter.ReadAsPropertyName(Utf8JsonReader, Type, JsonSerializerOptions)
+- uid: Blackwood.CasePreservingStringConverter.ReadAsPropertyName*
+  name: ReadAsPropertyName
+  href: api/Blackwood.CasePreservingStringConverter.html#Blackwood_CasePreservingStringConverter_ReadAsPropertyName_
+  commentId: Overload:Blackwood.CasePreservingStringConverter.ReadAsPropertyName
+  isSpec: "True"
+  fullName: Blackwood.CasePreservingStringConverter.ReadAsPropertyName
+  nameWithType: CasePreservingStringConverter.ReadAsPropertyName
+- uid: Blackwood.CasePreservingStringConverter.Write(System.Text.Json.Utf8JsonWriter,Blackwood.CasePreservingString,System.Text.Json.JsonSerializerOptions)
+  name: Write(Utf8JsonWriter, CasePreservingString, JsonSerializerOptions)
+  href: api/Blackwood.CasePreservingStringConverter.html#Blackwood_CasePreservingStringConverter_Write_System_Text_Json_Utf8JsonWriter_Blackwood_CasePreservingString_System_Text_Json_JsonSerializerOptions_
+  commentId: M:Blackwood.CasePreservingStringConverter.Write(System.Text.Json.Utf8JsonWriter,Blackwood.CasePreservingString,System.Text.Json.JsonSerializerOptions)
+  fullName: Blackwood.CasePreservingStringConverter.Write(System.Text.Json.Utf8JsonWriter, Blackwood.CasePreservingString, System.Text.Json.JsonSerializerOptions)
+  nameWithType: CasePreservingStringConverter.Write(Utf8JsonWriter, CasePreservingString, JsonSerializerOptions)
+- uid: Blackwood.CasePreservingStringConverter.Write*
+  name: Write
+  href: api/Blackwood.CasePreservingStringConverter.html#Blackwood_CasePreservingStringConverter_Write_
+  commentId: Overload:Blackwood.CasePreservingStringConverter.Write
+  isSpec: "True"
+  fullName: Blackwood.CasePreservingStringConverter.Write
+  nameWithType: CasePreservingStringConverter.Write
+- uid: Blackwood.CasePreservingStringConverter.WriteAsPropertyName(System.Text.Json.Utf8JsonWriter,Blackwood.CasePreservingString,System.Text.Json.JsonSerializerOptions)
+  name: WriteAsPropertyName(Utf8JsonWriter, CasePreservingString, JsonSerializerOptions)
+  href: api/Blackwood.CasePreservingStringConverter.html#Blackwood_CasePreservingStringConverter_WriteAsPropertyName_System_Text_Json_Utf8JsonWriter_Blackwood_CasePreservingString_System_Text_Json_JsonSerializerOptions_
+  commentId: M:Blackwood.CasePreservingStringConverter.WriteAsPropertyName(System.Text.Json.Utf8JsonWriter,Blackwood.CasePreservingString,System.Text.Json.JsonSerializerOptions)
+  fullName: Blackwood.CasePreservingStringConverter.WriteAsPropertyName(System.Text.Json.Utf8JsonWriter, Blackwood.CasePreservingString, System.Text.Json.JsonSerializerOptions)
+  nameWithType: CasePreservingStringConverter.WriteAsPropertyName(Utf8JsonWriter, CasePreservingString, JsonSerializerOptions)
+- uid: Blackwood.CasePreservingStringConverter.WriteAsPropertyName*
+  name: WriteAsPropertyName
+  href: api/Blackwood.CasePreservingStringConverter.html#Blackwood_CasePreservingStringConverter_WriteAsPropertyName_
+  commentId: Overload:Blackwood.CasePreservingStringConverter.WriteAsPropertyName
+  isSpec: "True"
+  fullName: Blackwood.CasePreservingStringConverter.WriteAsPropertyName
+  nameWithType: CasePreservingStringConverter.WriteAsPropertyName
+- uid: Blackwood.Converter2D`1
+  name: Converter2D<T>
+  href: api/Blackwood.Converter2D-1.html
+  commentId: T:Blackwood.Converter2D`1
+  name.vb: Converter2D(Of T)
+  fullName: Blackwood.Converter2D<T>
+  fullName.vb: Blackwood.Converter2D(Of T)
+  nameWithType: Converter2D<T>
+  nameWithType.vb: Converter2D(Of T)
+- uid: Blackwood.Converter2D`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
+  name: Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
+  href: api/Blackwood.Converter2D-1.html#Blackwood_Converter2D_1_Read_System_Text_Json_Utf8JsonReader__System_Type_System_Text_Json_JsonSerializerOptions_
+  commentId: M:Blackwood.Converter2D`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
+  name.vb: Read(Utf8JsonReader, Type, JsonSerializerOptions)
+  fullName: Blackwood.Converter2D<T>.Read(ref System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
+  fullName.vb: Blackwood.Converter2D(Of T).Read(System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
+  nameWithType: Converter2D<T>.Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
+  nameWithType.vb: Converter2D(Of T).Read(Utf8JsonReader, Type, JsonSerializerOptions)
+- uid: Blackwood.Converter2D`1.Read*
+  name: Read
+  href: api/Blackwood.Converter2D-1.html#Blackwood_Converter2D_1_Read_
+  commentId: Overload:Blackwood.Converter2D`1.Read
+  isSpec: "True"
+  fullName: Blackwood.Converter2D<T>.Read
+  fullName.vb: Blackwood.Converter2D(Of T).Read
+  nameWithType: Converter2D<T>.Read
+  nameWithType.vb: Converter2D(Of T).Read
+- uid: Blackwood.Converter2D`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)
+  name: Write(Utf8JsonWriter, T, JsonSerializerOptions)
+  href: api/Blackwood.Converter2D-1.html#Blackwood_Converter2D_1_Write_System_Text_Json_Utf8JsonWriter__0_System_Text_Json_JsonSerializerOptions_
+  commentId: M:Blackwood.Converter2D`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)
+  fullName: Blackwood.Converter2D<T>.Write(System.Text.Json.Utf8JsonWriter, T, System.Text.Json.JsonSerializerOptions)
+  fullName.vb: Blackwood.Converter2D(Of T).Write(System.Text.Json.Utf8JsonWriter, T, System.Text.Json.JsonSerializerOptions)
+  nameWithType: Converter2D<T>.Write(Utf8JsonWriter, T, JsonSerializerOptions)
+  nameWithType.vb: Converter2D(Of T).Write(Utf8JsonWriter, T, JsonSerializerOptions)
+- uid: Blackwood.Converter2D`1.Write*
+  name: Write
+  href: api/Blackwood.Converter2D-1.html#Blackwood_Converter2D_1_Write_
+  commentId: Overload:Blackwood.Converter2D`1.Write
+  isSpec: "True"
+  fullName: Blackwood.Converter2D<T>.Write
+  fullName.vb: Blackwood.Converter2D(Of T).Write
+  nameWithType: Converter2D<T>.Write
+  nameWithType.vb: Converter2D(Of T).Write
+- uid: Blackwood.IPAddressConverter
+  name: IPAddressConverter
+  href: api/Blackwood.IPAddressConverter.html
+  commentId: T:Blackwood.IPAddressConverter
+  fullName: Blackwood.IPAddressConverter
+  nameWithType: IPAddressConverter
+- uid: Blackwood.IPAddressConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
+  name: Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
+  href: api/Blackwood.IPAddressConverter.html#Blackwood_IPAddressConverter_Read_System_Text_Json_Utf8JsonReader__System_Type_System_Text_Json_JsonSerializerOptions_
+  commentId: M:Blackwood.IPAddressConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
+  name.vb: Read(Utf8JsonReader, Type, JsonSerializerOptions)
+  fullName: Blackwood.IPAddressConverter.Read(ref System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
+  fullName.vb: Blackwood.IPAddressConverter.Read(System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
+  nameWithType: IPAddressConverter.Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
+  nameWithType.vb: IPAddressConverter.Read(Utf8JsonReader, Type, JsonSerializerOptions)
+- uid: Blackwood.IPAddressConverter.Read*
+  name: Read
+  href: api/Blackwood.IPAddressConverter.html#Blackwood_IPAddressConverter_Read_
+  commentId: Overload:Blackwood.IPAddressConverter.Read
+  isSpec: "True"
+  fullName: Blackwood.IPAddressConverter.Read
+  nameWithType: IPAddressConverter.Read
+- uid: Blackwood.IPAddressConverter.Write(System.Text.Json.Utf8JsonWriter,System.Net.IPAddress,System.Text.Json.JsonSerializerOptions)
+  name: Write(Utf8JsonWriter, IPAddress, JsonSerializerOptions)
+  href: api/Blackwood.IPAddressConverter.html#Blackwood_IPAddressConverter_Write_System_Text_Json_Utf8JsonWriter_System_Net_IPAddress_System_Text_Json_JsonSerializerOptions_
+  commentId: M:Blackwood.IPAddressConverter.Write(System.Text.Json.Utf8JsonWriter,System.Net.IPAddress,System.Text.Json.JsonSerializerOptions)
+  fullName: Blackwood.IPAddressConverter.Write(System.Text.Json.Utf8JsonWriter, System.Net.IPAddress, System.Text.Json.JsonSerializerOptions)
+  nameWithType: IPAddressConverter.Write(Utf8JsonWriter, IPAddress, JsonSerializerOptions)
+- uid: Blackwood.IPAddressConverter.Write*
+  name: Write
+  href: api/Blackwood.IPAddressConverter.html#Blackwood_IPAddressConverter_Write_
+  commentId: Overload:Blackwood.IPAddressConverter.Write
+  isSpec: "True"
+  fullName: Blackwood.IPAddressConverter.Write
+  nameWithType: IPAddressConverter.Write
 - uid: Blackwood.JSONConvert
   name: JSONConvert
   href: api/Blackwood.JSONConvert.html
@@ -29,22 +279,6 @@ references:
   isSpec: "True"
   fullName: Blackwood.JSONConvert.ConvertToType
   nameWithType: JSONConvert.ConvertToType
-- uid: Blackwood.JSONConvert.LowerCaseKeys(System.Collections.Generic.Dictionary{System.String,System.Object})
-  name: LowerCaseKeys(Dictionary<string, object>)
-  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_LowerCaseKeys_System_Collections_Generic_Dictionary_System_String_System_Object__
-  commentId: M:Blackwood.JSONConvert.LowerCaseKeys(System.Collections.Generic.Dictionary{System.String,System.Object})
-  name.vb: LowerCaseKeys(Dictionary(Of String, Object))
-  fullName: Blackwood.JSONConvert.LowerCaseKeys(System.Collections.Generic.Dictionary<string, object>)
-  fullName.vb: Blackwood.JSONConvert.LowerCaseKeys(System.Collections.Generic.Dictionary(Of String, Object))
-  nameWithType: JSONConvert.LowerCaseKeys(Dictionary<string, object>)
-  nameWithType.vb: JSONConvert.LowerCaseKeys(Dictionary(Of String, Object))
-- uid: Blackwood.JSONConvert.LowerCaseKeys*
-  name: LowerCaseKeys
-  href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_LowerCaseKeys_
-  commentId: Overload:Blackwood.JSONConvert.LowerCaseKeys
-  isSpec: "True"
-  fullName: Blackwood.JSONConvert.LowerCaseKeys
-  nameWithType: JSONConvert.LowerCaseKeys
 - uid: Blackwood.JSONConvert.ToBool(System.Object)
   name: ToBool(object)
   href: api/Blackwood.JSONConvert.html#Blackwood_JSONConvert_ToBool_System_Object_
@@ -138,15 +372,15 @@ references:
   isSpec: "True"
   fullName: Blackwood.JSONDeserializer.Deserialize
   nameWithType: JSONDeserializer.Deserialize
-- uid: Blackwood.JSONDeserializer.DeserializeProperties(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object},System.Type)
-  name: DeserializeProperties(object, Dictionary<string, object>, Type)
-  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_DeserializeProperties_System_Object_System_Collections_Generic_Dictionary_System_String_System_Object__System_Type_
-  commentId: M:Blackwood.JSONDeserializer.DeserializeProperties(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object},System.Type)
-  name.vb: DeserializeProperties(Object, Dictionary(Of String, Object), Type)
-  fullName: Blackwood.JSONDeserializer.DeserializeProperties(object, System.Collections.Generic.Dictionary<string, object>, System.Type)
-  fullName.vb: Blackwood.JSONDeserializer.DeserializeProperties(Object, System.Collections.Generic.Dictionary(Of String, Object), System.Type)
-  nameWithType: JSONDeserializer.DeserializeProperties(object, Dictionary<string, object>, Type)
-  nameWithType.vb: JSONDeserializer.DeserializeProperties(Object, Dictionary(Of String, Object), Type)
+- uid: Blackwood.JSONDeserializer.DeserializeProperties(System.Object,System.Collections.Generic.Dictionary{Blackwood.CasePreservingString,System.Object},System.Type)
+  name: DeserializeProperties(object, Dictionary<CasePreservingString, object>, Type)
+  href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_DeserializeProperties_System_Object_System_Collections_Generic_Dictionary_Blackwood_CasePreservingString_System_Object__System_Type_
+  commentId: M:Blackwood.JSONDeserializer.DeserializeProperties(System.Object,System.Collections.Generic.Dictionary{Blackwood.CasePreservingString,System.Object},System.Type)
+  name.vb: DeserializeProperties(Object, Dictionary(Of CasePreservingString, Object), Type)
+  fullName: Blackwood.JSONDeserializer.DeserializeProperties(object, System.Collections.Generic.Dictionary<Blackwood.CasePreservingString, object>, System.Type)
+  fullName.vb: Blackwood.JSONDeserializer.DeserializeProperties(Object, System.Collections.Generic.Dictionary(Of Blackwood.CasePreservingString, Object), System.Type)
+  nameWithType: JSONDeserializer.DeserializeProperties(object, Dictionary<CasePreservingString, object>, Type)
+  nameWithType.vb: JSONDeserializer.DeserializeProperties(Object, Dictionary(Of CasePreservingString, Object), Type)
 - uid: Blackwood.JSONDeserializer.DeserializeProperties*
   name: DeserializeProperties
   href: api/Blackwood.JSONDeserializer.html#Blackwood_JSONDeserializer_DeserializeProperties_
@@ -274,3 +508,38 @@ references:
   isSpec: "True"
   fullName: Blackwood.JSONDeserializer.Write
   nameWithType: JSONDeserializer.Write
+- uid: Blackwood.PointConverter
+  name: PointConverter
+  href: api/Blackwood.PointConverter.html
+  commentId: T:Blackwood.PointConverter
+  fullName: Blackwood.PointConverter
+  nameWithType: PointConverter
+- uid: Blackwood.PointConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
+  name: Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
+  href: api/Blackwood.PointConverter.html#Blackwood_PointConverter_Read_System_Text_Json_Utf8JsonReader__System_Type_System_Text_Json_JsonSerializerOptions_
+  commentId: M:Blackwood.PointConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
+  name.vb: Read(Utf8JsonReader, Type, JsonSerializerOptions)
+  fullName: Blackwood.PointConverter.Read(ref System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
+  fullName.vb: Blackwood.PointConverter.Read(System.Text.Json.Utf8JsonReader, System.Type, System.Text.Json.JsonSerializerOptions)
+  nameWithType: PointConverter.Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
+  nameWithType.vb: PointConverter.Read(Utf8JsonReader, Type, JsonSerializerOptions)
+- uid: Blackwood.PointConverter.Read*
+  name: Read
+  href: api/Blackwood.PointConverter.html#Blackwood_PointConverter_Read_
+  commentId: Overload:Blackwood.PointConverter.Read
+  isSpec: "True"
+  fullName: Blackwood.PointConverter.Read
+  nameWithType: PointConverter.Read
+- uid: Blackwood.PointConverter.Write(System.Text.Json.Utf8JsonWriter,System.Drawing.Point,System.Text.Json.JsonSerializerOptions)
+  name: Write(Utf8JsonWriter, Point, JsonSerializerOptions)
+  href: api/Blackwood.PointConverter.html#Blackwood_PointConverter_Write_System_Text_Json_Utf8JsonWriter_System_Drawing_Point_System_Text_Json_JsonSerializerOptions_
+  commentId: M:Blackwood.PointConverter.Write(System.Text.Json.Utf8JsonWriter,System.Drawing.Point,System.Text.Json.JsonSerializerOptions)
+  fullName: Blackwood.PointConverter.Write(System.Text.Json.Utf8JsonWriter, System.Drawing.Point, System.Text.Json.JsonSerializerOptions)
+  nameWithType: PointConverter.Write(Utf8JsonWriter, Point, JsonSerializerOptions)
+- uid: Blackwood.PointConverter.Write*
+  name: Write
+  href: api/Blackwood.PointConverter.html#Blackwood_PointConverter_Write_
+  commentId: Overload:Blackwood.PointConverter.Write
+  isSpec: "True"
+  fullName: Blackwood.PointConverter.Write
+  nameWithType: PointConverter.Write
