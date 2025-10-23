@@ -4,9 +4,20 @@ using Blackwood;
 namespace Blackwood.System.Text.Json.tests;
 
 /// <summary>
-/// Test suite for Dictionary&lt;CasePreservingString, object&gt; serialization and deserialization.
-/// Tests cover JSON serialization/deserialization, case-insensitive key behavior,
-/// nested dictionaries, round-trip operations, and various edge cases.
+/// Comprehensive test suite for Dictionary&lt;CasePreservingString, object&gt; serialization and deserialization.
+///
+/// This test suite validates the JSON serialization and deserialization behavior of dictionaries
+/// that use CasePreservingString as keys. The tests ensure that:
+/// - JSON serialization/deserialization works correctly with case-insensitive key behavior
+/// - Nested dictionaries maintain their structure and case-insensitive key functionality
+/// - Round-trip operations preserve data integrity and case-insensitive behavior
+/// - Edge cases (empty dictionaries, null values, various data types) are handled properly
+/// - Complex nested structures with arrays and dictionaries work correctly
+///
+/// The CasePreservingString key type enables case-insensitive dictionary operations while
+/// preserving the original case of keys for display purposes, making it ideal for
+/// configuration data, API responses, and other scenarios where case-insensitive access
+/// is needed but original formatting should be maintained.
 /// </summary>
 [TestFixture]
 public class DictionaryCasePreservingStringTests
@@ -14,7 +25,9 @@ public class DictionaryCasePreservingStringTests
     #region Basic Dictionary Serialization Tests
 
     /// <summary>
-    /// Tests that a simple dictionary with CasePreservingString keys serializes correctly.
+    /// Tests that a simple dictionary with CasePreservingString keys serializes correctly to JSON.
+    /// This verifies the basic serialization functionality and ensures that the JSON output
+    /// contains the expected keys and values in the correct format.
     /// </summary>
     [Test]
     public void Serialize_SimpleDictionary_ShouldSerializeCorrectly()
@@ -41,7 +54,9 @@ public class DictionaryCasePreservingStringTests
     }
 
     /// <summary>
-    /// Tests that a dictionary with CasePreservingString keys deserializes correctly.
+    /// Tests that a dictionary with CasePreservingString keys deserializes correctly from JSON.
+    /// This verifies that JSON can be converted back to a Dictionary with CasePreservingString keys
+    /// and that the values are correctly typed and accessible.
     /// </summary>
     [Test]
     public void Deserialize_SimpleDictionary_ShouldDeserializeCorrectly()
@@ -62,6 +77,9 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests that case-insensitive key lookup works correctly in deserialized dictionary.
+    /// This is crucial for ensuring that the case-insensitive behavior of CasePreservingString
+    /// is preserved through the serialization/deserialization process, allowing keys to be
+    /// accessed regardless of their case in the original JSON.
     /// </summary>
     [Test]
     public void Deserialize_Dictionary_CaseInsensitiveKeyLookup()
@@ -85,6 +103,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests serialization of nested dictionaries with CasePreservingString keys.
+    /// This verifies that complex hierarchical data structures can be serialized correctly,
+    /// maintaining the nested structure and ensuring all keys are properly serialized.
     /// </summary>
     [Test]
     public void Serialize_NestedDictionary_ShouldSerializeCorrectly()
@@ -120,6 +140,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests deserialization of nested dictionaries with CasePreservingString keys.
+    /// This verifies that complex hierarchical JSON structures can be deserialized correctly,
+    /// maintaining the nested dictionary structure and ensuring proper type casting.
     /// </summary>
     [Test]
     public void Deserialize_NestedDictionary_ShouldDeserializeCorrectly()
@@ -159,6 +181,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests case-insensitive key lookup in nested dictionaries.
+    /// This ensures that the case-insensitive behavior works correctly at all levels
+    /// of nesting, allowing access to nested values regardless of key case.
     /// </summary>
     [Test]
     public void Deserialize_NestedDictionary_CaseInsensitiveLookup()
@@ -181,6 +205,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests that a dictionary survives round-trip serialization/deserialization.
+    /// This is a critical test that ensures data integrity is maintained when converting
+    /// from Dictionary to JSON and back, verifying that no data is lost or corrupted.
     /// </summary>
     [Test]
     public void RoundTrip_SimpleDictionary_PreservesData()
@@ -209,6 +235,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests that nested dictionaries survive round-trip serialization/deserialization.
+    /// This verifies that complex hierarchical structures maintain their integrity
+    /// and structure through the complete serialization/deserialization cycle.
     /// </summary>
     [Test]
     public void RoundTrip_NestedDictionary_PreservesData()
@@ -246,6 +274,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests that case-insensitive key behavior is preserved through round-trip.
+    /// This ensures that the core functionality of CasePreservingString (case-insensitive equality)
+    /// is maintained even after the dictionary has been serialized to JSON and deserialized back.
     /// </summary>
     [Test]
     public void RoundTrip_Dictionary_CaseInsensitiveKeysPreserved()
@@ -274,6 +304,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests serialization of an empty dictionary.
+    /// This verifies that edge cases with empty collections are handled correctly,
+    /// ensuring that empty dictionaries serialize to valid JSON ("{}").
     /// </summary>
     [Test]
     public void Serialize_EmptyDictionary_ShouldSerializeCorrectly()
@@ -290,6 +322,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests deserialization of an empty dictionary.
+    /// This verifies that empty JSON objects can be deserialized to empty dictionaries
+    /// without errors, ensuring proper handling of minimal JSON structures.
     /// </summary>
     [Test]
     public void Deserialize_EmptyDictionary_ShouldDeserializeCorrectly()
@@ -307,6 +341,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests serialization of dictionary with null values.
+    /// This verifies that null values are properly handled during serialization,
+    /// ensuring that null entries are included in the JSON output as "null".
     /// </summary>
     [Test]
     public void Serialize_DictionaryWithNullValues_ShouldSerializeCorrectly()
@@ -332,6 +368,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests deserialization of dictionary with null values.
+    /// This verifies that JSON containing null values can be deserialized correctly,
+    /// ensuring that null entries are properly represented in the resulting dictionary.
     /// </summary>
     [Test]
     public void Deserialize_DictionaryWithNullValues_ShouldDeserializeCorrectly()
@@ -352,6 +390,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests serialization of dictionary with various data types.
+    /// This verifies that dictionaries containing mixed data types (strings, numbers, booleans,
+    /// arrays, nested dictionaries) can be serialized correctly, ensuring type preservation.
     /// </summary>
     [Test]
     public void Serialize_DictionaryWithVariousTypes_ShouldSerializeCorrectly()
@@ -382,6 +422,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests deserialization of dictionary with various data types.
+    /// This verifies that JSON containing mixed data types can be deserialized correctly,
+    /// ensuring that each value maintains its proper type in the resulting dictionary.
     /// </summary>
     [Test]
     public void Deserialize_DictionaryWithVariousTypes_ShouldDeserializeCorrectly()
@@ -418,6 +460,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests that keys with different cases are treated as the same key.
+    /// This is the core functionality test for CasePreservingString - verifying that
+    /// case-insensitive equality works correctly in dictionary operations like ContainsKey.
     /// </summary>
     [Test]
     public void Dictionary_CaseInsensitiveKeys_ShouldTreatAsSame()
@@ -437,6 +481,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests that adding a key with different case overwrites the existing key.
+    /// This verifies that the case-insensitive behavior works correctly for dictionary updates,
+    /// ensuring that keys with different cases are treated as the same entry.
     /// </summary>
     [Test]
     public void Dictionary_CaseInsensitiveKeys_ShouldOverwriteExisting()
@@ -459,6 +505,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests that case-insensitive behavior is preserved through serialization.
+    /// This ensures that the case-insensitive functionality remains intact after
+    /// the dictionary has been serialized to JSON and deserialized back.
     /// </summary>
     [Test]
     public void RoundTrip_CaseInsensitiveKeys_PreservesBehavior()
@@ -487,6 +535,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests that TryGetValue works correctly with case-insensitive keys.
+    /// This verifies that the TryGetValue method respects the case-insensitive behavior
+    /// of CasePreservingString keys, allowing retrieval regardless of key case.
     /// </summary>
     [Test]
     public void TryGetValue_CaseInsensitiveKeys_ShouldFindValues()
@@ -521,6 +571,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests that TryGetValue returns false for non-existent keys.
+    /// This verifies that TryGetValue correctly handles non-existent keys by returning
+    /// false and setting the out parameter to null, maintaining proper error handling.
     /// </summary>
     [Test]
     public void TryGetValue_NonExistentKey_ShouldReturnFalse()
@@ -542,6 +594,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests that TryGetValue works correctly after deserialization.
+    /// This verifies that the TryGetValue functionality is preserved through the
+    /// deserialization process, ensuring consistent behavior regardless of data source.
     /// </summary>
     [Test]
     public void TryGetValue_AfterDeserialization_ShouldWorkCorrectly()
@@ -568,6 +622,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests that TryGetValue works correctly with nested dictionaries.
+    /// This verifies that TryGetValue functionality works at all levels of nesting,
+    /// ensuring that case-insensitive key access works throughout complex structures.
     /// </summary>
     [Test]
     public void TryGetValue_NestedDictionary_ShouldWorkCorrectly()
@@ -613,6 +669,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests that TryGetValue works correctly with round-trip serialization.
+    /// This ensures that TryGetValue functionality is preserved through the complete
+    /// serialization/deserialization cycle, maintaining data access consistency.
     /// </summary>
     [Test]
     public void TryGetValue_RoundTripSerialization_ShouldPreserveBehavior()
@@ -653,6 +711,8 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests serialization of a complex nested structure with arrays and dictionaries.
+    /// This verifies that highly complex data structures containing arrays of dictionaries
+    /// with nested dictionaries can be serialized correctly, ensuring support for real-world scenarios.
     /// </summary>
     [Test]
     public void Serialize_ComplexNestedStructure_ShouldSerializeCorrectly()
@@ -709,6 +769,9 @@ public class DictionaryCasePreservingStringTests
 
     /// <summary>
     /// Tests deserialization of a complex nested structure.
+    /// This verifies that highly complex JSON structures containing arrays of objects
+    /// with nested dictionaries can be deserialized correctly, ensuring support for
+    /// real-world data scenarios with complex hierarchical structures.
     /// </summary>
     [Test]
     public void Deserialize_ComplexNestedStructure_ShouldDeserializeCorrectly()

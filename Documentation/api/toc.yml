@@ -4,6 +4,18 @@ items:
   name: Blackwood
   type: Namespace
   items:
+  - uid: Blackwood.CasePreservingString
+    name: CasePreservingString
+    type: Struct
+  - uid: Blackwood.CasePreservingStringConverter
+    name: CasePreservingStringConverter
+    type: Class
+  - uid: Blackwood.Converter2D`1
+    name: Converter2D<T>
+    type: Class
+  - uid: Blackwood.IPAddressConverter
+    name: IPAddressConverter
+    type: Class
   - uid: Blackwood.JSONConvert
     name: JSONConvert
     type: Class

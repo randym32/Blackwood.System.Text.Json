@@ -14,6 +14,7 @@ namespace Blackwood;
 /// Creates a CasePreservingString instance.
 /// </remarks>
 /// <param name="text">The text string.</param>
+[System.Text.Json.Serialization.JsonConverter(typeof(CasePreservingStringConverter))]
 public readonly struct CasePreservingString(string text)
 {
     /// <summary>

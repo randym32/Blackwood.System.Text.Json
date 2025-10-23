@@ -1,6 +1,7 @@
 # Getting Started with Blackwood.System.Text.Json
 
-This guide will help you get up and running with Blackwood.System.Text.Json quickly and easily.
+This guide will help you get up and running with Blackwood.System.Text.Json
+quickly and easily.
 
 ## Prerequisites
 
@@ -10,16 +11,21 @@ This guide will help you get up and running with Blackwood.System.Text.Json quic
 ## Installation
 
 ### Package Manager Console
+
 ```powershell
 Install-Package Blackwood.System.Text.Json
 ```
 
 ### .NET CLI
+
 ```bash
 dotnet add package Blackwood.System.Text.Json
 ```
 
 ### PackageReference
+
+Add the following to your `.csproj` file:
+
 ```xml
 <PackageReference Include="Blackwood.System.Text.Json" Version="2.0.0" />
 ```

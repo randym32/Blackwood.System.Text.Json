@@ -216,18 +216,6 @@ var boolValue2 = JSONConvert.ToBool("True");       // true (case insensitive con
 var color1 = JSONConvert.TryParseColor("#FF0000");     // Red (hex format)
 var color2 = JSONConvert.TryParseColor("blue");        // Blue (named color)
 var color3 = JSONConvert.TryParseColor("#00FF0080");   // Green with alpha (hex with alpha)
-
-// Convert dictionary keys to lowercase for consistent casing
-var dict = new Dictionary<string, object>
-{
-    ["FirstName"] = "John",
-    ["LastName"] = "Doe",
-    ["Email"] = "john@example.com"
-};
-
-// Convert all keys to lowercase
-var lowerCaseDict = JSONConvert.LowerCaseKeys(dict);
-// Result: { "firstname": "John", "lastname": "Doe", "email": "john@example.com" }
 ```
 
 
@@ -330,33 +318,6 @@ string displayName = user?.Name ?? "Guest";
 DateTime lastLogin = user?.LastLogin ?? DateTime.MinValue;
 ```
 
-
-
-### 4. Implement Proper Error Handling
-
-```csharp
-public class RobustJsonProcessor
-{
-    public async Task<T> ProcessJsonAsync<T>(string json, T defaultValue = default)
-    {
-        if (string.IsNullOrWhiteSpace(json))
-        {
-            return defaultValue;
-        }
-
-        try
-        {
-            return JSONDeserializer.Deserialize<T>(json);
-        }
-        catch (JsonException ex)
-        {
-            // Log the error with context
-            Logger.LogError(ex, "Failed to deserialize JSON: {Json}", json);
-            return defaultValue;
-        }
-    }
-}
-```
 
 
 ## Next Steps
