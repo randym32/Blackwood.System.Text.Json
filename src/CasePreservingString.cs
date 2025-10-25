@@ -1,4 +1,4 @@
-﻿// Copyright © 2022-2025 Randall Maas. All rights reserved.
+﻿// Copyright (c) 2022-2025 Randall Maas. All rights reserved.
 // See LICENSE file in the project root for full license information.
 
 namespace Blackwood;
