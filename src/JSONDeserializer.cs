@@ -41,18 +41,19 @@ public partial class JSONDeserializer : JsonConverter<object>
         PropertyNameCaseInsensitive = true,                   // Match properties regardless of case
         WriteIndented       = true,                           // Pretty-print JSON output
         DefaultIgnoreCondition= JsonIgnoreCondition.WhenWritingDefault, // Skip default values
+        IncludeFields       = true,                           // Include fields in the serialization
         // Use a helper converter to better map to the native .NET types
         Converters =
             {
                 new JSONDeserializer(),                       // Custom converter
-                new IPAddressConverter(),                      // IPAddress converter
-                new CasePreservingStringConverter(),           // CasePreservingString converter
-                new Converter2D<Point>(),                          // Point converter
-                new Converter2D<PointF>(),                          // Point converter
-                new Converter2D<Size>(),                          // Point converter
-                new Converter2D<SizeF>(),                         // Point converter
-                new Converter2D<Rectangle>(),                          // Point converter
-                new Converter2D<RectangleF>()                          // Point converter
+                new IPAddressConverter(),                     // IPAddress converter
+                new CasePreservingStringConverter(),          // CasePreservingString converter
+                new Converter2D<Point>(),                     // Point converter
+                new Converter2D<PointF>(),                    // Point converter
+                new Converter2D<Size>(),                      // Size converter
+                new Converter2D<SizeF>(),                     // SizeF converter
+                new Converter2D<Rectangle>(),                 // Rectangle converter
+                new Converter2D<RectangleF>()                 // RectangleF converter
             }
     };
 
