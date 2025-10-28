@@ -91,6 +91,8 @@ public class DictionaryCasePreservingStringTests
         var result = JSONDeserializer.Deserialize<Dictionary<CasePreservingString, object>>(json);
 
         // Assert
+        Assert.That(result, Is.Not.Null);
+        if (result == null) return;
         Assert.That(result[new CasePreservingString("name")], Is.EqualTo("John Doe"));
         Assert.That(result[new CasePreservingString("NAME")], Is.EqualTo("John Doe"));
         Assert.That(result[new CasePreservingString("age")], Is.EqualTo(30));
@@ -194,7 +196,11 @@ public class DictionaryCasePreservingStringTests
         var result = JSONDeserializer.Deserialize<Dictionary<CasePreservingString, object>>(json);
 
         // Assert
+        Assert.That(result, Is.Not.Null);
+        if (result == null) return;
         var user = (Dictionary<CasePreservingString, object>)result[new CasePreservingString("user")];
+        Assert.That(user, Is.Not.Null);
+        if (user == null) return;
         Assert.That(user[new CasePreservingString("name")], Is.EqualTo("John Doe"));
         Assert.That(user[new CasePreservingString("age")], Is.EqualTo(30));
     }
@@ -292,6 +298,8 @@ public class DictionaryCasePreservingStringTests
         var deserializedDict = JSONDeserializer.Deserialize<Dictionary<CasePreservingString, object>>(json);
 
         // Assert - Test case-insensitive access
+        Assert.That(deserializedDict, Is.Not.Null);
+        if (deserializedDict == null) return;
         Assert.That(deserializedDict[new CasePreservingString("name")], Is.EqualTo("John Doe"));
         Assert.That(deserializedDict[new CasePreservingString("NAME")], Is.EqualTo("John Doe"));
         Assert.That(deserializedDict[new CasePreservingString("age")], Is.EqualTo(30));
@@ -348,7 +356,7 @@ public class DictionaryCasePreservingStringTests
     public void Serialize_DictionaryWithNullValues_ShouldSerializeCorrectly()
     {
         // Arrange
-        var dict = new Dictionary<CasePreservingString, object>
+        var dict = new Dictionary<CasePreservingString, object?>
         {
             ["Name"] = "John Doe",
             ["MiddleName"] = null,
@@ -523,6 +531,8 @@ public class DictionaryCasePreservingStringTests
         var deserializedDict = JSONDeserializer.Deserialize<Dictionary<CasePreservingString, object>>(json);
 
         // Assert
+        Assert.That(deserializedDict, Is.Not.Null);
+        if (deserializedDict == null) return;
         Assert.That(deserializedDict.ContainsKey(new CasePreservingString("name")), Is.True);
         Assert.That(deserializedDict.ContainsKey(new CasePreservingString("NAME")), Is.True);
         Assert.That(deserializedDict.ContainsKey(new CasePreservingString("age")), Is.True);
@@ -607,6 +617,8 @@ public class DictionaryCasePreservingStringTests
         var dict = JSONDeserializer.Deserialize<Dictionary<CasePreservingString, object>>(json);
 
         // Assert
+        Assert.That(dict, Is.Not.Null);
+        if (dict == null) return;
         Assert.That(dict.TryGetValue(new CasePreservingString("name"), out var nameValue), Is.True);
         Assert.That(nameValue, Is.EqualTo("John Doe"));
 
@@ -649,6 +661,8 @@ public class DictionaryCasePreservingStringTests
         var dict = JSONDeserializer.Deserialize<Dictionary<CasePreservingString, object>>(json);
 
         // Assert
+        Assert.That(dict, Is.Not.Null);
+        if (dict == null) return;
         Assert.That(dict.TryGetValue(new CasePreservingString("user"), out var userValue), Is.True);
         Assert.That(userValue, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
 
@@ -688,6 +702,8 @@ public class DictionaryCasePreservingStringTests
         var deserializedDict = JSONDeserializer.Deserialize<Dictionary<CasePreservingString, object>>(json);
 
         // Assert
+        Assert.That(deserializedDict, Is.Not.Null);
+        if (deserializedDict == null) return;
         Assert.That(deserializedDict.TryGetValue(new CasePreservingString("name"), out var nameValue), Is.True);
         Assert.That(nameValue, Is.EqualTo("John Doe"));
 

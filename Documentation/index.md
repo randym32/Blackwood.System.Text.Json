@@ -9,6 +9,8 @@ to make JSON serialization and deserialization more flexible.
 **Utility Classes**:
 - [`JSONDeserializer`](xref:Blackwood.JSONDeserializer) – Enhanced deserialization with flexible type handling.
 - [`JSONConvert`](xref:Blackwood.JSONConvert) – Customer conversion utilities.
+- [`CasePreserving`](xref:Blackwood.CasePreserving) – Ensures that property name casing is preserved during serialization and deserialization.
+
 
 View the [API Documentation](./api/index.md) for detailed information about available namespaces, classes, and methods.
 

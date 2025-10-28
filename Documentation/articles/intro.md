@@ -40,6 +40,7 @@ var result = JSONDeserializer.Deserialize<Person>(json);
 
 - [`JSONDeserializer`](xref:Blackwood.JSONDeserializer) -- The main class providing enhanced JSON deserialization capabilities.
 - [`JSONConvert`](xref:Blackwood.JSONConvert) -- A utility class for type conversion operations: parsing colors, booleans, etc.
+- [`CasePreserving`](xref:Blackwood.CasePreserving) -- Ensures property name casing is preserved during serialization and deserialization.
 
 
 ## Next Steps

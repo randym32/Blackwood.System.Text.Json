@@ -22,4 +22,7 @@ items:
   - uid: Blackwood.JSONDeserializer
     name: JSONDeserializer
     type: Class
+  - uid: Blackwood.JSONDeserializer.DefaultValueAwareTypeInfoResolver
+    name: JSONDeserializer.DefaultValueAwareTypeInfoResolver
+    type: Class
 memberLayout: SamePage

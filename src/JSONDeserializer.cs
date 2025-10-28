@@ -42,6 +42,7 @@ public partial class JSONDeserializer : JsonConverter<object>
         WriteIndented       = true,                           // Pretty-print JSON output
         DefaultIgnoreCondition= JsonIgnoreCondition.WhenWritingDefault, // Skip default values
         IncludeFields       = true,                           // Include fields in the serialization
+        TypeInfoResolver    = new DefaultValueAwareTypeInfoResolver(), // Respect DefaultValueAttribute
         // Use a helper converter to better map to the native .NET types
         Converters =
             {

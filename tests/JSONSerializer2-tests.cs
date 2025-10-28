@@ -635,15 +635,17 @@ public class JSONSerializerTests2
         var firstPoint = result[0];
         Assert.That(firstPoint, Is.Not.Null);
         var firstPointType = firstPoint.GetType();
-        Assert.That(firstPointType?.GetProperty("x").GetValue(firstPoint), Is.EqualTo(1));
-        Assert.That(firstPointType?.GetProperty("y").GetValue(firstPoint), Is.EqualTo(2));
+        Assert.That(firstPointType, Is.Not.Null);
+        Assert.That(firstPointType.GetProperty("x")?.GetValue(firstPoint), Is.EqualTo(1));
+        Assert.That(firstPointType.GetProperty("y")?.GetValue(firstPoint), Is.EqualTo(2));
 
         // Verify second point
         var secondPoint = result[1];
         Assert.That(secondPoint, Is.Not.Null);
         var secondPointType = secondPoint.GetType();
-        Assert.That(secondPointType?.GetProperty("x").GetValue(secondPoint), Is.EqualTo(3));
-        Assert.That(secondPointType?.GetProperty("y").GetValue(secondPoint), Is.EqualTo(4));
+        Assert.That(secondPointType, Is.Not.Null);
+        Assert.That(secondPointType.GetProperty("x")?.GetValue(secondPoint), Is.EqualTo(3));
+        Assert.That(secondPointType.GetProperty("y")?.GetValue(secondPoint), Is.EqualTo(4));
     }
 
     /// <summary>
@@ -672,7 +674,7 @@ public class JSONSerializerTests2
     public void SerializeArray_ArrayWithNulls_ReturnsArrayWithNulls()
     {
         // Arrange
-        var array = new string[] { "Hello", null, "World" };
+        var array = new string?[] { "Hello", null, "World" };
 
         // Act
         var result = JSONDeserializer.SerializeArray(array);

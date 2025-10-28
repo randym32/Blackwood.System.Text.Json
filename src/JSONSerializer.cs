@@ -1,88 +1,16 @@
 ﻿// Copyright (c) 2025 Randall Maas. All rights reserved.
 // See LICENSE file in the project root for full license information.
+
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 using System.Reflection;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace Blackwood;
 public partial class JSONDeserializer
 {
-    /// <summary>
-    /// Serializes custom properties marked with give attribute.
-    /// </summary>
-    /// <returns>A dictionary of serialized property values</returns>
-    public static Dictionary<CasePreservingString, object> SerializeProperties(object from, Type AttributeType)
-    {
-        var properties = new Dictionary<CasePreservingString, object>();
-        var type = from.GetType();
-
-        // Get all properties marked with AttributeType
-        var propertyInfos = type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-            .Where(prop => Attribute.IsDefined(prop, AttributeType));
-
-        foreach (var prop in propertyInfos)
-        {
-            try
-            {
-                // Serialize the field and its value, skipping if null or default
-                SerializeProperty(properties, prop, prop.GetValue(from));
-            }
-            catch (Exception ex)
-            {
-                // Log error but continue with other properties
-                properties[prop.Name] = $"Error serializing: {ex.Message}";
-            }
-        }
-
-        // Get all fields marked with AttributeType
-        var fieldInfos = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-            .Where(prop => Attribute.IsDefined(prop, AttributeType));
-
-        foreach (var field in fieldInfos)
-        {
-            try
-            {
-                // Serialize the field and its value, skipping if null or default
-                SerializeProperty(properties, field, field.GetValue(from));
-            }
-            catch (Exception ex)
-            {
-                // Log error but continue with other properties
-                properties[field.Name] = $"Error serializing: {ex.Message}";
-            }
-        }
-
-        return properties;
-    }
-
-    /// <summary>
-    /// Serializes a property value to a JSON-compatible format.
-    /// </summary>
-    /// <param name="properties">The dictionary to store the serialized properties</param>
-    /// <param name="info">The property or field to serialize</param>
-    /// <param name="value">The property value to serialize</param>
-    static void SerializeProperty(Dictionary<CasePreservingString, object> properties, MemberInfo info, object? value)
-    {
-        // Skip nulls
-        if (null == value) return;
-
-        // Skip serialization if the value is the default value, as
-        // given in the [DefaultValue] attribute -- if it is present.
-        // We don't use the types default value, as the object may give
-        // an initial value and skipping the type default will skip the
-        // change from the initial value.
-        var defaultAttr = info.GetCustomAttribute(typeof(System.ComponentModel.DefaultValueAttribute)) as System.ComponentModel.DefaultValueAttribute;
-        if (defaultAttr != null && Equals(value, defaultAttr.Value))
-            return;
-
-        // Convert the value to a serializable form
-        var serializedValue = ConvertValueToSerializableForm(value);
-        if (null != serializedValue)
-            properties[info.Name] = serializedValue;
-    }
-
-
-
     /// <summary>
     /// Serializes a property value to a JSON-compatible format.
     /// </summary>
@@ -157,6 +85,62 @@ public partial class JSONDeserializer
         if (value is Color c)
             value = SerializeColor(c);
         JsonSerializer.Serialize(writer, serializedValue, serializedValue.GetType(), options);
+    }
+
+    /// <summary>
+    /// JsonTypeInfoResolver that respects DefaultValueAttribute when 
+    /// DefaultIgnoreCondition is WhenWritingDefault.  This allows 
+    /// JsonSerializer.Serialize to properly skip properties that match their
+    /// DefaultValue attribute.
+    /// </summary>
+    /// <remarks>
+    /// Skip serialization if the value is the default value, as given in the
+    /// [DefaultValue] attribute -- if it is present.  We don't use the types
+    /// default value, as the DefaultValue is more authoratitative here.
+    /// </remarks>
+    public class DefaultValueAwareTypeInfoResolver : DefaultJsonTypeInfoResolver
+    {
+        public override JsonTypeInfo GetTypeInfo(Type type, JsonSerializerOptions options)
+        {
+            var typeInfo = base.GetTypeInfo(type, options);
+
+            // Check if we should skip default values based on JsonIgnoreCondition.WhenWritingDefault
+            if (typeInfo.Kind != JsonTypeInfoKind.Object ||
+                options.DefaultIgnoreCondition != JsonIgnoreCondition.WhenWritingDefault)
+                return typeInfo;
+
+            // Modify properties to respect DefaultValueAttribute
+            foreach (var property in typeInfo.Properties)
+            {
+                // Try to get DefaultValueAttribute from the property's attribute provider
+                if (property.AttributeProvider == null)
+                    continue;
+
+                DefaultValueAttribute? defaultValueAttr = null;
+
+                var attrs = property.AttributeProvider.GetCustomAttributes(typeof(DefaultValueAttribute), false);
+                if (attrs.Length > 0)
+                {
+                    defaultValueAttr = attrs[0] as DefaultValueAttribute;
+                }
+
+                if (defaultValueAttr != null)
+                {
+                    var originalShouldSerialize = property.ShouldSerialize;
+                    property.ShouldSerialize = (obj, value) =>
+                    {
+                        // First check the original condition (e.g., null checks)
+                        if (originalShouldSerialize != null && !originalShouldSerialize(obj, value))
+                            return false;
+
+                        // Then check if value matches DefaultValue attribute
+                        return !Equals(value, defaultValueAttr.Value);
+                    };
+                }
+            }
+
+            return typeInfo;
+        }
     }
 
 }

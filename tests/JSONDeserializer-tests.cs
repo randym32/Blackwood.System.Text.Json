@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace Blackwood.System.Text.Json.tests;
 
@@ -597,6 +598,210 @@ public class JSONDeserializerTests
         Assert.That(options.DefaultIgnoreCondition, Is.EqualTo(JsonIgnoreCondition.WhenWritingDefault));
         Assert.That(options.Converters.Count, Is.EqualTo(9));
         Assert.That(options.Converters[0], Is.InstanceOf<JSONDeserializer>());
+    }
+
+    #endregion
+
+    #region DefaultValue Attribute Tests
+
+    /// <summary>
+    /// Custom attribute for testing the SerializeProperties method with DefaultValue attributes.
+    /// </summary>
+    public class TestSerializeAttribute : Attribute
+    {
+        public string Description { get; set; } = "";
+    }
+
+    /// <summary>
+    /// Test class with properties and fields that have DefaultValue attributes.
+    /// </summary>
+    public class TestClassWithDefaultValues
+    {
+        [TestSerialize(Description = "Default int property")]
+        [DefaultValue(42)]
+        public int DefaultIntProperty { get; set; }
+
+        [TestSerialize(Description = "Default string property")]
+        [DefaultValue("default")]
+        public string DefaultStringProperty { get; set; } = string.Empty;
+
+        [TestSerialize(Description = "Default bool property")]
+        [DefaultValue(true)]
+        public bool DefaultBoolProperty { get; set; }
+
+        [TestSerialize(Description = "Default double property")]
+        [DefaultValue(3.14)]
+        public double DefaultDoubleProperty { get; set; }
+
+        [TestSerialize(Description = "Default int field")]
+        [DefaultValue(42)]
+        public int DefaultIntField;
+
+        [TestSerialize(Description = "Default string field")]
+        [DefaultValue("default")]
+        public string DefaultStringField = string.Empty;
+
+        [TestSerialize(Description = "Default bool field")]
+        [DefaultValue(true)]
+        public bool DefaultBoolField;
+
+        [TestSerialize(Description = "Default double field")]
+        [DefaultValue(3.14)]
+        public double DefaultDoubleField;
+
+        // Properties without DefaultValue attributes
+        [TestSerialize(Description = "Non-default int property")]
+        public int NonDefaultIntProperty { get; set; }
+
+        [TestSerialize(Description = "Non-default string property")]
+        public string NonDefaultStringProperty { get; set; } = string.Empty;
+    }
+    #endregion
+
+    #region Object Serialization with DefaultValue Tests
+
+    /// <summary>
+    /// Test class for verifying object serialization with DefaultValue attributes.
+    /// </summary>
+    public class TestObjectWithDefaultValues
+    {
+        [DefaultValue(42)]
+        public int DefaultIntProperty { get; set; }
+
+        [DefaultValue("default")]
+        public string DefaultStringProperty { get; set; } = string.Empty;
+
+        [DefaultValue(true)]
+        public bool DefaultBoolProperty { get; set; }
+
+        [DefaultValue(3.14)]
+        public double DefaultDoubleProperty { get; set; }
+
+        // Properties without DefaultValue attributes
+        public int NonDefaultIntProperty { get; set; }
+        public string NonDefaultStringProperty { get; set; } = string.Empty;
+    }
+
+    /// <summary>
+    /// Tests that JsonSerializer.Serialize skips properties with DefaultValue attributes when their value matches the default.
+    /// </summary>
+    [Test]
+    public void JsonSerializer_Serialize_WithDefaultValueAttributes_MatchingDefault_ShouldSkipProperties()
+    {
+        // Arrange
+        var testObject = new TestObjectWithDefaultValues
+        {
+            DefaultIntProperty = 42,        // Matches default
+            DefaultStringProperty = "default", // Matches default
+            DefaultBoolProperty = true,     // Matches default
+            DefaultDoubleProperty = 3.14,   // Matches default
+            NonDefaultIntProperty = 100,    // No default value attribute
+            NonDefaultStringProperty = "test" // No default value attribute
+        };
+
+        // Act
+        var json = JsonSerializer.Serialize(testObject, JSONDeserializer.JSONOptions);
+
+        // Assert
+        Assert.That(json, Is.Not.Null);
+
+        using var doc = JsonDocument.Parse(json);
+        var root = doc.RootElement;
+        Assert.That(root.ValueKind, Is.EqualTo(JsonValueKind.Object));
+
+        // Properties with DefaultValue attributes should be skipped when value matches default
+        Assert.That(root.TryGetProperty("DefaultIntProperty", out _), Is.False, "DefaultIntProperty should be skipped when value matches default");
+        Assert.That(root.TryGetProperty("DefaultStringProperty", out _), Is.False, "DefaultStringProperty should be skipped when value matches default");
+        Assert.That(root.TryGetProperty("DefaultBoolProperty", out _), Is.False, "DefaultBoolProperty should be skipped when value matches default");
+        Assert.That(root.TryGetProperty("DefaultDoubleProperty", out _), Is.False, "DefaultDoubleProperty should be skipped when value matches default");
+
+        // Properties without DefaultValue attributes should be included
+        Assert.That(root.TryGetProperty("NonDefaultIntProperty", out var nonDefInt), Is.True, "NonDefaultIntProperty should be included (no default value attribute)");
+        Assert.That(root.TryGetProperty("NonDefaultStringProperty", out var nonDefStr), Is.True, "NonDefaultStringProperty should be included (no default value attribute)");
+
+        // Verify the actual values are present
+        Assert.That(nonDefInt.GetInt32(), Is.EqualTo(100), "NonDefaultIntProperty value should be present");
+        Assert.That(nonDefStr.GetString(), Is.EqualTo("test"), "NonDefaultStringProperty value should be present");
+    }
+
+    /// <summary>
+    /// Tests that JsonSerializer.Serialize includes properties with DefaultValue attributes when their value differs from the default.
+    /// </summary>
+    [Test]
+    public void JsonSerializer_Serialize_WithDefaultValueAttributes_DifferentFromDefault_ShouldIncludeProperties()
+    {
+        // Arrange
+        var testObject = new TestObjectWithDefaultValues
+        {
+            DefaultIntProperty = 100,       // Different from default (42)
+            DefaultStringProperty = "custom", // Different from default ("default")
+            DefaultBoolProperty = false,    // Different from default (true)
+            DefaultDoubleProperty = 2.71,   // Different from default (3.14)
+            NonDefaultIntProperty = 200,
+            NonDefaultStringProperty = "test"
+        };
+
+        // Act
+        var json = JsonSerializer.Serialize(testObject, JSONDeserializer.JSONOptions);
+
+        // Assert
+        Assert.That(json, Is.Not.Null);
+
+        // Properties with DefaultValue attributes should be included when value differs from default
+        Assert.That(json, Does.Contain("DefaultIntProperty"), "DefaultIntProperty should be included when value differs from default");
+        Assert.That(json, Does.Contain("DefaultStringProperty"), "DefaultStringProperty should be included when value differs from default");
+        Assert.That(json, Does.Contain("DefaultBoolProperty"), "DefaultBoolProperty should be included when value differs from default");
+        Assert.That(json, Does.Contain("DefaultDoubleProperty"), "DefaultDoubleProperty should be included when value differs from default");
+
+        // Properties without DefaultValue attributes should be included
+        Assert.That(json, Does.Contain("NonDefaultIntProperty"), "NonDefaultIntProperty should be included");
+        Assert.That(json, Does.Contain("NonDefaultStringProperty"), "NonDefaultStringProperty should be included");
+
+        // Verify the actual values are present
+        Assert.That(json, Does.Contain("100"), "DefaultIntProperty value should be present");
+        Assert.That(json, Does.Contain("\"custom\""), "DefaultStringProperty value should be present");
+        Assert.That(json, Does.Contain("false"), "DefaultBoolProperty value should be present");
+        Assert.That(json, Does.Contain("2.71"), "DefaultDoubleProperty value should be present");
+        Assert.That(json, Does.Contain("200"), "NonDefaultIntProperty value should be present");
+        Assert.That(json, Does.Contain("\"test\""), "NonDefaultStringProperty value should be present");
+    }
+
+    /// <summary>
+    /// Tests that JsonSerializer.Serialize includes all properties when DefaultIgnoreCondition is not WhenWritingDefault.
+    /// </summary>
+    [Test]
+    public void JsonSerializer_Serialize_WithDefaultValueAttributes_OtherIgnoreCondition_ShouldIncludeAllProperties()
+    {
+        // Arrange
+        var testObject = new TestObjectWithDefaultValues
+        {
+            DefaultIntProperty = 42,        // Matches default
+            DefaultStringProperty = "default", // Matches default
+            DefaultBoolProperty = true,     // Matches default
+            DefaultDoubleProperty = 3.14,   // Matches default
+            NonDefaultIntProperty = 100,
+            NonDefaultStringProperty = "test"
+        };
+
+        // Create options with different DefaultIgnoreCondition
+        var options = new JsonSerializerOptions
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.Never
+        };
+
+        // Act
+        var json = JsonSerializer.Serialize(testObject, options);
+
+        // Assert
+        Assert.That(json, Is.Not.Null);
+
+        // All properties should be included when DefaultIgnoreCondition is not WhenWritingDefault
+        Assert.That(json, Does.Contain("DefaultIntProperty"), "DefaultIntProperty should be included when DefaultIgnoreCondition is not WhenWritingDefault");
+        Assert.That(json, Does.Contain("DefaultStringProperty"), "DefaultStringProperty should be included when DefaultIgnoreCondition is not WhenWritingDefault");
+        Assert.That(json, Does.Contain("DefaultBoolProperty"), "DefaultBoolProperty should be included when DefaultIgnoreCondition is not WhenWritingDefault");
+        Assert.That(json, Does.Contain("DefaultDoubleProperty"), "DefaultDoubleProperty should be included when DefaultIgnoreCondition is not WhenWritingDefault");
+        Assert.That(json, Does.Contain("NonDefaultIntProperty"), "NonDefaultIntProperty should be included");
+        Assert.That(json, Does.Contain("NonDefaultStringProperty"), "NonDefaultStringProperty should be included");
     }
 
     #endregion
