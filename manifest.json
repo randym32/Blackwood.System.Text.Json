@@ -82,6 +82,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Blackwood.JSONDeserializer.DefaultValueAwareTypeInfoResolver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Blackwood.JSONDeserializer.DefaultValueAwareTypeInfoResolver.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Blackwood.JSONDeserializer.DefaultValueAwareTypeInfoResolver",
+      "Summary": "<p sourcefile=\"api/Blackwood.JSONDeserializer.DefaultValueAwareTypeInfoResolver.yml\" sourcestartlinenumber=\"1\">JsonTypeInfoResolver that respects DefaultValueAttribute when\nDefaultIgnoreCondition is WhenWritingDefault.  This allows\nJsonSerializer.Serialize to properly skip properties that match their\nDefaultValue attribute.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Blackwood.JSONDeserializer.yml",
       "output": {
         ".html": {

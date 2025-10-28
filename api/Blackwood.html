@@ -107,6 +107,14 @@ functionality to better handle common JSON patterns and provide more
 flexible type conversion.</p>
 </dd>
     </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Blackwood.JSONDeserializer.DefaultValueAwareTypeInfoResolver.html">JSONDeserializer.DefaultValueAwareTypeInfoResolver</a></dt>
+      <dd><p>JsonTypeInfoResolver that respects DefaultValueAttribute when
+DefaultIgnoreCondition is WhenWritingDefault.  This allows
+JsonSerializer.Serialize to properly skip properties that match their
+DefaultValue attribute.</p>
+</dd>
+    </dl>
     <h3 id="structs">
 Structs
 </h3>
