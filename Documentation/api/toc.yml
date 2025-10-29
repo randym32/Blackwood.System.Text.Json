@@ -25,4 +25,7 @@ items:
   - uid: Blackwood.JSONDeserializer.DefaultValueAwareTypeInfoResolver
     name: JSONDeserializer.DefaultValueAwareTypeInfoResolver
     type: Class
+  - uid: Blackwood.JsonConverterExtensions
+    name: JsonConverterExtensions
+    type: Class
 memberLayout: SamePage

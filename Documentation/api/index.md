@@ -10,6 +10,7 @@ This section contains the API reference documentation for the Blackwood.System.T
 
 - [JSONConvert](xref:Blackwood.JSONConvert) - Customer conversion utilities
 - [JSONDeserializer](xref:Blackwood.JSONDeserializer) - Enhanced deserialization with flexible type handling
+- [`CasePreservingString`](xref:Blackwood.CasePreservingString) – Allows caseless matching, such as with a dictionary, while preserving the name case is preserved for printing, serialization, deserialization, etc.
 
 ## Getting Started
 
