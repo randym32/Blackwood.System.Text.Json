@@ -511,6 +511,25 @@ references:
   isSpec: "True"
   fullName: Blackwood.JSONDeserializer.Write
   nameWithType: JSONDeserializer.Write
+- uid: Blackwood.JsonConverterExtensions
+  name: JsonConverterExtensions
+  href: api/Blackwood.JsonConverterExtensions.html
+  commentId: T:Blackwood.JsonConverterExtensions
+  fullName: Blackwood.JsonConverterExtensions
+  nameWithType: JsonConverterExtensions
+- uid: Blackwood.JsonConverterExtensions.Skip(System.Text.Json.Serialization.JsonConverter,System.Text.Json.Utf8JsonReader)
+  name: Skip(JsonConverter, Utf8JsonReader)
+  href: api/Blackwood.JsonConverterExtensions.html#Blackwood_JsonConverterExtensions_Skip_System_Text_Json_Serialization_JsonConverter_System_Text_Json_Utf8JsonReader_
+  commentId: M:Blackwood.JsonConverterExtensions.Skip(System.Text.Json.Serialization.JsonConverter,System.Text.Json.Utf8JsonReader)
+  fullName: Blackwood.JsonConverterExtensions.Skip(System.Text.Json.Serialization.JsonConverter, System.Text.Json.Utf8JsonReader)
+  nameWithType: JsonConverterExtensions.Skip(JsonConverter, Utf8JsonReader)
+- uid: Blackwood.JsonConverterExtensions.Skip*
+  name: Skip
+  href: api/Blackwood.JsonConverterExtensions.html#Blackwood_JsonConverterExtensions_Skip_
+  commentId: Overload:Blackwood.JsonConverterExtensions.Skip
+  isSpec: "True"
+  fullName: Blackwood.JsonConverterExtensions.Skip
+  nameWithType: JsonConverterExtensions.Skip
 - uid: Blackwood.PointConverter
   name: PointConverter
   href: api/Blackwood.PointConverter.html

@@ -110,6 +110,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Blackwood.JsonConverterExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Blackwood.JsonConverterExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Blackwood.JsonConverterExtensions",
+      "Summary": "<p sourcefile=\"api/Blackwood.JsonConverterExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for JsonConverter.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Blackwood.PointConverter.yml",
       "output": {
         ".html": {
