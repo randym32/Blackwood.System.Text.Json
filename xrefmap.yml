@@ -517,12 +517,15 @@ references:
   commentId: T:Blackwood.JsonConverterExtensions
   fullName: Blackwood.JsonConverterExtensions
   nameWithType: JsonConverterExtensions
-- uid: Blackwood.JsonConverterExtensions.Skip(System.Text.Json.Serialization.JsonConverter,System.Text.Json.Utf8JsonReader)
-  name: Skip(JsonConverter, Utf8JsonReader)
-  href: api/Blackwood.JsonConverterExtensions.html#Blackwood_JsonConverterExtensions_Skip_System_Text_Json_Serialization_JsonConverter_System_Text_Json_Utf8JsonReader_
-  commentId: M:Blackwood.JsonConverterExtensions.Skip(System.Text.Json.Serialization.JsonConverter,System.Text.Json.Utf8JsonReader)
-  fullName: Blackwood.JsonConverterExtensions.Skip(System.Text.Json.Serialization.JsonConverter, System.Text.Json.Utf8JsonReader)
-  nameWithType: JsonConverterExtensions.Skip(JsonConverter, Utf8JsonReader)
+- uid: Blackwood.JsonConverterExtensions.Skip(System.Text.Json.Serialization.JsonConverter,System.Text.Json.Utf8JsonReader@)
+  name: Skip(JsonConverter, ref Utf8JsonReader)
+  href: api/Blackwood.JsonConverterExtensions.html#Blackwood_JsonConverterExtensions_Skip_System_Text_Json_Serialization_JsonConverter_System_Text_Json_Utf8JsonReader__
+  commentId: M:Blackwood.JsonConverterExtensions.Skip(System.Text.Json.Serialization.JsonConverter,System.Text.Json.Utf8JsonReader@)
+  name.vb: Skip(JsonConverter, Utf8JsonReader)
+  fullName: Blackwood.JsonConverterExtensions.Skip(System.Text.Json.Serialization.JsonConverter, ref System.Text.Json.Utf8JsonReader)
+  fullName.vb: Blackwood.JsonConverterExtensions.Skip(System.Text.Json.Serialization.JsonConverter, System.Text.Json.Utf8JsonReader)
+  nameWithType: JsonConverterExtensions.Skip(JsonConverter, ref Utf8JsonReader)
+  nameWithType.vb: JsonConverterExtensions.Skip(JsonConverter, Utf8JsonReader)
 - uid: Blackwood.JsonConverterExtensions.Skip*
   name: Skip
   href: api/Blackwood.JsonConverterExtensions.html#Blackwood_JsonConverterExtensions_Skip_
