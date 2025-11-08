@@ -14,7 +14,7 @@
 
   <PropertyGroup>
     <PackageId>Blackwood.System.Text.Json</PackageId>
-    <Version>2.0.0</Version>
+    <Version>1.1.0</Version>
     <Authors>Randall Maas</Authors>
     <Company>Blackwood Designs, LLC</Company>
     <Product>Blackwood.System.Text.Json</Product>

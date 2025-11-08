@@ -49,7 +49,7 @@ public class JsonConverterExtensionsTests
         var originalToken = reader.TokenType; // Number
 
         var conv = new DummyConverter();
-        try { conv.Skip(reader); }
+        try { conv.Skip(ref reader); }
         catch (Exception ex) { Assert.Fail($"Skip threw for primitive: {ex.Message}"); }
 
         // Reader was passed by value, so caller's state should be unchanged
@@ -57,7 +57,7 @@ public class JsonConverterExtensionsTests
     }
 
     /// <summary>
-    /// Ensures Skip() handles an empty object without throwing and without moving caller's reader.
+    /// Ensures Skip() handles an empty object without throwing and advances to EndObject.
     /// </summary>
     [Test]
     public void Skip_EmptyObject_NoThrow_NoReaderMutation()
@@ -67,11 +67,11 @@ public class JsonConverterExtensionsTests
         Assert.That(reader.TokenType, Is.EqualTo(JsonTokenType.StartObject));
 
         var conv = new DummyConverter();
-        try { conv.Skip(reader); }
+        try { conv.Skip(ref reader); }
         catch (Exception ex) { Assert.Fail($"Skip threw for empty object: {ex.Message}"); }
 
-        // Reader state unchanged in caller
-        Assert.That(reader.TokenType, Is.EqualTo(JsonTokenType.StartObject));
+        // Reader advances to EndObject after skipping
+        Assert.That(reader.TokenType, Is.EqualTo(JsonTokenType.EndObject));
         Assert.That(reader.CurrentDepth, Is.EqualTo(originalDepth));
     }
 
@@ -87,15 +87,15 @@ public class JsonConverterExtensionsTests
         Assert.That(reader.TokenType, Is.EqualTo(JsonTokenType.StartObject));
 
         var conv = new DummyConverter();
-        try { conv.Skip(reader); }
+        try { conv.Skip(ref reader); }
         catch (Exception ex) { Assert.Fail($"Skip threw for nested: {ex.Message}"); }
 
-        // Caller state unchanged
-        Assert.That(reader.TokenType, Is.EqualTo(JsonTokenType.StartObject));
+        // Reader advances to EndObject after skipping
+        Assert.That(reader.TokenType, Is.EqualTo(JsonTokenType.EndObject));
     }
 
     /// <summary>
-    /// Ensures Skip() handles an array root without throwing and without mutating caller state.
+    /// Ensures Skip() handles an array root without throwing and advances to EndArray.
     /// </summary>
     [Test]
     public void Skip_ArrayRoot_NoThrow_NoReaderMutation()
@@ -104,10 +104,10 @@ public class JsonConverterExtensionsTests
         Assert.That(reader.TokenType, Is.EqualTo(JsonTokenType.StartArray));
 
         var conv = new DummyConverter();
-        try { conv.Skip(reader); }
+        try { conv.Skip(ref reader); }
         catch (Exception ex) { Assert.Fail($"Skip threw for array root: {ex.Message}"); }
 
-        Assert.That(reader.TokenType, Is.EqualTo(JsonTokenType.StartArray));
+        Assert.That(reader.TokenType, Is.EqualTo(JsonTokenType.EndArray));
     }
 }
 

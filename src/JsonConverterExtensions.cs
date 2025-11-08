@@ -16,7 +16,7 @@ public static class JsonConverterExtensions
     /// </summary>
     /// <param name="ignored"></param>
     /// <param name="reader">The JsonReader to skip</param>
-    public static void Skip(this JsonConverter ignored, Utf8JsonReader reader)
+    public static void Skip(this JsonConverter ignored, ref Utf8JsonReader reader)
     {
         if (  reader.TokenType != JsonTokenType.StartObject
            && reader.TokenType != JsonTokenType.StartArray
@@ -34,7 +34,7 @@ public static class JsonConverterExtensions
         {
             if ((  reader.TokenType == JsonTokenType.EndObject
                 || reader.TokenType == JsonTokenType.EndArray)
-                && reader.CurrentDepth == depth - 1)
+                && reader.CurrentDepth == depth-1)
                 break;
         }
     }

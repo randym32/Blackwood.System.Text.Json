@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2020-2025 Randall Maas. All rights reserved.
 // See LICENSE file in the project root for full license information.
 using System.Drawing;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -41,11 +42,13 @@ public partial class JSONDeserializer : JsonConverter<object>
         PropertyNameCaseInsensitive = true,                   // Match properties regardless of case
         WriteIndented       = true,                           // Pretty-print JSON output
         DefaultIgnoreCondition= JsonIgnoreCondition.WhenWritingDefault, // Skip default values
+        Encoder            = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, // Avoid escaping '>' etc.
         IncludeFields       = true,                           // Include fields in the serialization
         TypeInfoResolver    = new DefaultValueAwareTypeInfoResolver(), // Respect DefaultValueAttribute
         // Use a helper converter to better map to the native .NET types
         Converters =
             {
+                new JsonStringEnumConverter(),
                 new JSONDeserializer(),                       // Custom converter
                 new IPAddressConverter(),                     // IPAddress converter
                 new CasePreservingStringConverter(),          // CasePreservingString converter

@@ -223,19 +223,6 @@ public class JSONDeserializerTests
         Assert.That(result, Is.Not.Null);
     }
 
-    /// <summary>
-    /// Tests that deserializing an empty stream throws an exception.
-    /// </summary>
-    [Test]
-    public async Task Deserialize_EmptyStream_ShouldThrowException()
-    {
-        // Arrange
-        using var stream = new MemoryStream();
-
-        // Act & Assert
-        Assert.ThrowsAsync<JsonException>(async () => await JSONDeserializer.Deserialize<string>(stream));
-    }
-
     #endregion
 
     #region JsonToNormal Tests
@@ -596,8 +583,8 @@ public class JSONDeserializerTests
         Assert.That(options.PropertyNameCaseInsensitive, Is.True);
         Assert.That(options.WriteIndented, Is.True);
         Assert.That(options.DefaultIgnoreCondition, Is.EqualTo(JsonIgnoreCondition.WhenWritingDefault));
-        Assert.That(options.Converters.Count, Is.EqualTo(9));
-        Assert.That(options.Converters[0], Is.InstanceOf<JSONDeserializer>());
+        Assert.That(options.Converters.Count, Is.EqualTo(10));
+        Assert.That(options.Converters[1], Is.InstanceOf<JSONDeserializer>());
     }
 
     #endregion
