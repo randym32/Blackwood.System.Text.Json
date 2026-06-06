@@ -45,6 +45,8 @@ public partial class JSONDeserializer : JsonConverter<object>
         Encoder            = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, // Avoid escaping '>' etc.
         IncludeFields       = true,                           // Include fields in the serialization
         TypeInfoResolver    = new DefaultValueAwareTypeInfoResolver(), // Respect DefaultValueAttribute
+        // Hand-written scene JSON may place polymorphic "type" after other keys (e.g. Camera2D).
+        AllowOutOfOrderMetadataProperties = true,
         // Use a helper converter to better map to the native .NET types
         Converters =
             {

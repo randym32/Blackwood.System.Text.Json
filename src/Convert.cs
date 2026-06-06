@@ -10,6 +10,103 @@ namespace Blackwood;
 /// </summary>
 public static class JSONConvert
 {
+    private static readonly Dictionary<Type, Func<Dictionary<CasePreservingString, object>, object?>> DictionaryConverters = [];
+
+    /// <summary>
+    /// Registers deserialization from a JSON object dictionary (e.g. <c>{"x":1,"y":2}</c>).
+    /// Used by <see cref="Converter2D{T}"/> for types outside this assembly.
+    /// </summary>
+    public static void RegisterDictionaryConverter(
+        Type type,
+        Func<Dictionary<CasePreservingString, object>, object?> converter)
+    {
+        ArgumentNullException.ThrowIfNull(type);
+        ArgumentNullException.ThrowIfNull(converter);
+        DictionaryConverters[type] = converter;
+    }
+
+    /// <summary>
+    /// Reads float <c>x</c> and <c>y</c> from a dictionary. Empty object maps to (0, 0).
+    /// Matches <see cref="PointF"/> JSON handling.
+    /// </summary>
+    public static bool TryReadFloatXY(
+        Dictionary<CasePreservingString, object> dict,
+        out float x,
+        out float y)
+    {
+        x = 0f;
+        y = 0f;
+        if (dict.Count == 0)
+            return true;
+
+        if (dict.TryGetValue("x", out var ox) && dict.TryGetValue("y", out var oy))
+        {
+            x = ToFloat(ox);
+            y = ToFloat(oy);
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>Reads <c>x</c>/<c>y</c>/<c>z</c> from a dictionary (case-insensitive keys). Empty object maps to zero.</summary>
+    /// <param name="dict">Parsed JSON object.</param>
+    /// <param name="x">The X component when the method returns <see langword="true"/>.</param>
+    /// <param name="y">The Y component when the method returns <see langword="true"/>.</param>
+    /// <param name="z">The Z component when the method returns <see langword="true"/>.</param>
+    /// <returns><see langword="true"/> when <c>{}</c> or all of <c>x</c>, <c>y</c>, <c>z</c> are present.</returns>
+    public static bool TryReadFloatXYZ(
+        Dictionary<CasePreservingString, object> dict,
+        out float x,
+        out float y,
+        out float z)
+    {
+        x = y = z = 0f;
+        if (dict.Count == 0)
+            return true;
+
+        if (dict.TryGetValue("x", out var ox)
+            && dict.TryGetValue("y", out var oy)
+            && dict.TryGetValue("z", out var oz))
+        {
+            x = ToFloat(ox);
+            y = ToFloat(oy);
+            z = ToFloat(oz);
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>Reads <c>x</c>/<c>y</c>/<c>z</c> from a string-key dictionary (case-insensitive). Empty object maps to zero.</summary>
+    /// <param name="dict">Parameter object with string keys.</param>
+    /// <param name="x">The X component when the method returns <see langword="true"/>.</param>
+    /// <param name="y">The Y component when the method returns <see langword="true"/>.</param>
+    /// <param name="z">The Z component when the method returns <see langword="true"/>.</param>
+    /// <returns><see langword="true"/> when <c>{}</c> or all of <c>x</c>, <c>y</c>, <c>z</c> are present.</returns>
+    public static bool TryReadFloatXYZ(
+        IReadOnlyDictionary<string, object> dict,
+        out float x,
+        out float y,
+        out float z)
+    {
+        x = y = z = 0f;
+        if (dict.Count == 0)
+            return true;
+
+        if (dict.TryGetValue("x", out var ox)
+            && dict.TryGetValue("y", out var oy)
+            && dict.TryGetValue("z", out var oz))
+        {
+            x = ToFloat(ox);
+            y = ToFloat(oy);
+            z = ToFloat(oz);
+            return true;
+        }
+
+        return false;
+    }
+
     /// <summary>
     /// Converts an object to an integer.
     /// </summary>
@@ -178,6 +275,12 @@ public static class JSONConvert
         if (targetType == typeof(IPAddress))
             return IPAddress.Parse(value.ToString()!);
 
+        if (value is Dictionary<CasePreservingString, object> customDict
+            && DictionaryConverters.TryGetValue(targetType, out var customConvert))
+        {
+            return customConvert(customDict);
+        }
+
         // Handle Point type (with integer x and y properties)
         if (  (targetType == typeof(Point) || targetType == typeof(Point?))
            && value is Dictionary<CasePreservingString, object> pdict)
@@ -192,18 +295,12 @@ public static class JSONConvert
                 return new Point(0, 0);
         }
 
-        // Handle PointF type (with float x and y properties)
-        if ( (targetType == typeof(PointF) || targetType == typeof(PointF?))
-           && value is Dictionary<CasePreservingString, object> pfdict)
+        // Handle PointF type (with float x and y properties; same wire format as Vec2)
+        if ((targetType == typeof(PointF) || targetType == typeof(PointF?))
+            && value is Dictionary<CasePreservingString, object> pfdict
+            && TryReadFloatXY(pfdict, out var pfx, out var pfy))
         {
-            if (  pfdict.TryGetValue("x", out var x)
-               && pfdict.TryGetValue("y", out var y)
-               )
-            return new PointF(ToFloat(x), ToFloat(y));
-
-            // Handle default type
-            if (pfdict.Count == 0)
-                return new PointF(0.0f, 0.0f);
+            return new PointF(pfx, pfy);
         }
 
         // Handle Size type (with integer width and height properties)

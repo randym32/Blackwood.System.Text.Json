@@ -11,6 +11,18 @@ using System.ComponentModel;
 namespace Blackwood;
 public partial class JSONDeserializer
 {
+    private static readonly Dictionary<Type, Func<object, object?>> SerializableConverters = [];
+
+    /// <summary>
+    /// Registers a custom JSON shape for a type when writing through <see cref="Converter2D{T}"/>.
+    /// </summary>
+    public static void RegisterSerializableConverter(Type type, Func<object, object?> converter)
+    {
+        ArgumentNullException.ThrowIfNull(type);
+        ArgumentNullException.ThrowIfNull(converter);
+        SerializableConverters[type] = converter;
+    }
+
     /// <summary>
     /// Serializes a property value to a JSON-compatible format.
     /// </summary>
@@ -20,11 +32,15 @@ public partial class JSONDeserializer
     {
         if (value == null) return null;
 
+        var valueType = value.GetType();
+        if (SerializableConverters.TryGetValue(valueType, out var serialize))
+            return serialize(value);
+
         return value switch
         {
             Color      color => SerializeColor(color),
             Point      point => new { x = point.X, y = point.Y },
-            PointF     point => new { x = point.X, y = point.Y },
+            PointF     point => SerializeFloatXY(point.X, point.Y),
             Size       size  => new { width = size.Width, height = size.Height },
             SizeF      size  => new { width = size.Width, height = size.Height },
             Rectangle  rect  => new { x = rect.X, y = rect.Y, width = rect.Width, height = rect.Height },
@@ -49,6 +65,23 @@ public partial class JSONDeserializer
         }
         return result;
     }
+
+    /// <summary>JSON object with x/y (always both keys, including zero components).</summary>
+    public static Dictionary<CasePreservingString, object> SerializeFloatXY(float x, float y) =>
+        new()
+        {
+            [new CasePreservingString("x")] = x,
+            [new CasePreservingString("y")] = y,
+        };
+
+    /// <summary>JSON object with x/y/z (always all keys).</summary>
+    public static Dictionary<CasePreservingString, object> SerializeFloatXYZ(float x, float y, float z) =>
+        new()
+        {
+            [new CasePreservingString("x")] = x,
+            [new CasePreservingString("y")] = y,
+            [new CasePreservingString("z")] = z,
+        };
 
     /// <summary>
     /// Serializes a Color to a JSON-compatible format.
