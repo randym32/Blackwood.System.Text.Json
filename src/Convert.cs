@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2025 Randall Maas. All rights reserved.
 // See LICENSE file in the project root for full license information.
+
 using System.Drawing;
 using System.Net;
 
@@ -10,7 +11,7 @@ namespace Blackwood;
 /// </summary>
 public static class JSONConvert
 {
-    private static readonly Dictionary<Type, Func<Dictionary<CasePreservingString, object>, object?>> DictionaryConverters = [];
+    private static readonly Dictionary<Type, Func<IReadOnlyDictionary<CasePreservingString, object>, object?>> DictionaryConverters = [];
 
     /// <summary>
     /// Registers deserialization from a JSON object dictionary (e.g. <c>{"x":1,"y":2}</c>).
@@ -18,7 +19,7 @@ public static class JSONConvert
     /// </summary>
     public static void RegisterDictionaryConverter(
         Type type,
-        Func<Dictionary<CasePreservingString, object>, object?> converter)
+        Func<IReadOnlyDictionary<CasePreservingString, object>, object?> converter)
     {
         ArgumentNullException.ThrowIfNull(type);
         ArgumentNullException.ThrowIfNull(converter);
@@ -30,7 +31,7 @@ public static class JSONConvert
     /// Matches <see cref="PointF"/> JSON handling.
     /// </summary>
     public static bool TryReadFloatXY(
-        Dictionary<CasePreservingString, object> dict,
+        IReadOnlyDictionary<CasePreservingString, object> dict,
         out float x,
         out float y)
     {
@@ -49,63 +50,8 @@ public static class JSONConvert
         return false;
     }
 
-    /// <summary>Reads <c>x</c>/<c>y</c>/<c>z</c> from a dictionary (case-insensitive keys). Empty object maps to zero.</summary>
-    /// <param name="dict">Parsed JSON object.</param>
-    /// <param name="x">The X component when the method returns <see langword="true"/>.</param>
-    /// <param name="y">The Y component when the method returns <see langword="true"/>.</param>
-    /// <param name="z">The Z component when the method returns <see langword="true"/>.</param>
-    /// <returns><see langword="true"/> when <c>{}</c> or all of <c>x</c>, <c>y</c>, <c>z</c> are present.</returns>
-    public static bool TryReadFloatXYZ(
-        Dictionary<CasePreservingString, object> dict,
-        out float x,
-        out float y,
-        out float z)
-    {
-        x = y = z = 0f;
-        if (dict.Count == 0)
-            return true;
 
-        if (dict.TryGetValue("x", out var ox)
-            && dict.TryGetValue("y", out var oy)
-            && dict.TryGetValue("z", out var oz))
-        {
-            x = ToFloat(ox);
-            y = ToFloat(oy);
-            z = ToFloat(oz);
-            return true;
-        }
 
-        return false;
-    }
-
-    /// <summary>Reads <c>x</c>/<c>y</c>/<c>z</c> from a string-key dictionary (case-insensitive). Empty object maps to zero.</summary>
-    /// <param name="dict">Parameter object with string keys.</param>
-    /// <param name="x">The X component when the method returns <see langword="true"/>.</param>
-    /// <param name="y">The Y component when the method returns <see langword="true"/>.</param>
-    /// <param name="z">The Z component when the method returns <see langword="true"/>.</param>
-    /// <returns><see langword="true"/> when <c>{}</c> or all of <c>x</c>, <c>y</c>, <c>z</c> are present.</returns>
-    public static bool TryReadFloatXYZ(
-        IReadOnlyDictionary<string, object> dict,
-        out float x,
-        out float y,
-        out float z)
-    {
-        x = y = z = 0f;
-        if (dict.Count == 0)
-            return true;
-
-        if (dict.TryGetValue("x", out var ox)
-            && dict.TryGetValue("y", out var oy)
-            && dict.TryGetValue("z", out var oz))
-        {
-            x = ToFloat(ox);
-            y = ToFloat(oy);
-            z = ToFloat(oz);
-            return true;
-        }
-
-        return false;
-    }
 
     /// <summary>
     /// Converts an object to an integer.
@@ -191,6 +137,7 @@ public static class JSONConvert
         // If the string is a named color, return the color
         // Try parse as a named color
         var named = Color.FromName(s);
+
         // Valid named colors are not Empty and have a known name that matches the input
         // Color.FromName returns a color with the input as name even for invalid colors
         // We need to check if it's a known color by comparing with KnownColor enum
@@ -296,11 +243,20 @@ public static class JSONConvert
         }
 
         // Handle PointF type (with float x and y properties; same wire format as Vec2)
-        if ((targetType == typeof(PointF) || targetType == typeof(PointF?))
-            && value is Dictionary<CasePreservingString, object> pfdict
-            && TryReadFloatXY(pfdict, out var pfx, out var pfy))
+        if ((targetType == typeof(PointF) || targetType == typeof(PointF?)))
         {
-            return new PointF(pfx, pfy);
+            // If it's a dictionary, get the coordinates by name.
+            if (value is Dictionary<CasePreservingString, object> pfdict
+                && TryReadFloatXY(pfdict, out var pfx, out var pfy))
+            {
+                return new PointF(pfx, pfy);
+            }
+
+            // If it's an array, get the coordinates in order
+            if (value is object[] array && array.Length == 2)
+            {
+                return new PointF(ToFloat(array[0]), ToFloat(array[1]));
+            }
         }
 
         // Handle Size type (with integer width and height properties)

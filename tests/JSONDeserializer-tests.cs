@@ -583,6 +583,8 @@ public class JSONDeserializerTests
         Assert.That(options.PropertyNameCaseInsensitive, Is.True);
         Assert.That(options.WriteIndented, Is.True);
         Assert.That(options.DefaultIgnoreCondition, Is.EqualTo(JsonIgnoreCondition.WhenWritingDefault));
+        Assert.That(options.PropertyNamingPolicy, Is.Null);
+        Assert.That(options.IncludeFields, Is.True);
         Assert.That(options.Converters.Count, Is.EqualTo(10));
         Assert.That(options.Converters[1], Is.InstanceOf<JSONDeserializer>());
     }

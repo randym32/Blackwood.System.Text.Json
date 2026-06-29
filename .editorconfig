@@ -1,5 +1,10 @@
 ﻿[*.cs]
 
+# Indentation settings
+indent_style = space
+indent_size = 4
+tab_width = 4
+
 # CA1304: Specify CultureInfo
 dotnet_diagnostic.CA1304.severity = none
 

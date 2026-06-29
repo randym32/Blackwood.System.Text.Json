@@ -1039,4 +1039,122 @@ public class ConvertTests
     }
 
     #endregion
+
+    #region TryReadFloatXY Tests
+
+    [Test]
+    public void TryReadFloatXY_WithCoordinates_ReturnsValues()
+    {
+        var dict = new Dictionary<CasePreservingString, object>
+        {
+            ["x"] = 10.5,
+            ["y"] = 20.25
+        };
+
+        Assert.That(JSONConvert.TryReadFloatXY(dict, out var x, out var y), Is.True);
+        Assert.That(x, Is.EqualTo(10.5f));
+        Assert.That(y, Is.EqualTo(20.25f));
+    }
+
+    [Test]
+    public void TryReadFloatXY_EmptyDictionary_ReturnsZero()
+    {
+        var dict = new Dictionary<CasePreservingString, object>();
+
+        Assert.That(JSONConvert.TryReadFloatXY(dict, out var x, out var y), Is.True);
+        Assert.That(x, Is.EqualTo(0f));
+        Assert.That(y, Is.EqualTo(0f));
+    }
+
+    [Test]
+    public void TryReadFloatXY_MissingCoordinate_ReturnsFalse()
+    {
+        var dict = new Dictionary<CasePreservingString, object> { ["x"] = 1f };
+
+        Assert.That(JSONConvert.TryReadFloatXY(dict, out _, out _), Is.False);
+    }
+
+    #endregion
+
+    #region RegisterDictionaryConverter Tests
+
+    private sealed class CustomVec2
+    {
+        public float X { get; init; }
+        public float Y { get; init; }
+    }
+
+    [Test]
+    public void RegisterDictionaryConverter_CustomType_UsedByConvertToType()
+    {
+        JSONConvert.RegisterDictionaryConverter(typeof(CustomVec2), dict =>
+        {
+            var mutable = new Dictionary<CasePreservingString, object>(dict);
+            return JSONConvert.TryReadFloatXY(mutable, out var x, out var y)
+                ? new CustomVec2 { X = x, Y = y }
+                : null;
+        });
+
+        var dict = new Dictionary<CasePreservingString, object>
+        {
+            ["x"] = 1.5f,
+            ["y"] = 2.5f
+        };
+
+        var result = JSONConvert.ConvertToType(dict, typeof(CustomVec2));
+
+        Assert.That(result, Is.InstanceOf<CustomVec2>());
+        var vec = (CustomVec2)result!;
+        Assert.That(vec.X, Is.EqualTo(1.5f));
+        Assert.That(vec.Y, Is.EqualTo(2.5f));
+    }
+
+    #endregion
+
+    #region ConvertToType PointF Tests
+
+    [Test]
+    public void ConvertToType_PointFDictionary_ReturnsPointF()
+    {
+        var dict = new Dictionary<CasePreservingString, object>
+        {
+            ["x"] = 3,
+            ["y"] = 4.5
+        };
+
+        var result = JSONConvert.ConvertToType(dict, typeof(Drawing.PointF));
+
+        Assert.That(result, Is.InstanceOf<Drawing.PointF>());
+        var point = (Drawing.PointF)result!;
+        Assert.That(point.X, Is.EqualTo(3f));
+        Assert.That(point.Y, Is.EqualTo(4.5f));
+    }
+
+    [Test]
+    public void ConvertToType_PointFEmptyDictionary_ReturnsOrigin()
+    {
+        var dict = new Dictionary<CasePreservingString, object>();
+
+        var result = JSONConvert.ConvertToType(dict, typeof(Drawing.PointF));
+
+        Assert.That(result, Is.InstanceOf<Drawing.PointF>());
+        var point = (Drawing.PointF)result!;
+        Assert.That(point.X, Is.EqualTo(0f));
+        Assert.That(point.Y, Is.EqualTo(0f));
+    }
+
+    [Test]
+    public void ConvertToType_PointFArray_ReturnsPointF()
+    {
+        var array = new object[] { 7, 8.25 };
+
+        var result = JSONConvert.ConvertToType(array, typeof(Drawing.PointF));
+
+        Assert.That(result, Is.InstanceOf<Drawing.PointF>());
+        var point = (Drawing.PointF)result!;
+        Assert.That(point.X, Is.EqualTo(7f));
+        Assert.That(point.Y, Is.EqualTo(8.25f));
+    }
+
+    #endregion
 }

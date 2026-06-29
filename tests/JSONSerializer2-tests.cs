@@ -314,8 +314,7 @@ public class JSONSerializerTests2
     }
 
     /// <summary>
-    /// Tests that PointF structs are serialized as objects with x and y properties.
-    /// Verifies that PointF serialization creates a proper object structure.
+    /// Tests that PointF structs serialize as a dictionary with x and y keys (same wire format as Vec2).
     /// </summary>
     [Test]
     public void ConvertValueToSerializableForm_PointF_ReturnsObject()
@@ -328,17 +327,12 @@ public class JSONSerializerTests2
 
         // Assert
         Assert.That(result, Is.Not.Null);
-        Assert.That(result, Is.InstanceOf<object>());
-
-        // Use reflection to verify the object has the expected properties
-        var resultType = result.GetType();
-        var xProperty = resultType.GetProperty("x");
-        var yProperty = resultType.GetProperty("y");
-
-        Assert.That(xProperty, Is.Not.Null);
-        Assert.That(yProperty, Is.Not.Null);
-        Assert.That(xProperty.GetValue(result), Is.EqualTo(10.5f));
-        Assert.That(yProperty.GetValue(result), Is.EqualTo(20.7f));
+        Assert.That(result, Is.InstanceOf<Dictionary<CasePreservingString, object>>());
+        var dict = (Dictionary<CasePreservingString, object>)result!;
+        Assert.That(dict.TryGetValue("x", out var xValue), Is.True);
+        Assert.That(dict.TryGetValue("y", out var yValue), Is.True);
+        Assert.That(xValue, Is.EqualTo(10.5f));
+        Assert.That(yValue, Is.EqualTo(20.7f));
     }
 
     /// <summary>
